@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   jumpHeight: 20
-  counterJumpForce: 1000
+  counterJumpForce: 1500
   grounded: 0
   groundCheckRadius: 0.2
   groundCheck_tr: {fileID: 815928612}
