@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -131,7 +131,7 @@ TextureImporter:
       name: Idle_0
       rect:
         serializedVersion: 2
-        x: 528
+        x: 531
         y: 22523
         width: 418
         height: 962
@@ -152,9 +152,9 @@ TextureImporter:
       name: Idle_1
       rect:
         serializedVersion: 2
-        x: 1507
+        x: 1532
         y: 22527
-        width: 434
+        width: 409
         height: 954
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -590,7 +590,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MidAir_0
+      name: Fall_0
       rect:
         serializedVersion: 2
         x: 2517
@@ -611,7 +611,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_0
+      name: Fall_1
       rect:
         serializedVersion: 2
         x: 3486
@@ -632,7 +632,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_1
+      name: Fall_2
       rect:
         serializedVersion: 2
         x: 461
@@ -1100,13 +1100,12 @@ TextureImporter:
       Dash_5: 920093435
       Dash_3: -602196975
       Dash_0: -1449271778
-      Fall_1: 911404880
+      Fall_1: -11234079
       Running_2: -6461807
       JumpAttack_0: 532786980
       Dash_4: -1859318949
       Dash_2: 510296483
       Idle_1: -1364350829
-      MidAir_0: 295109138
       Running_1: -1751680741
       JumpAttack_3: 584197569
       Impact_2: -301736497
@@ -1115,19 +1114,20 @@ TextureImporter:
       Attack3_1: -1975667830
       Attack3_0: 675916089
       Attack3_3: -956131766
-      Fall_0: -11234079
+      Fall_2: 911404880
       JumpAttack_1: 1685478237
       Attack1_2: 478189176
       Attack2_2: 357885799
       Running_5: 1795930779
+      Fall_0: 295109138
       Idle_2: -1120786385
       Attack2_1: 463104775
-      Running_7: -243169868
-      Running_4: -1567282570
-      Running_8: 1837101691
       Attack2_3: -1341729881
-      Running_6: -1113884013
+      Running_8: 1837101691
       Attack2_0: -1341729881
+      Running_4: -1567282570
+      Running_6: -1113884013
+      Running_7: -243169868
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
