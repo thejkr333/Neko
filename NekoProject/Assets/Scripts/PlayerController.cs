@@ -10,10 +10,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player attributes")]
     [SerializeField]
-    float speed = 4f, jumpHeight = 5f, counterJumpForce = 2f;
+    float speed = 4f, jumpHeight = 5f, counterJumpForce = 2f, dashForce = 10f;
 
-    float jumpForce;
-    bool movementDisabled, isJumping, canDoubleJump, jumpKeyHeld;
+    bool movementDisabled;
+    float initialGravityScale;
+    int dir;
 
     [Header("Ground Check Variables")]
     [SerializeField] bool grounded;
@@ -21,10 +22,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform groundCheck_tr;
     [SerializeField] LayerMask groundLayer;
 
+    //Jump Variables
+    bool isJumping, canDoubleJump, jumpKeyHeld, canJump;
+    float jumpForce;
+
     //Attack variables
-    bool canAttack;
+    bool canAttack, attacking;
     float timeSinceLastAttack, attackFrecuency, timeToCombo;
     int lastAttack;
+
+    //Dash variables
+    bool canDash, dashing;
+    float timeSinceLastDash, dashFrecuency;
 
     // Start is called before the first frame update
     void Start()
@@ -35,15 +44,22 @@ public class PlayerController : MonoBehaviour
 
         jumpForce = CalculateJumpForce(Physics2D.gravity.magnitude, jumpHeight);
 
+        dir = 1;
+
         movementDisabled = false;
         isJumping = false;
         canDoubleJump = true;
         jumpKeyHeld = false;
+        canJump = true;
 
         lastAttack = -1;
         attackFrecuency = 0.5f;
         timeToCombo = 1f;
         canAttack = true;
+
+        dashFrecuency = 1;
+
+        initialGravityScale = rb.gravityScale;
     }
 
     // Update is called once per frame
@@ -56,8 +72,6 @@ public class PlayerController : MonoBehaviour
         Dash();
 
         UpdateAnim();
-
-        FlipSr();
     }
 
     private void FixedUpdate()
@@ -82,6 +96,26 @@ public class PlayerController : MonoBehaviour
 
         float x = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
+
+        FlipSr(x);
+    }
+    void FlipSr(float input_hor)
+    {
+        if (input_hor != 0)
+        {
+            if (input_hor < 0) { dir = -1; sr.transform.localScale = new Vector3(-1, 1, 0); }
+            else { dir = 1; sr.transform.localScale = new Vector3(1, 1, 0); }
+        }
+    }
+
+    void DisableMovement()
+    {
+        movementDisabled = true;
+    }
+
+    void EnableMovement()
+    {
+        movementDisabled = false;
     }
 
     void CheckJump()
@@ -97,6 +131,8 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
+        if (dashing || attacking) return;
+        
         isJumping = true;
         anim.SetTrigger("Jump");
         rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -104,6 +140,8 @@ public class PlayerController : MonoBehaviour
     }
     private void DoubleJump()
     {
+        if (dashing || attacking) return;
+
         canDoubleJump = false;
         isJumping = true;
 
@@ -125,7 +163,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!canAttack) return;
+            if (!canAttack || dashing) return;
+
+            attacking = true;
 
             timeSinceLastAttack = 0;
             canAttack = false;
@@ -149,9 +189,44 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void EndAttack()
+    {
+        attacking = false;
+    }
+
     void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift)) anim.SetTrigger("Dash");
+        timeSinceLastDash += Time.deltaTime;
+        if (timeSinceLastDash >= dashFrecuency) canDash = true;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        {
+            if (!canDash || attacking) return;
+
+            dashing = true;
+
+            canDash = false;
+            timeSinceLastDash = 0;
+
+            anim.SetTrigger("Dash");
+
+            //Stop and disable movement and gravity
+            DisableMovement();
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+
+            //actual dash
+            rb.AddForce(transform.right * dashForce * dir, ForceMode2D.Impulse);
+        }
+
+    }
+    public void EndDash()
+    {
+        dashing = false;
+
+        rb.gravityScale = initialGravityScale;
+        rb.velocity = Vector2.zero;
+        EnableMovement();
     }
 
     void CheckGround()
@@ -166,11 +241,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FlipSr()
-    {
-        if (rb.velocity.x < 0 && !sr.flipX) sr.flipX = true;
-        else if (rb.velocity.x > 0 && sr.flipX) sr.flipX = false;
-    }
+   
     #endregion
 
     void UpdateAnim()
