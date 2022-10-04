@@ -1,0 +1,342 @@
+fileFormatVersion: 2
+guid: 8d6e06e8eaeff384d90d9f6883d1bf28
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Nek0_RUNNING_1
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 931
+        width: 615
+        height: 774
+      alignment: 9
+      pivot: {x: 0.50448567, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31ef16dd184130f4fa6f3d4fcac5f1cc
+      internalID: -34285903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_4
+      rect:
+        serializedVersion: 2
+        x: 3179
+        y: 1020
+        width: 759
+        height: 683
+      alignment: 9
+      pivot: {x: 0.5563357, y: 0.4757659}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db71c5fa4e80f1544b746a3d09699ed1
+      internalID: 869178393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_5
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 20
+        width: 712
+        height: 794
+      alignment: 9
+      pivot: {x: 0.5666743, y: 0.50000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dcdbd99a19caed42b5085dfb677ad2f
+      internalID: -362278589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_6
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 22
+        width: 616
+        height: 790
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1e806c8a37b7104aa81cb9f108e2e84
+      internalID: 701988079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_8
+      rect:
+        serializedVersion: 2
+        x: 2331
+        y: 42
+        width: 726
+        height: 685
+      alignment: 9
+      pivot: {x: 0.5322985, y: 0.47785044}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a68521ce3905ea40b85758e4c481238
+      internalID: -1807453225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_9
+      rect:
+        serializedVersion: 2
+        x: 3135
+        y: 69
+        width: 783
+        height: 625
+      alignment: 9
+      pivot: {x: 0.5492893, y: 0.44266227}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af7d424cc0df8ad4a83affd1350d9077
+      internalID: -29705617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 942
+        width: 705
+        height: 763
+      alignment: 9
+      pivot: {x: 0.5821723, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 502a3f0fca0f9af45a8409aca9bfdc48
+      internalID: 1716107405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_2
+      rect:
+        serializedVersion: 2
+        x: 1611
+        y: 930
+        width: 618
+        height: 763
+      alignment: 9
+      pivot: {x: 0.524551, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 113b0a3f93ffcf74c911edcba2e10aa6
+      internalID: 891113329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_3
+      rect:
+        serializedVersion: 2
+        x: 2351
+        y: 969
+        width: 716
+        height: 734
+      alignment: 9
+      pivot: {x: 0.55586624, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50c49f082cdff704da9d5bdc09d58771
+      internalID: -1685212379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nek0_RUNNING_7
+      rect:
+        serializedVersion: 2
+        x: 1616
+        y: 34
+        width: 624
+        height: 780
+      alignment: 9
+      pivot: {x: 0.5198941, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c19afa14c6e86045b33cef6c50ac304
+      internalID: 29283942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Nek0_RUNNING_5: -362278589
+      Nek0_RUNNING_6: 701988079
+      Nek0_RUNNING_7: 29283942
+      Nek0_RUNNING_9: -29705617
+      Nek0_RUNNING_2: 891113329
+      Nek0_RUNNING_8: -1807453225
+      Nek0_RUNNING_3: -1685212379
+      Nek0_RUNNING_0: 1716107405
+      Nek0_RUNNING_1: -34285903
+      Nek0_RUNNING_4: 869178393
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
