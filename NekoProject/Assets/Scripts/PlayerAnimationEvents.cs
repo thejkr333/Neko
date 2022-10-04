@@ -20,4 +20,10 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         parent.EndAttack();
     }
+
+    public void Attack()
+    {
+        parent.Attack();
+
+    }
 }
