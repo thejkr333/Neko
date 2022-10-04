@@ -588,6 +588,7 @@ MonoBehaviour:
   attackFrecuency: 0.5
   timeToCombo: 1
   attackDmg: 1
+  knockbackForce: 200
   dashForce: 1500
   dashFrecuency: 1
   grounded: 0

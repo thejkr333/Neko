@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float attackFrecuency = 0.5f;
     [SerializeField] float timeToCombo = 1f;
     [SerializeField] float attackDmg;
+    [SerializeField] float knockbackForce;
     bool canAttack, attacking;
     float timeSinceLastAttack;
     int lastAttack;
@@ -204,17 +205,26 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < hit.Length; i++)
         {
+            Knockback();
             HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
             if (hitHealth == null) continue;
 
             hitHealth.GetHurt(attackDmg);
         }
     }
-
     public void EndAttack()
     {
         attacking = false;
     }
+    void Knockback()
+    {
+        DisableMovement();
+        rb.gravityScale = 0;
+        rb.AddForce(transform.right * dir * -1f * knockbackForce, ForceMode2D.Impulse);
+        rb.gravityScale = initialGravityScale;
+        Invoke("EnableMovement", 0.2f);
+    }
+
 
     void Dash()
     {
