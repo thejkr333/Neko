@@ -129,9 +129,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 658
-        y: 153
+        y: 151
         width: 353
-        height: 1047
+        height: 869
       alignment: 9
       pivot: {x: 0.5342876, y: 0.45838383}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,7 +150,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1174
-        y: 195
+        y: 199
         width: 437
         height: 882
       alignment: 9
@@ -170,7 +170,7 @@ TextureImporter:
       name: Nek0_JUMP_3
       rect:
         serializedVersion: 2
-        x: 1759
+        x: 1761
         y: 165
         width: 537
         height: 913
@@ -191,7 +191,7 @@ TextureImporter:
       name: Nek0_JUMP_4
       rect:
         serializedVersion: 2
-        x: 2487
+        x: 2491
         y: 1
         width: 545
         height: 725
