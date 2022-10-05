@@ -107,12 +107,12 @@ TextureImporter:
       name: Nek0_ATTACK1_0
       rect:
         serializedVersion: 2
-        x: 19
+        x: 20
         y: 0
         width: 971
         height: 1200
       alignment: 9
-      pivot: {x: 0.7566262, y: 0.2923467}
+      pivot: {x: 0.7549663, y: 0.3827749}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -128,12 +128,12 @@ TextureImporter:
       name: Nek0_ATTACK1_1
       rect:
         serializedVersion: 2
-        x: 1086
+        x: 1088
         y: 0
         width: 1503
         height: 1200
       alignment: 9
-      pivot: {x: 0.4570698, y: 0.2923467}
+      pivot: {x: 0.44854984, y: 0.3828832}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,7 +154,7 @@ TextureImporter:
         width: 967
         height: 1200
       alignment: 9
-      pivot: {x: 0.3602531, y: 0.2923467}
+      pivot: {x: 0.3580538, y: 0.38286343}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -175,7 +175,7 @@ TextureImporter:
         width: 588
         height: 1200
       alignment: 9
-      pivot: {x: 0.591101, y: 0.2923467}
+      pivot: {x: 0.58735996, y: 0.38285834}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

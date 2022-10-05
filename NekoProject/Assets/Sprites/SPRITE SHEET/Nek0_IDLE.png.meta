@@ -133,7 +133,7 @@ TextureImporter:
         width: 394
         height: 934
       alignment: 9
-      pivot: {x: 0.57721025, y: 0.4889511}
+      pivot: {x: 0.57807267, y: 0.48988453}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -149,12 +149,12 @@ TextureImporter:
       name: Nek0_IDLE_2
       rect:
         serializedVersion: 2
-        x: 1028
+        x: 1022
         y: 1
-        width: 393
-        height: 927
+        width: 402
+        height: 926
       alignment: 9
-      pivot: {x: 0.5743346, y: 0.49619964}
+      pivot: {x: 0.5782404, y: 0.49415255}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -175,7 +175,7 @@ TextureImporter:
         width: 393
         height: 920
       alignment: 9
-      pivot: {x: 0.57194257, y: 0.4979056}
+      pivot: {x: 0.57701707, y: 0.49727827}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

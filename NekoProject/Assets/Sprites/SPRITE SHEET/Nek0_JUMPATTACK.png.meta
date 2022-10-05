@@ -112,7 +112,7 @@ TextureImporter:
         width: 894
         height: 1046
       alignment: 9
-      pivot: {x: 0.31878412, y: 0.466743}
+      pivot: {x: 0.30427736, y: 0.4390844}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,11 +129,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 990
-        y: 48
+        y: 69
         width: 1099
         height: 1187
       alignment: 9
-      pivot: {x: 0.5672592, y: 0.529016}
+      pivot: {x: 0.5539502, y: 0.49317724}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -149,12 +149,12 @@ TextureImporter:
       name: Nek0_JUMPATTACK_2
       rect:
         serializedVersion: 2
-        x: 2189
+        x: 2178
         y: 194
         width: 871
         height: 1041
       alignment: 9
-      pivot: {x: 0.71133214, y: 0.466743}
+      pivot: {x: 0.71094984, y: 0.4402158}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -175,7 +175,7 @@ TextureImporter:
         width: 819
         height: 1003
       alignment: 9
-      pivot: {x: 0.69112635, y: 0.466743}
+      pivot: {x: 0.67868114, y: 0.45766088}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

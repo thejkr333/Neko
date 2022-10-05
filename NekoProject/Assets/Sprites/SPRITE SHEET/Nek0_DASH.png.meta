@@ -107,12 +107,12 @@ TextureImporter:
       name: Nek0_DASH_0
       rect:
         serializedVersion: 2
-        x: 10
+        x: 8
         y: 99
         width: 619
         height: 758
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5026001, y: 0.6051714}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -132,8 +132,8 @@ TextureImporter:
         y: 99
         width: 628
         height: 758
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.50107956, y: 0.6051714}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,7 +154,7 @@ TextureImporter:
         width: 774
         height: 686
       alignment: 9
-      pivot: {x: 0.55322313, y: 0.47140464}
+      pivot: {x: 0.5544257, y: 0.6663007}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -175,7 +175,7 @@ TextureImporter:
         width: 807
         height: 684
       alignment: 9
-      pivot: {x: 0.5413233, y: 0.47132102}
+      pivot: {x: 0.5544257, y: 0.6663007}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,7 +196,7 @@ TextureImporter:
         width: 767
         height: 686
       alignment: 9
-      pivot: {x: 0.56393903, y: 0.46568552}
+      pivot: {x: 0.5544257, y: 0.6663007}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -213,11 +213,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4081
-        y: 99
+        y: 101
         width: 620
         height: 758
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5026001, y: 0.6051714}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
