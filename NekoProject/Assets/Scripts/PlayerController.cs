@@ -25,12 +25,15 @@ public class PlayerController : MonoBehaviour
     //Attack variables
     [Header("Attack variables")]
     [SerializeField] LayerMask enemyLayer;
-    [SerializeField] Transform attackPos;
+    [SerializeField] LayerMask jumpAttackHitLayer;
+    [SerializeField] Transform attackPos, jumpAttackPos;
     [SerializeField] Vector2[] attackSize;
+    [SerializeField] Vector2 jumpAttackSize;
     [SerializeField] float attackFrecuency = 0.5f;
     [SerializeField] float timeToCombo = 1f;
     [SerializeField] float attackDmg;
-    [SerializeField] float knockbackForce;
+    [SerializeField] float attackKnockbackForce;
+    [SerializeField] float jumpAttackKnockbackForce;
     bool canAttack, attacking;
     float timeSinceLastAttack;
     int lastAttack;
@@ -148,7 +151,7 @@ public class PlayerController : MonoBehaviour
             if (dashing || attacking) return;
 
             jumpKeyHeld = true;
-            if (grounded) Jump();
+            if (grounded || wallSliding) Jump();
             else if (canDoubleJump) DoubleJump();
         }
         else if (Input.GetKeyUp(KeyCode.Space)) jumpKeyHeld = false;
@@ -188,29 +191,38 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!canAttack || dashing) return;
+            if (!canAttack || dashing || wallSliding) return;
 
             attacking = true;
-
             timeSinceLastAttack = 0;
             canAttack = false;
-            if (lastAttack == 0)
+
+            //Check if jump attack
+            if (Input.GetKey(KeyCode.S) && !grounded)
             {
-                //Attack 2
-                lastAttack++;
-                anim.SetTrigger("Attack2");
+                anim.SetTrigger("JumpAttack");
             }
-            else if (lastAttack == 1)
-            {
-                //attack 3
-                lastAttack++;
-                anim.SetTrigger("Attack3");
-            }
+            //Rest of attacks
             else
             {
-                //attack 1
-                lastAttack = 0;
-                anim.SetTrigger("Attack1");
+                if (lastAttack == 0)
+                {
+                    //Attack 2
+                    lastAttack++;
+                    anim.SetTrigger("Attack2");
+                }
+                else if (lastAttack == 1)
+                {
+                    //attack 3
+                    lastAttack++;
+                    anim.SetTrigger("Attack3");
+                }
+                else
+                {
+                    //attack 1
+                    lastAttack = 0;
+                    anim.SetTrigger("Attack1");
+                }
             }
         }
     }
@@ -222,7 +234,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < hit.Length; i++)
         {
-            Knockback();
+            AttackKnockback();
             HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
             if (hitHealth == null) continue;
 
@@ -233,13 +245,34 @@ public class PlayerController : MonoBehaviour
     {
         attacking = false;
     }
-    void Knockback()
+    void AttackKnockback()
     {
         DisableMovement();
         rb.gravityScale = 0;
-        rb.AddForce(transform.right * dir * -1f * knockbackForce, ForceMode2D.Impulse);
+        rb.AddForce(transform.right * dir * -1f * attackKnockbackForce, ForceMode2D.Impulse);
         rb.gravityScale = initialGravityScale;
         Invoke("EnableMovement", 0.2f);
+    }
+
+    public void JumpAttack()
+    {
+        Collider2D[] hit = Physics2D.OverlapBoxAll(jumpAttackPos.position, jumpAttackSize, 0, jumpAttackHitLayer);
+        if (hit.Length == 0) return;
+
+        JumpAttackKnockback();
+        for (int i = 0; i < hit.Length; i++)
+        {
+            HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
+            if (hitHealth == null) continue;
+
+            hitHealth.GetHurt(attackDmg);
+        }
+    }
+
+    void JumpAttackKnockback()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(transform.up * jumpAttackKnockbackForce, ForceMode2D.Impulse);
     }
 
     #endregion
@@ -302,6 +335,7 @@ public class PlayerController : MonoBehaviour
     void WallSlide()
     {
         wallSliding = true;
+        canDoubleJump = true;
         if (rb.velocity.y <= -wallSlideSpeed) rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
     }
 
@@ -340,5 +374,8 @@ public class PlayerController : MonoBehaviour
         //Draw attack 3
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(attackPos.position, new Vector3(attackSize[2].x, attackSize[2].y, 0));
+        //Draw jump attack
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(jumpAttackPos.position, new Vector3(jumpAttackSize.x, jumpAttackSize.y, 0));
     }
 }

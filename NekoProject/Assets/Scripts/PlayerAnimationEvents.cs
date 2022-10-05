@@ -24,6 +24,9 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void Attack()
     {
         parent.Attack();
-
+    }
+    public void JumpAttack()
+    {
+        parent.JumpAttack();
     }
 }
