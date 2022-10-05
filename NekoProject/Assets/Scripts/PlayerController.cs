@@ -10,10 +10,9 @@ public class PlayerController : MonoBehaviour
 
     //Movement variables
     [Header("Movement variables")]
-    [SerializeField]
-    float speed = 4f;
     bool movementDisabled;
-    float initialGravityScale;
+    [SerializeField] float speed = 4f;
+    float initialGravityScale, input_hor;
     int dir;
 
     //Jump Variables
@@ -43,11 +42,19 @@ public class PlayerController : MonoBehaviour
     bool canDash, dashing;
     float timeSinceLastDash;
 
+    //WallSlide variables
+    [Header("WallSlide variables")]
+    [SerializeField] LayerMask wallLayer;
+    [SerializeField] Transform wallSlideContact;
+    bool wallSliding;
+    [SerializeField] float wallSlideSpeed;
+    [SerializeField] float wallSlideCheckRadius;
+
     [Header("Ground Check Variables")]
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Transform groundCheck_tr;
     [SerializeField] bool grounded;
     [SerializeField] float groundCheckRadius;
-    [SerializeField] Transform groundCheck_tr;
-    [SerializeField] LayerMask groundLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -96,20 +103,22 @@ public class PlayerController : MonoBehaviour
 
         CheckGround();
 
+        CheckWallSlide();
+
         Movement();
     }
 
-    #region Movement / Jump / Attack / Dash
+    #region Movement 
     void Movement()
     {
         if (movementDisabled) return;
 
-        float x = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(x * speed, rb.velocity.y);
+        input_hor = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(input_hor * speed, rb.velocity.y);
 
-        FlipSr(x);
+        FlipSr();
     }
-    void FlipSr(float input_hor)
+    void FlipSr()
     {
         if (input_hor != 0)
         {
@@ -127,6 +136,10 @@ public class PlayerController : MonoBehaviour
     {
         movementDisabled = false;
     }
+
+    #endregion
+
+    #region Jump
 
     void CheckJump()
     {
@@ -162,6 +175,10 @@ public class PlayerController : MonoBehaviour
     {
         return Mathf.Sqrt(2 * gravityStrength * jumpHeight * 1000f);
     }
+
+    #endregion
+
+    #region Attack
 
     void CheckAttack()
     {
@@ -225,7 +242,9 @@ public class PlayerController : MonoBehaviour
         Invoke("EnableMovement", 0.2f);
     }
 
+    #endregion
 
+    #region Dash
     void Dash()
     {
         timeSinceLastDash += Time.deltaTime;
@@ -250,7 +269,6 @@ public class PlayerController : MonoBehaviour
             //actual dash
             rb.AddForce(transform.right * dashForce * dir, ForceMode2D.Impulse);
         }
-
     }
     public void EndDash()
     {
@@ -260,6 +278,34 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         EnableMovement();
     }
+    #endregion
+
+    #region WallSlide
+
+    void CheckWallSlide()
+    {
+        if(grounded) { wallSliding = false; return; }
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(wallSlideContact.position, wallSlideCheckRadius, wallLayer);
+
+        if (colliders.Length == 0) wallSliding = false;
+        else
+        {
+            if ((dir == -1 && input_hor < 0) || (dir == 1 && input_hor > 0))
+            {
+                WallSlide();
+            }
+            else wallSliding = false;
+        }
+    }
+
+    void WallSlide()
+    {
+        wallSliding = true;
+        if (rb.velocity.y <= -wallSlideSpeed) rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
+    }
+
+    #endregion
 
     void CheckGround()
     {
@@ -273,14 +319,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
-    #endregion
+
 
     void UpdateAnim()
     {
         anim.SetFloat("XVel", Mathf.Abs(rb.velocity.x));
         anim.SetFloat("YVel", rb.velocity.y);
         anim.SetBool("Grounded", grounded);
+        anim.SetBool("WallSliding", wallSliding);
     }
 
     private void OnDrawGizmos()
