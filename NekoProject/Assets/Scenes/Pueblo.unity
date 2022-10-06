@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 1248762703}
   - component: {fileID: 1248762702}
   m_Layer: 0
-  m_Name: ENTRADA TIENDA_1
+  m_Name: ESCALERA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
