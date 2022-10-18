@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    [SerializeField] float maxHealth;
+    public int maxHealth;
 
-    [SerializeField] float currentHealth;
+    public int currentHealth;
 
     private void Awake()
     {
         currentHealth = maxHealth;
     }
 
-    public void GetHurt(float damage)
+    public void GetHurt(int damage)
     {
         currentHealth -= damage;
 
