@@ -6,7 +6,9 @@ public class RoomLogic : MonoBehaviour
 {
     RoomManager roomManager;
 
-    [SerializeField] Transform[] exits;
+    //[SerializeField] Transform[] exits;
+
+    [SerializeField] public Transform cameraConfiner;
 
     private void Awake()
     {
@@ -17,6 +19,6 @@ public class RoomLogic : MonoBehaviour
     {
         RoomManager.Direction directionExited = delegation.Caller.GetComponent<RoomExitTrigger>().direction;
 
-        roomManager.RoomExited();
+        roomManager.RoomExited(this, directionExited);
     }
 }

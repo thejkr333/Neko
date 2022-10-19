@@ -113,14 +113,32 @@ public class PlayerController : MonoBehaviour
 
     #region Movement 
 
+    // Variables para el control del movimiento del jugador
     public bool controllingPlayerMovement;
-    public bool controllingDir;
+    public int controllingDir = 0;
+    public void ControlPlayer(int dir)
+    {
+        controllingPlayerMovement = true;
+        controllingDir = dir;
+    }
+
+    public void UnControl()
+    {
+        controllingPlayerMovement = false;
+        controllingDir = 0;
+    }
 
     void Movement()
     {
         if (movementDisabled) return;
 
-        input_hor = Input.GetAxisRaw("Horizontal");
+        // Si se le esta controlando
+        if (controllingPlayerMovement)
+            input_hor = controllingDir;
+        else
+            input_hor = Input.GetAxisRaw("Horizontal");
+
+
         rb.velocity = new Vector2(input_hor * speed, rb.velocity.y);
 
         FlipSr();
@@ -162,7 +180,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Jump()
-    {    
+    {
         isJumping = true;
         anim.SetTrigger("Jump");
         rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -287,7 +305,7 @@ public class PlayerController : MonoBehaviour
         timeSinceLastDash += Time.deltaTime;
         if (timeSinceLastDash >= dashFrecuency) canDash = true;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (!canDash || attacking) return;
 
@@ -321,7 +339,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckWallSlide()
     {
-        if(grounded) { wallSliding = false; return; }
+        if (grounded) { wallSliding = false; return; }
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(wallSlideContact.position, wallSlideCheckRadius, wallLayer);
 
