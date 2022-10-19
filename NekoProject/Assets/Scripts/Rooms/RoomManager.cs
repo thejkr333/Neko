@@ -54,7 +54,7 @@ public class RoomManager : MonoBehaviour
             player.ControlPlayer(0);
         else if (dir == Direction.up)
         {
-            player.ControlPlayer(1);
+            player.ControlPlayer(.8f);
             player.AddVelocityToRB(new Vector2(30, 40));
         }
 
@@ -67,9 +67,11 @@ public class RoomManager : MonoBehaviour
 
         // AQUI SPAWNEAR ENEMIGOS DE LA NUEVA SALA Y DEMAS CAMBIOS
 
-
-        // Alejar al jugador del borde de la sala nueva
-        yield return new WaitForSeconds(.2f);
+        if (dir == Direction.left || dir == Direction.right)
+            // Alejar al jugador del borde de la sala nueva
+            yield return new WaitForSeconds(.2f);
+        else if (dir == Direction.up || dir == Direction.down)
+            yield return new WaitForSeconds(.6f);
 
         // Volver a controlar al jugador
         player.UnControl();
