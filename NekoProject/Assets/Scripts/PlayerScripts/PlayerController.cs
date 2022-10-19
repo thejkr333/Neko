@@ -112,6 +112,10 @@ public class PlayerController : MonoBehaviour
     }
 
     #region Movement 
+
+    public bool controllingPlayerMovement;
+    public bool controllingDir;
+
     void Movement()
     {
         if (movementDisabled) return;
