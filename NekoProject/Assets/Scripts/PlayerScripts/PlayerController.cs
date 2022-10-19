@@ -115,8 +115,8 @@ public class PlayerController : MonoBehaviour
 
     // Variables para el control del movimiento del jugador
     public bool controllingPlayerMovement;
-    public int controllingDir = 0;
-    public void ControlPlayer(int dir)
+    public float controllingDir = 0;
+    public void ControlPlayer(float dir)
     {
         controllingPlayerMovement = true;
         controllingDir = dir;
@@ -128,6 +128,9 @@ public class PlayerController : MonoBehaviour
         controllingDir = 0;
     }
 
+    public void AddVelocityToRB(Vector2 newVelocity)
+    { rb.velocity = newVelocity; }
+
     void Movement()
     {
         if (movementDisabled) return;
@@ -137,7 +140,6 @@ public class PlayerController : MonoBehaviour
             input_hor = controllingDir;
         else
             input_hor = Input.GetAxisRaw("Horizontal");
-
 
         rb.velocity = new Vector2(input_hor * speed, rb.velocity.y);
 

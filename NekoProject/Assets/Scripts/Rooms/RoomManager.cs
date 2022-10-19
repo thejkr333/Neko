@@ -50,6 +50,13 @@ public class RoomManager : MonoBehaviour
             player.ControlPlayer(-1);
         else if (dir == Direction.right)
             player.ControlPlayer(1);
+        else if (dir == Direction.down)
+            player.ControlPlayer(0);
+        else if (dir == Direction.up)
+        {
+            player.ControlPlayer(.8f);
+            player.AddVelocityToRB(new Vector2(30, 40));
+        }
 
         // Esperar hasta que el jugador llege al trigger de la nueva sala
         yield return new WaitUntil(() => playerTransitioning == false);
@@ -57,8 +64,14 @@ public class RoomManager : MonoBehaviour
         // Cambio de camara, pasar de la sala anterior a la nueva
         cam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = newRoom.cameraConfiner.GetComponent<PolygonCollider2D>();
 
-        // Alejar al jugador del borde de la sala nueva
-        yield return new WaitForSeconds(.2f);
+
+        // AQUI SPAWNEAR ENEMIGOS DE LA NUEVA SALA Y DEMAS CAMBIOS
+
+        if (dir == Direction.left || dir == Direction.right)
+            // Alejar al jugador del borde de la sala nueva
+            yield return new WaitForSeconds(.2f);
+        else if (dir == Direction.up || dir == Direction.down)
+            yield return new WaitForSeconds(.6f);
 
         // Volver a controlar al jugador
         player.UnControl();
