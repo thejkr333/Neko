@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 jumpAttackSize;
     [SerializeField] float attackFrecuency = 0.5f;
     [SerializeField] float timeToCombo = 1f;
-    [SerializeField] float attackDmg;
+    [SerializeField] int attackDmg;
     [SerializeField] float attackKnockbackForce;
     [SerializeField] float jumpAttackKnockbackForce;
     bool canAttack, attacking;
