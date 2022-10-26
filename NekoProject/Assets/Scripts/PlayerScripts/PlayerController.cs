@@ -154,14 +154,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void DisableMovement()
+    public void DisableMovement()
     {
         movementDisabled = true;
     }
 
-    void EnableMovement()
+    public void EnableMovement()
     {
         movementDisabled = false;
+    }
+
+    public void EnableMovement(float seconds)
+    {
+        Invoke("EnableMovement", seconds);
     }
 
     #endregion
@@ -262,7 +267,7 @@ public class PlayerController : MonoBehaviour
             HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
             if (hitHealth == null) continue;
 
-            hitHealth.GetHurt(attackDmg);
+            hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
         }
     }
     public void EndAttack()
@@ -275,7 +280,7 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0;
         rb.AddForce(transform.right * dir * -1f * attackKnockbackForce, ForceMode2D.Impulse);
         rb.gravityScale = initialGravityScale;
-        Invoke("EnableMovement", 0.2f);
+        EnableMovement(0.2f);
     }
 
     public void JumpAttack()
@@ -289,7 +294,7 @@ public class PlayerController : MonoBehaviour
             HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
             if (hitHealth == null) continue;
 
-            hitHealth.GetHurt(attackDmg);
+            hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
         }
     }
 
@@ -377,8 +382,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     void UpdateAnim()
     {
         anim.SetFloat("XVel", Mathf.Abs(rb.velocity.x));
@@ -386,6 +389,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Grounded", grounded);
         anim.SetBool("WallSliding", wallSliding);
     }
+
 
     private void OnDrawGizmos()
     {
