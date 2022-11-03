@@ -614,8 +614,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe1ebf81a5c845469bfd0fa19dde028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  jumpHeight: 50
+  speed: 18.5
+  jumpHeight: 90.81
   counterJumpForce: 2000
   enemyLayer:
     serializedVersion: 2
@@ -639,7 +639,7 @@ MonoBehaviour:
   dashFrecuency: 1
   wallLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 136
   wallSlideContact: {fileID: 8928839649421280500}
   wallSlideSpeed: 1
   wallSlideCheckRadius: 0.3
@@ -682,6 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
+  knockbackForce: 0
   currentHealth: 0
 --- !u!70 &8928839649289422009
 CapsuleCollider2D:
@@ -692,7 +693,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 8928839649289421990}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e01fcf748e66da04eb0d2de5d4b9241c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
