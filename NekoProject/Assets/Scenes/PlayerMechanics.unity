@@ -1096,8 +1096,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1151322728}
-  - component: {fileID: 1151322729}
   - component: {fileID: 1151322727}
+  - component: {fileID: 1151322729}
   m_Layer: 0
   m_Name: Pixie
   m_TagString: Untagged
@@ -1184,10 +1184,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9730c58d91d9c294a8054b7b7074cf96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 685666096}
+  target: {fileID: 1851443997}
   maxDistance: 3000
-  maxSpeed: 3
   smoothTime: 0.25
+  speed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 20
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   states: 0
 --- !u!1 &1327824366
 GameObject:
@@ -1576,6 +1599,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1851443997 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8512837039094187031, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+  m_PrefabInstance: {fileID: 8928839648890825610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8928839648890825610
 PrefabInstance:
   m_ObjectHideFlags: 0

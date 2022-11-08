@@ -5,14 +5,16 @@ using UnityEngine;
 public class Pixie : MonoBehaviour
 {
     [SerializeField] Transform target;
-    [SerializeField] float maxDistance, maxSpeed, smoothTime;
+    [SerializeField] float maxDistance, smoothTime;
+    [SerializeField] AnimationCurve speed;
 
     Vector3 velocity;
+    float distance = 20f;
     Transform tr;
 
 
     public enum States { Following, Checkpoint, ChangeMinds}
-    public States states;
+    [HideInInspector] public States states;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,12 +42,28 @@ public class Pixie : MonoBehaviour
 
     void Follow()
     {
-        Vector3.SmoothDamp(tr.position, target.position, ref velocity, smoothTime, maxSpeed);
+        float evalValue;
+        if (Vector3.Distance(tr.position, target.position) > distance) evalValue = 1;
+        else evalValue = Vector3.Distance(tr.position, target.position) / distance;
+
+        tr.position = Vector3.SmoothDamp(tr.position, target.position, ref velocity, smoothTime, speed.Evaluate(evalValue));
+
+        if (Input.GetKeyDown(KeyCode.Q) && Vector3.Distance(tr.position, target.position) <= 0.5f)
+        {
+            //anim de plantarse
+
+            states = States.Checkpoint;
+        }
     }
 
     void Checkpoint()
     {
+        if (Input.GetKeyDown(KeyCode.Q) || Vector3.Distance(tr.position, target.position) > maxDistance)
+        {
+            //anim de salir de checkpoint
 
+            states = States.Following;
+        }
     }
 
     void ChangeMinds()
