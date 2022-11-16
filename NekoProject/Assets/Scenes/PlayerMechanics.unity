@@ -1184,7 +1184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9730c58d91d9c294a8054b7b7074cf96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1851443997}
+  followTarget: {fileID: 1851443997}
   maxDistance: 3000
   smoothTime: 0.25
   minDistanceForCheckPoint: 5
@@ -1214,7 +1214,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   ground:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   states: 0
 --- !u!1 &1327824366
 GameObject:
