@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Pixie : MonoBehaviour
 {
-    [SerializeField] Transform target;
-    [SerializeField] float maxDistance, smoothTime;
+    [SerializeField] Transform followTarget;
+    [SerializeField] float maxDistance, smoothTime, minDistanceForCheckPoint;
     [SerializeField] AnimationCurve speed;
+    [SerializeField] LayerMask ground;
 
-    Vector3 velocity;
-    float distance = 20f;
+    Vector3 velocity, tpTarget;
+    float distance = 20f, evalValue;
     Transform tr;
 
 
@@ -42,32 +43,44 @@ public class Pixie : MonoBehaviour
 
     void Follow()
     {
-        float evalValue;
-        if (Vector3.Distance(tr.position, target.position) > distance) evalValue = 1;
-        else evalValue = Vector3.Distance(tr.position, target.position) / distance;
+        if(Vector3.Distance(tr.position, followTarget.position) > .5f) Move(followTarget.position);
 
-        tr.position = Vector3.SmoothDamp(tr.position, target.position, ref velocity, smoothTime, speed.Evaluate(evalValue));
-
-        if (Input.GetKeyDown(KeyCode.Q) && Vector3.Distance(tr.position, target.position) <= 0.5f)
+        if (Input.GetKeyDown(KeyCode.Q) && Vector3.Distance(tr.position, followTarget.position) <= minDistanceForCheckPoint)
         {
-            //anim de plantarse
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, ground);
+            if (raycastHit2D)
+            {
+                //anim de plantarse
+                tpTarget = raycastHit2D.point;
 
-            states = States.Checkpoint;
+                states = States.Checkpoint;
+            }
         }
     }
 
     void Checkpoint()
     {
-        if (Input.GetKeyDown(KeyCode.Q) || Vector3.Distance(tr.position, target.position) > maxDistance)
+        if(Vector3.Distance(tr.position, tpTarget) > .5f) Move(tpTarget);
+
+        if (Input.GetKeyDown(KeyCode.Q) || Vector3.Distance(tr.position, followTarget.position) > maxDistance)
         {
             //anim de salir de checkpoint
 
             states = States.Following;
+            return;
         }
     }
 
     void ChangeMinds()
     {
 
+    }
+
+    void Move(Vector3 target)
+    {
+        if (Vector3.Distance(tr.position, target) > distance) evalValue = 1;
+        else evalValue = Vector3.Distance(tr.position, target) / distance;
+
+        tr.position = Vector3.SmoothDamp(tr.position, target, ref velocity, smoothTime, speed.Evaluate(evalValue));
     }
 }

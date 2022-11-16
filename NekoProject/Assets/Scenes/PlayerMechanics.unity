@@ -1187,6 +1187,7 @@ MonoBehaviour:
   target: {fileID: 1851443997}
   maxDistance: 3000
   smoothTime: 0.25
+  minDistanceForCheckPoint: 5
   speed:
     serializedVersion: 2
     m_Curve:
@@ -1211,6 +1212,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
   states: 0
 --- !u!1 &1327824366
 GameObject:
@@ -1619,6 +1623,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+      propertyPath: pixie
+      value: 
+      objectReference: {fileID: 1151322729}
     - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
       propertyPath: jumpAttackKnockbackForce
       value: 1000

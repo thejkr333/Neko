@@ -59,6 +59,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool grounded;
     [SerializeField] float groundCheckRadius;
 
+    [Header("Pixie")]
+    [SerializeField] Pixie pixie;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +94,8 @@ public class PlayerController : MonoBehaviour
 
         Dash();
 
+        CheckTP();
+
         UpdateAnim();
     }
 
@@ -114,8 +119,8 @@ public class PlayerController : MonoBehaviour
     #region Movement 
 
     // Variables para el control del movimiento del jugador
-    public bool controllingPlayerMovement;
-    public float controllingDir = 0;
+    [HideInInspector] public bool controllingPlayerMovement;
+    [HideInInspector] public float controllingDir = 0;
     public void ControlPlayer(float dir)
     {
         controllingPlayerMovement = true;
@@ -369,6 +374,19 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    void CheckTP()
+    {
+        if(Input.GetKeyDown(KeyCode.T) && pixie.states == Pixie.States.Checkpoint)
+        {
+            TpToPixie();
+        }
+    }
+    void TpToPixie()
+    {
+        //anim.SetTrigger("Disappear"); //animacion de tp
+        transform.position = pixie.transform.position;
+    }
 
     void CheckGround()
     {
