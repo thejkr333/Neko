@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 8928839649289422008}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe1ebf81a5c845469bfd0fa19dde028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 18.5
+  speed: 12
   jumpHeight: 90.81
   counterJumpForce: 2000
   enemyLayer:
@@ -665,8 +665,8 @@ MonoBehaviour:
   timeToCombo: 1
   attackDmg: 1
   attackKnockbackForce: 500
-  jumpAttackKnockbackForce: 800
-  dashForce: 700
+  jumpAttackKnockbackForce: 1000
+  dashForce: 1500
   dashFrecuency: 1
   wallLayer:
     serializedVersion: 2
@@ -680,6 +680,10 @@ MonoBehaviour:
   groundCheck_tr: {fileID: 8928839649689714350}
   grounded: 0
   groundCheckRadius: 0.2
+  pixie: {fileID: 0}
+  antman: 0
+  antmanSpeed: 20
+  antmanCD: 2
   controllingPlayerMovement: 0
   controllingDir: 0
 --- !u!114 &7700636

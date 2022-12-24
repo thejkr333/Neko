@@ -74,7 +74,7 @@ public class RoomManager : MonoBehaviour
             yield return new WaitForSeconds(.6f);
 
         // Volver a controlar al jugador
-        player.UnControl();
+        player.Uncontrol();
 
 
         // Version alternativa

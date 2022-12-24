@@ -223,7 +223,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &313361774
 GameObject:
@@ -863,7 +863,7 @@ Transform:
   m_Children:
   - {fileID: 657358072}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904396322
 GameObject:
@@ -1341,7 +1341,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387878955
 GameObject:
@@ -1436,7 +1436,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1627,6 +1627,22 @@ PrefabInstance:
       propertyPath: pixie
       value: 
       objectReference: {fileID: 1151322729}
+    - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+      propertyPath: speed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+      propertyPath: antmanCD
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+      propertyPath: dashForce
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+      propertyPath: antmanSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
       propertyPath: jumpAttackKnockbackForce
       value: 1000

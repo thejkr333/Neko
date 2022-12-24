@@ -62,6 +62,13 @@ public class PlayerController : MonoBehaviour
     [Header("Pixie")]
     [SerializeField] Pixie pixie;
 
+    [Header("Antman")]
+    [SerializeField] bool antman;
+    [SerializeField] float antmanSpeed = 8f;
+    [SerializeField] float antmanCD;
+    float antmanTimer;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,6 +89,8 @@ public class PlayerController : MonoBehaviour
         lastAttack = -1;
         canAttack = true;
 
+        antman = false;
+
         initialGravityScale = rb.gravityScale;
     }
 
@@ -94,6 +103,8 @@ public class PlayerController : MonoBehaviour
 
         Dash();
 
+        AntMan();
+
         CheckTP();
 
         UpdateAnim();
@@ -103,6 +114,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isJumping)
         {
+            if (dashing) return;
+
             if (!jumpKeyHeld || rb.velocity.y < 0)
             {
                 rb.AddForce(Vector2.down * counterJumpForce, ForceMode2D.Force);
@@ -127,7 +140,7 @@ public class PlayerController : MonoBehaviour
         controllingDir = dir;
     }
 
-    public void UnControl()
+    public void Uncontrol()
     {
         controllingPlayerMovement = false;
         controllingDir = 0;
@@ -146,7 +159,11 @@ public class PlayerController : MonoBehaviour
         else
             input_hor = Input.GetAxisRaw("Horizontal");
 
-        rb.velocity = new Vector2(input_hor * speed, rb.velocity.y);
+        float currentSpeed;
+        if (antman) currentSpeed = antmanSpeed;
+        else currentSpeed = speed;
+
+        rb.velocity = new Vector2(input_hor * currentSpeed, rb.velocity.y);
 
         FlipSr();
     }
@@ -225,7 +242,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!canAttack || dashing || wallSliding) return;
+            if (!canAttack || dashing || wallSliding || antman) return;
 
             attacking = true;
             timeSinceLastAttack = 0;
@@ -319,7 +336,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (!canDash || attacking) return;
+            if (!canDash || attacking || antman) return;
 
             dashing = true;
 
@@ -351,7 +368,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckWallSlide()
     {
-        if (grounded) { wallSliding = false; return; }
+        if (grounded || antman) { wallSliding = false; return; }
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(wallSlideContact.position, wallSlideCheckRadius, wallLayer);
 
@@ -406,6 +423,30 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("YVel", rb.velocity.y);
         anim.SetBool("Grounded", grounded);
         anim.SetBool("WallSliding", wallSliding);
+        anim.SetBool("Antman", antman);
+    }
+    
+    void AntMan()
+    {
+        if (wallSliding || dashing || attacking) return;
+
+        antmanTimer += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if (antmanTimer < antmanCD) return;
+
+            antman = !antman;
+            antmanTimer = 0;
+
+            if (antman)
+            {
+                anim.SetTrigger("ConvertToSmall");
+            }
+            else
+            {
+                anim.SetTrigger("ConvertToBig");
+            }
+        }
     }
 
 
