@@ -63,11 +63,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Pixie pixie;
 
     [Header("Antman")]
-    [SerializeField] bool antman;
     [SerializeField] float antmanSpeed = 8f;
     [SerializeField] float antmanCD;
+    bool antman;
     float antmanTimer;
 
+    [Header("Shield")]
+    [SerializeField] GameObject shield;
+    bool shieldActive;
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +93,8 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
 
         antman = false;
+
+        shieldActive = false;
 
         initialGravityScale = rb.gravityScale;
     }
@@ -449,6 +454,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Shield()
+    {
+        if(Input.GetMouseButtonDown(1))
+        {
+            shieldActive = !shieldActive;
+
+            shield.SetActive(shieldActive);
+        }
+    }
 
     private void OnDrawGizmos()
     {
