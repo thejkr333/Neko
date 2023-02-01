@@ -438,8 +438,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818336108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -3.768, z: 0}
+  m_LocalScale: {x: 1, y: 4.335951, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8928839649289422010}
@@ -527,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 8928839649959710524}
   rotationSpeed: 50
+  distanceFromPlayer: 0
 --- !u!50 &1818336113
 Rigidbody2D:
   serializedVersion: 4
@@ -823,6 +824,8 @@ MonoBehaviour:
   antmanSpeed: 20
   antmanCD: 2
   shield: {fileID: 1818336108}
+  shieldActiveTime: 0
+  shieldCD: 0
   controllingPlayerMovement: 0
   controllingDir: 0
 --- !u!114 &7700636

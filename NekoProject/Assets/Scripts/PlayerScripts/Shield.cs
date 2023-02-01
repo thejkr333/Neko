@@ -5,12 +5,12 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
     [SerializeField] Transform target;
-    [SerializeField] float rotationSpeed;
+    [SerializeField] float rotationSpeed, distanceFromPlayer;
 
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(target.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+        MoveToCursor();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,5 +20,21 @@ public class Shield : MonoBehaviour
         if (projectile == null) return;
 
         projectile.Rebound();
+    }
+
+    void RotateAroundPlayer()
+    {
+        transform.RotateAround(target.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+    }
+
+    void MoveToCursor()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 position = new Vector3(mousePos.x - target.position.x, mousePos.y - target.position.y, target.position.z);
+        position = position.normalized * distanceFromPlayer;
+
+        transform.right = position.normalized;
+        transform.position = target.position + position;
     }
 }

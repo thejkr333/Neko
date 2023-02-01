@@ -1615,6 +1615,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1818336110, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+      propertyPath: distanceFromPlayer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8928839649289421990, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1623,6 +1627,14 @@ PrefabInstance:
       propertyPath: pixie
       value: 
       objectReference: {fileID: 1151322729}
+    - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+      propertyPath: shieldCD
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928839649289421991, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+      propertyPath: shieldActiveTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8928839649289422010, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -70,7 +70,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Shield")]
     [SerializeField] GameObject shield;
-    bool shieldActive;
+    [SerializeField] float shieldActiveTime;
+    [SerializeField] float shieldCD;
+    bool shieldActive, shielding, canShield;
+    float shieldTimer, shieldCDTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -94,7 +97,9 @@ public class PlayerController : MonoBehaviour
 
         antman = false;
 
-        shieldActive = false;
+        //shieldActive = false;
+        shielding = false;
+        canShield = true;
 
         initialGravityScale = rb.gravityScale;
     }
@@ -107,6 +112,8 @@ public class PlayerController : MonoBehaviour
         CheckAttack();
 
         Dash();
+
+        Shield();
 
         AntMan();
 
@@ -247,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!canAttack || dashing || wallSliding || antman) return;
+            if (!canAttack || dashing || wallSliding || antman || shielding) return;
 
             attacking = true;
             timeSinceLastAttack = 0;
@@ -433,7 +440,7 @@ public class PlayerController : MonoBehaviour
     
     void AntMan()
     {
-        if (wallSliding || dashing || attacking) return;
+        if (wallSliding || dashing || attacking || shielding) return;
 
         antmanTimer += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -456,12 +463,48 @@ public class PlayerController : MonoBehaviour
 
     void Shield()
     {
-        if(Input.GetMouseButtonDown(1))
+        if (!shielding)
         {
-            shieldActive = !shieldActive;
+            shield.SetActive(false);
 
-            shield.SetActive(shieldActive);
+            if (!canShield)
+            {
+                shieldCDTimer += Time.deltaTime;
+                if (shieldCDTimer >= shieldCD)
+                {
+                    canShield = true;
+                    shieldCDTimer = 0;
+                }
+            }
         }
+
+        if (!canShield || wallSliding || dashing || attacking) return;
+
+        if (Input.GetMouseButton(1))
+        {
+            //Mantain to be active
+            shielding = true;
+            shield.SetActive(true);
+
+            shieldTimer += Time.deltaTime;
+
+            if (shieldTimer >= shieldActiveTime) EndShield();
+
+
+            //Click to make active
+            //shieldActive = !shieldActive;
+
+            //shield.SetActive(shieldActive);
+        }
+        else EndShield();
+    }
+
+    void EndShield()
+    {
+        shielding = false;
+        canShield = false;
+        shieldTimer = 0;
+        shieldCDTimer = 0;
     }
 
     private void OnDrawGizmos()
