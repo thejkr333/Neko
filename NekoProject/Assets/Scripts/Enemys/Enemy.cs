@@ -7,40 +7,43 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator anim;
 
-    [SerializeField] protected float patrolSpeed, chaseSpeed, attackCD, attackDistance;
-    protected Transform player;
+    [SerializeField] protected float patrolSpeed, chaseSpeed, attackCD, chaseDistance, attackDistance;
+    protected Transform playerTransform;
 
-    protected enum States { Patrolling, Chasing }
-    States states;
+    protected enum States { Patrolling, Chasing , Attacking}
+    [SerializeField] protected States state;
     // Start is called before the first frame update
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        states = States.Patrolling;
+        state = States.Patrolling;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        switch (states)
+        switch (state)
         {
             case States.Patrolling:
-                Patrolling();
+                Patrol();
                 break;
             case States.Chasing:
-                Chasing();
+                Chase();
+                break;
+            case States.Attacking:
+                Attack();
                 break;
         }
     }
 
-    protected virtual void Patrolling()
+    protected virtual void Patrol()
     {
 
     }
 
-    protected virtual void Chasing()
+    protected virtual void Chase()
     {
 
     }
@@ -50,22 +53,27 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerController playerController = collision.GetComponent<PlayerController>();
 
         if (playerController == null) return;
 
-        states = States.Chasing;
-        player = playerController.transform;
+        ChangeState(States.Chasing);
+        playerTransform = playerController.transform;
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    public virtual void OnTriggerExit2D(Collider2D collision)
     {
         PlayerController playerController = collision.GetComponent<PlayerController>();
 
         if (playerController == null) return;
 
-        states = States.Patrolling;
+        ChangeState(States.Patrolling);
+    }
+
+    protected virtual void ChangeState(States nextState)
+    {
+        state = nextState;
     }
 }

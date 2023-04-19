@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class SimpleEnemy : Enemy
 {
-    [SerializeField] BoxCollider2D sensor;
-
-    [SerializeField] float sensorSize;
-
     [Tooltip("Only values '-1' or '1")]
     [SerializeField] int initialDir;
     int dir;
@@ -16,19 +12,19 @@ public class SimpleEnemy : Enemy
     {
         base.Start();
 
-        sensor.size = new Vector2(sensorSize, sensor.size.y);
+        GetComponentInChildren<BoxCollider2D>().size = new Vector2(chaseDistance, GetComponentInChildren<BoxCollider2D>().size.y);
         dir = initialDir;
     }
 
-    protected override void Patrolling()
+    protected override void Patrol()
     {
         rb.velocity = new Vector2(patrolSpeed * dir, rb.velocity.y);
     }
 
-    protected override void Chasing()
+    protected override void Chase()
     {
         //if player is in attack range attack, else keep chasing;
-        if(Mathf.Abs(player.position.x - transform.position.x) <= attackDistance)
+        if(Mathf.Abs(playerTransform.position.x - transform.position.x) <= attackDistance)
         {
             Attack();
         }
@@ -36,7 +32,7 @@ public class SimpleEnemy : Enemy
         {
             int _dir;
             //follow player
-            if (player.position.x - transform.position.x <= 0) _dir = -1;
+            if (playerTransform.position.x - transform.position.x <= 0) _dir = -1;
             else _dir = 1;
 
             dir = _dir;
