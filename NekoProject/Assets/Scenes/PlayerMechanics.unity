@@ -1239,7 +1239,7 @@ MonoBehaviour:
   state: 0
   patrolInterval: {x: 1, y: 3}
   shootingPoint: {fileID: 1768910764}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 1051890879572586491, guid: 9ada4f418437d904eb70b421b637a23c, type: 3}
 --- !u!1 &976947662
 GameObject:
   m_ObjectHideFlags: 0

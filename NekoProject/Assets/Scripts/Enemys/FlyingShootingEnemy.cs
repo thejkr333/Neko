@@ -63,13 +63,19 @@ public class FlyingShootingEnemy : Enemy
             Shoot();
             attackTimer = attackCD;
         }
+
+        // Check if player has left attacking range
+        if (Vector2.Distance(transform.position, playerTransform.position) > attackDistance)
+        {
+            ChangeState(States.Chasing);
+        }
     }
 
     void Shoot()
     {
         GameObject clon = Instantiate(projectilePrefab);
         clon.transform.position = shootingPoint.position;
-        clon.transform.forward = (playerTransform.position - transform.position).normalized;
+        clon.transform.up = attackDirection;
     }
 
     //need to change this
