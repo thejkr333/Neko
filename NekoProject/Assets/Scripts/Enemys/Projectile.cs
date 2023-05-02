@@ -18,12 +18,17 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.right = direction.normalized;
-        rb.velocity = transform.right * speed;
+        transform.up = direction.normalized;
+        rb.velocity = transform.up * speed;
     }
 
     public void Rebound()
     {
         direction *= -1;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
     }
 }

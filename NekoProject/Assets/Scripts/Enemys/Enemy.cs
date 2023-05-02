@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
 
     protected enum States { Patrolling, Chasing , Attacking}
     [SerializeField] protected States state;
+
+    protected bool facingRight;
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -45,7 +47,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Chase()
     {
-
+        
     }
 
     protected virtual void Attack()
@@ -55,25 +57,38 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController playerController = collision.GetComponent<PlayerController>();
+        if (playerTransform != null) return;
 
-        if (playerController == null) return;
-
-        ChangeState(States.Chasing);
-        playerTransform = playerController.transform;
-    }
-
-    public virtual void OnTriggerExit2D(Collider2D collision)
-    {
-        PlayerController playerController = collision.GetComponent<PlayerController>();
-
-        if (playerController == null) return;
-
-        ChangeState(States.Patrolling);
+        if(collision.TryGetComponent(out PlayerController playerController)) playerTransform = playerController.transform;
     }
 
     protected virtual void ChangeState(States nextState)
     {
         state = nextState;
     }
+
+    protected void LookToPlayer()
+    {
+        if (playerTransform.position.x < transform.position.x) facingRight = false;
+        else facingRight = true;
+
+        if (facingRight)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z);
+        }
+    }
+
+    protected virtual void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, chaseDistance);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
+    }
+
 }

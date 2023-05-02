@@ -1,16 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FlyingEnemy : Enemy
 {
-    [SerializeField] float attackSpeed;
-    [SerializeField] Vector2 patrolInterval;
+    [SerializeField] private float attackSpeed;
+    protected Vector2 attackDirection;
 
+    [Header("PATROLLING")]
     float patrolTimer;
     private Vector2 patrolDirection = Vector2.right;
-    private Vector2 attackDirection;
-    // Start is called before the first frame update
+    [SerializeField] Vector2 patrolInterval;
+    [SerializeField] LayerMask obstacles;
+    float obstacleDistance = 4;
+    float chasingTimer;
+    float waitForChase = 3;
+
     protected override void Start()
     {
         base.Start();
@@ -20,6 +23,15 @@ public class FlyingEnemy : Enemy
 
     protected override void Patrol()
     {
+        if (playerTransform != null)
+        {
+            if (Vector2.Distance(playerTransform.position, transform.position) <= chaseDistance && chasingTimer <= 0)
+            {
+                ChangeState(States.Chasing);
+                return;
+            }
+        }
+
         // Move in patrol direction
         rb.velocity = patrolDirection * patrolSpeed;
 
@@ -32,61 +44,68 @@ public class FlyingEnemy : Enemy
             // Generate new patrol timer and direction
             patrolTimer = Random.Range(patrolInterval.x, patrolInterval.y);
             patrolDirection = Random.insideUnitCircle.normalized;
+
+            if (Physics2D.Raycast(transform.position, transform.up, obstacleDistance, obstacles) && patrolDirection.y > 0) patrolDirection.y *= -1;
+            if (Physics2D.Raycast(transform.position, -transform.up, obstacleDistance, obstacles) && patrolDirection.y < 0) patrolDirection.y *= -1;
+            if (Physics2D.Raycast(transform.position, transform.right, obstacleDistance, obstacles) && patrolDirection.x > 0) patrolDirection.x *= -1;
+            if (Physics2D.Raycast(transform.position, -transform.right, obstacleDistance, obstacles) && patrolDirection.x < 0) patrolDirection.x *= -1;
         }
+
+        chasingTimer -= Time.deltaTime;
     }
 
     protected override void Chase()
     {
-        // Move towards player
+        LookToPlayer();
+
         Vector2 playerDirection = playerTransform.position - transform.position;
-        rb.velocity = playerDirection.normalized * chaseSpeed;
+
+        if(Vector2.Distance(transform.position, playerTransform.position) > chaseDistance)
+        {
+            ChangeState(States.Patrolling);
+            return;
+        }
 
         // Check if player is close enough to attack
-        if (Vector2.Distance(transform.position, playerTransform.position) < attackDistance)
+        if (Vector2.Distance(transform.position, playerTransform.position) <= attackDistance)
         {
             attackDirection = playerDirection.normalized;
             ChangeState(States.Attacking);
+            return;
         }
+
+        // Move towards player
+        rb.velocity = playerDirection.normalized * chaseSpeed;
     }
 
     protected override void Attack()
     {
+        LookToPlayer();
+
+        if (Vector2.Distance(transform.position, playerTransform.position) > attackDistance)
+        {
+            ChangeState(States.Chasing);
+            return;
+        }
+
         // Move towards player with attack speed
         rb.velocity = attackDirection * attackSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (state == States.Patrolling) patrolTimer = 0;
-        else if (state == States.Attacking)
+        
+        if(collision.gameObject.TryGetComponent(out PlayerController playerController))
         {
-            // Stop attacking if colliding with something
-            ChangeState(States.Chasing);
-            // Stop when colliding with something
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            ChangeState(States.Patrolling);
+            chasingTimer = waitForChase;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    protected virtual void OnCollisionExit2D(Collision2D collision)
     {
-        if (state == States.Chasing)
-        {
-            // Return to patrolling if player is out of range
-            ChangeState(States.Patrolling);
-        }
-
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-    }
-
-    public override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-    }
-
-    public override void OnTriggerExit2D(Collider2D collision)
-    {
-        base.OnTriggerExit2D(collision);
-
     }
 }
