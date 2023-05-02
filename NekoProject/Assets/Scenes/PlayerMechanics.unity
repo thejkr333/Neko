@@ -2265,14 +2265,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1151322731, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
-      propertyPath: m_UsedByEffector
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672905378, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8928839649289421990, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2321,27 +2313,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1818336112, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
---- !u!1 &8928839648890825611 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1818336108, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
-  m_PrefabInstance: {fileID: 8928839648890825610}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &8928839648890825612
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8928839648890825611}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
