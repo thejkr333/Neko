@@ -49,9 +49,14 @@ public class PlayerUI : MonoBehaviour
         UpdateHealthOrbs();
 
         if (Input.GetKeyDown(KeyCode.Escape)) ToggleMenu();
-        if (!menuOn && Input.GetKeyDown(KeyCode.M)) ToggleMap();
+        //if (!menuOn && Input.GetKey(KeyCode.M)) ToggleMap();
 
-        if (menuOn) Menu();
+        if (menuOn) {Menu(); map.SetActive(false);}
+        else
+        {
+            menu.SetActive(Input.GetKey(KeyCode.M));
+            map.SetActive(Input.GetKey(KeyCode.M));
+        }
 
         Time.timeScale = menuOn ? 0 : 1;
     }
