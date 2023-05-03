@@ -9,15 +9,31 @@ public class PlayerUI : MonoBehaviour
 
     [SerializeField] Image[] healthOrbs;
 
+    [Header("MENU")]
+    [SerializeField] GameObject menu;
+    bool menuOn;
+    int menuIndex, menuLength;
+
     [Header("MAP")]
     [SerializeField] GameObject map;
     bool mapOn;
+
+    GameObject[] menuGameobjects;
  
     PlayerController playerController;
 
     private void Awake()
     {
         map.SetActive(false);
+        menu.SetActive(false);
+
+        menuLength = menu.transform.childCount;
+        menuGameobjects = new GameObject[menuLength];
+        for (int i = 0; i < menuLength; i++)
+        {
+            menuGameobjects[i] = menu.transform.GetChild(i).gameObject;
+            menuGameobjects[i].SetActive(false);
+        }
     }
 
     // Start is called before the first frame update
@@ -32,9 +48,12 @@ public class PlayerUI : MonoBehaviour
     {
         UpdateHealthOrbs();
 
-        if (Input.GetKeyDown(KeyCode.M)) ToggleMap();
+        if (Input.GetKeyDown(KeyCode.Escape)) ToggleMenu();
+        if (!menuOn && Input.GetKeyDown(KeyCode.M)) ToggleMap();
 
-        Time.timeScale = mapOn ? 0 : 1;
+        if (menuOn) Menu();
+
+        Time.timeScale = menuOn ? 0 : 1;
     }
 
     void UpdateHealthOrbs()
@@ -50,7 +69,39 @@ public class PlayerUI : MonoBehaviour
     {
         mapOn = !mapOn;
 
-        map.SetActive(mapOn);
-        if (!mapOn) return;     
+        map.SetActive(mapOn);   
+    }
+
+    void ToggleMenu()
+    {
+        menuOn = !menuOn;
+
+        menu.SetActive(menuOn);
+
+        if(!menuOn)
+            for (int i = 0; i < menuLength; i++)
+            {
+                menuGameobjects[menuIndex].SetActive(false);
+            }
+    }
+
+    void Menu()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            menuGameobjects[menuIndex].SetActive(false);
+
+            if (menuIndex == 0) menuIndex = menuLength - 1;
+            else menuIndex--;
+        }
+        else if(Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            menuGameobjects[menuIndex].SetActive(false);
+
+            if (menuIndex == menuLength - 1) menuIndex = 0;
+            else menuIndex++;
+        }
+
+        menuGameobjects[menuIndex].SetActive(true);
     }
 }

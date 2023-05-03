@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Pixie : MonoBehaviour
 {
@@ -22,10 +23,14 @@ public class Pixie : MonoBehaviour
     public enum States { Following, Checkpoint, ChangeMinds}
     public States states;
 
+    [SerializeField] float maxMoveDistance = .2f;
+
     [Header("CHANGE MINDS")]
     [SerializeField] float movSpeed;
     Rigidbody2D rb;
     CircleCollider2D circleCollider;
+
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
 
     private void Awake()
     {
@@ -50,22 +55,22 @@ public class Pixie : MonoBehaviour
         if (transitioning)
         {
             Transition();
+            return;
         }
-        else
+
+        switch (states)
         {
-            switch (states)
-            {
-                case States.Following:
-                    Follow();
-                    break;
-                case States.Checkpoint:
-                    Checkpoint();
-                    break;
-                case States.ChangeMinds:
-                    ChangeMinds();
-                    break;
-            }
+            case States.Following:
+                Follow();
+                break;
+            case States.Checkpoint:
+                Checkpoint();
+                break;
+            case States.ChangeMinds:
+                ChangeMinds();
+                break;
         }
+
     }
 
     public void ChangeStates(States nextState)
@@ -88,6 +93,7 @@ public class Pixie : MonoBehaviour
                 {
                     playerController.enabled = true;
                     circleCollider.enabled = false;
+                    virtualCamera.Follow = player;
                 }
                 pressTime = 0;
                 break;
@@ -97,6 +103,7 @@ public class Pixie : MonoBehaviour
                 {
                     playerController.enabled = false;
                     circleCollider.enabled = true;
+                    virtualCamera.Follow = tr;
                 }
                 break;
         }
@@ -106,7 +113,7 @@ public class Pixie : MonoBehaviour
 
     void Follow()
     {
-        /*if(Vector3.Distance(tr.position, followTarget.position) > .2f)*/ Move(followTarget.position);
+        /*if(Vector3.Distance(tr.position, followTarget.position) > .2f)*/ MoveSmooth(followTarget.position);
 
         if (Input.GetKeyDown(KeyCode.R) && Vector3.Distance(tr.position, followTarget.position) <= minDistanceForCheckPoint)
         {
@@ -175,11 +182,16 @@ public class Pixie : MonoBehaviour
     }
 
 
-    void Move(Vector3 target)
+    void MoveSmooth(Vector3 target)
     {
         if (Vector3.Distance(tr.position, target) > distance) evalValue = 1;
         else evalValue = Vector3.Distance(tr.position, target) / distance;
 
         tr.position = Vector3.SmoothDamp(tr.position, target, ref velocity, smoothTime, speed.Evaluate(evalValue));
+    }
+
+    void Move(Vector3 target)
+    {
+        tr.position = Vector3.MoveTowards(tr.position, target, maxMoveDistance);
     }
 }
