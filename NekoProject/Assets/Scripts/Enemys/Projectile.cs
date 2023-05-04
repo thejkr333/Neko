@@ -29,6 +29,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.TryGetComponent(out PlayerController playerController))
+        {
+            playerController.GetComponent<HealthSystem>().GetHurt(1, direction);
+        }
         Destroy(gameObject);
     }
 }

@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected States state;
 
     protected bool facingRight;
+
+    public int coinsToSpawn;
     // Start is called before the first frame update
     protected virtual void Start()
     {

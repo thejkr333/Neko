@@ -1528,6 +1528,7 @@ GameObject:
   - component: {fileID: 8928839649289421991}
   - component: {fileID: 7700636}
   - component: {fileID: 7700635}
+  - component: {fileID: 4690704439699148665}
   - component: {fileID: 8928839649289422009}
   - component: {fileID: 8928839649289422008}
   m_Layer: 8
@@ -1652,6 +1653,20 @@ MonoBehaviour:
   maxHealth: 5
   knockbackForce: 0
   currentHealth: 0
+  coinPrefab: {fileID: 0}
+  coinForce: 0
+--- !u!114 &4690704439699148665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928839649289421990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d88376a0b774940a720ae9094dcea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!70 &8928839649289422009
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
