@@ -9,21 +9,21 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
 
     //Movement variables
-    [Header("Movement variables")]
+    [Header("MOVEMENT")]
     bool movementDisabled;
     [SerializeField] float speed = 4f;
     float initialGravityScale, input_hor;
     int dir;
 
     //Jump Variables
-    [Header("Jump variables")]
+    [Header("JUMP")]
     [SerializeField] float jumpHeight = 5f;
     [SerializeField] float counterJumpForce = 2f;
     bool isJumping, canDoubleJump, jumpKeyHeld;
     float jumpForce;
 
     //Attack variables
-    [Header("Attack variables")]
+    [Header("ATTACK")]
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] LayerMask jumpAttackHitLayer;
     [SerializeField] Transform attackPos, jumpAttackPos;
@@ -39,44 +39,44 @@ public class PlayerController : MonoBehaviour
     int lastAttack;
 
     //Dash variables
-    [Header("Dash variables")]
+    [Header("DASH")]
     [SerializeField] float dashForce = 1500f;
     [SerializeField] float dashFrecuency = 1f;
     bool canDash, dashing;
     float timeSinceLastDash;
 
     //WallSlide variables
-    [Header("WallSlide variables")]
+    [Header("WALLSLIDE")]
     [SerializeField] LayerMask wallLayer;
     [SerializeField] Transform wallSlideContact;
     bool wallSliding;
     [SerializeField] float wallSlideSpeed;
     [SerializeField] float wallSlideCheckRadius;
 
-    [Header("Ground Check Variables")]
+    [Header("GROUND CHECK")]
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheck_tr;
     [SerializeField] bool grounded;
     [SerializeField] float groundCheckRadius;
 
-    [Header("Pixie")]
+    [Header("PIXIE")]
     [SerializeField] Pixie pixie;
 
-    [Header("Antman")]
+    [Header("ANTMAN")]
     [SerializeField] float antmanSpeed = 8f;
-    [SerializeField] float antmanCD;
-    bool antman;
-    float antmanTimer;
+    public float antmanCD;
+    bool antman, canAntman;
+    [HideInInspector] public float antmanTimer;
 
-    [Header("Shield")]
+    [Header("SHIELD")]
     [SerializeField] GameObject shield;
     [SerializeField] float shieldActiveTime;
-    [SerializeField] float shieldCD;
-    bool shieldActive, shielding, canShield;
-    float shieldTimer, shieldCDTimer;
+    public float shieldCD;
+    bool shielding, canShield;
+    float shieldActiveTimer;
+    [HideInInspector] public float shieldCDTimer;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         sr = GetComponentInChildren<SpriteRenderer>();
@@ -96,8 +96,8 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
 
         antman = false;
+        canAntman = true;
 
-        //shieldActive = false;
         shielding = false;
         canShield = true;
 
@@ -442,21 +442,31 @@ public class PlayerController : MonoBehaviour
     {
         if (wallSliding || dashing || attacking || shielding) return;
 
-        antmanTimer += Time.deltaTime;
+        if (!canAntman)
+        {
+            antmanTimer += Time.deltaTime;
+            if (antmanTimer >= antmanCD)
+            {
+                antmanTimer = 0;
+                canAntman = true;
+            }
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            if (antmanTimer < antmanCD) return;
-
             antman = !antman;
             antmanTimer = 0;
 
             if (antman)
             {
                 anim.SetTrigger("ConvertToSmall");
+                canAntman = false;
             }
             else
             {
                 anim.SetTrigger("ConvertToBig");
+                canAntman = false; 
             }
         }
     }
@@ -486,24 +496,18 @@ public class PlayerController : MonoBehaviour
             shielding = true;
             shield.SetActive(true);
 
-            shieldTimer += Time.deltaTime;
+            shieldActiveTimer += Time.deltaTime;
 
-            if (shieldTimer >= shieldActiveTime) EndShield();
-
-
-            //Click to make active
-            //shieldActive = !shieldActive;
-
-            //shield.SetActive(shieldActive);
+            if (shieldActiveTimer >= shieldActiveTime) EndShield();
         }
-        else EndShield();
+        else if (shielding) EndShield();
     }
 
     void EndShield()
     {
         shielding = false;
         canShield = false;
-        shieldTimer = 0;
+        shieldActiveTimer = 0;
         shieldCDTimer = 0;
     }
 

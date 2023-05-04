@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
+    PlayerController playerController;
+
     HealthSystem healthSystem;
 
     [SerializeField] Image[] healthOrbs;
@@ -13,20 +13,30 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject menu;
     bool menuOn;
     int menuIndex, menuLength;
+    GameObject[] menuGameobjects;
 
     [Header("MAP")]
     [SerializeField] GameObject map;
     bool mapOn;
 
-    GameObject[] menuGameobjects;
- 
-    PlayerController playerController;
+    [Header("SHIELD")]
+    [SerializeField] Image shieldCDImg;
+    float shieldTimeCD, shieldTimer;
+
+    [Header("ANTMAN")]
+    [SerializeField] Image antmanCDImg;
+    float antmanTimeCD, antmanTimer;
 
     private void Awake()
     {
+        healthSystem = GetComponent<HealthSystem>();
+        playerController = GetComponent<PlayerController>();
+
+        //Set starting UI
         map.SetActive(false);
         menu.SetActive(false);
 
+        //Set menu child objects
         menuLength = menu.transform.childCount;
         menuGameobjects = new GameObject[menuLength];
         for (int i = 0; i < menuLength; i++)
@@ -36,11 +46,11 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        healthSystem = GetComponent<HealthSystem>();
-        playerController = GetComponent<PlayerController>();
+        //Set abilities info
+        shieldTimeCD = playerController.shieldCD;
+        antmanTimeCD = playerController.antmanCD;
     }
 
     // Update is called once per frame
@@ -58,7 +68,36 @@ public class PlayerUI : MonoBehaviour
             map.SetActive(Input.GetKey(KeyCode.M));
         }
 
+        UpdateShieldCD();
+        UpdateAntmanCD();
+
         Time.timeScale = menuOn ? 0 : 1;
+    }
+
+    void UpdateShieldCD()
+    {
+        shieldTimer = playerController.shieldCDTimer;
+
+        if (shieldTimer <= 0)
+        {
+            shieldCDImg.fillAmount = 0; 
+            return;
+        }
+
+        shieldCDImg.fillAmount = shieldTimer / shieldTimeCD;
+    }
+
+    void UpdateAntmanCD()
+    {
+        antmanTimer = playerController.antmanTimer;
+
+        if (antmanTimer <= 0)
+        {
+            antmanCDImg.fillAmount = 0;
+            return;
+        }
+
+        antmanCDImg.fillAmount = antmanTimer / antmanTimeCD;
     }
 
     void UpdateHealthOrbs()
