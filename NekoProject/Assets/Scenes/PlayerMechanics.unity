@@ -1812,17 +1812,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1724584157 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1724584157, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
-  m_PrefabInstance: {fileID: 8928839648890825610}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1756558793
 GameObject:
   m_ObjectHideFlags: 0
@@ -2276,10 +2265,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7700636, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
-      propertyPath: antmanCDImg
-      value: 
-      objectReference: {fileID: 1724584157}
     - target: {fileID: 1151322729, guid: 5d9abad78f36cd04cb6c75a5cc7b50dd, type: 3}
       propertyPath: virtualCamera
       value: 

@@ -84,7 +84,7 @@ public class PlayerUI : MonoBehaviour
             return;
         }
 
-        shieldCDImg.fillAmount = shieldTimer / shieldTimeCD;
+        shieldCDImg.fillAmount = 1 - (shieldTimer / shieldTimeCD);
     }
 
     void UpdateAntmanCD()
@@ -97,7 +97,7 @@ public class PlayerUI : MonoBehaviour
             return;
         }
 
-        antmanCDImg.fillAmount = antmanTimer / antmanTimeCD;
+        antmanCDImg.fillAmount = 1 - (antmanTimer / antmanTimeCD);
     }
 
     void UpdateHealthOrbs()
