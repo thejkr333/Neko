@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     [HideInInspector] public float speed;
     [HideInInspector] public Vector2 direction;
 
+    bool hasRebounded;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,17 +24,32 @@ public class Projectile : MonoBehaviour
         rb.velocity = transform.up * speed;
     }
 
-    public void Rebound()
+    void Rebound()
     {
         direction *= -1;
+        hasRebounded = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out PlayerController playerController))
+        if (collision.TryGetComponent(out Projectile projectile)) return;
+
+        if(collision.TryGetComponent(out HealthSystem health))
         {
-            playerController.GetComponent<HealthSystem>().GetHurt(1, direction);
+            if (hasRebounded || collision.TryGetComponent(out PlayerController playerController))
+            {
+                health.GetHurt(1, -direction);
+            }
+            else return;
         }
-        Destroy(gameObject);
+       
+        if(collision.TryGetComponent(out Shield shield))
+        {
+            Rebound();           
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

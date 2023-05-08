@@ -13,15 +13,6 @@ public class Shield : MonoBehaviour
         MoveToCursor();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Projectile projectile = collision.GetComponent<Projectile>();
-
-        if (projectile == null) return;
-
-        projectile.Rebound();
-    }
-
     void RotateAroundPlayer()
     {
         transform.RotateAround(target.position, Vector3.forward, rotationSpeed * Time.deltaTime);
