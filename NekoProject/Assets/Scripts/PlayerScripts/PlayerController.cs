@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     bool movementDisabled;
     [SerializeField] float speed = 4f;
     float initialGravityScale, input_hor;
-    int dir;
+    public int Dir;
 
     //Jump Variables
     [Header("JUMP")]
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
         jumpForce = CalculateJumpForce(Physics2D.gravity.magnitude, jumpHeight);
 
-        dir = 1;
+        Dir = 1;
 
         movementDisabled = false;
 
@@ -186,8 +186,8 @@ public class PlayerController : MonoBehaviour
     {
         if (input_hor != 0)
         {
-            if (input_hor < 0) { dir = -1; sr.transform.localScale = new Vector3(-1, 1, 0); }
-            else { dir = 1; sr.transform.localScale = new Vector3(1, 1, 0); }
+            if (input_hor < 0) { Dir = -1; sr.transform.localScale = new Vector3(-1, 1, 0); }
+            else { Dir = 1; sr.transform.localScale = new Vector3(1, 1, 0); }
         }
     }
 
@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
     {
         DisableMovement();
         rb.gravityScale = 0;
-        rb.AddForce(transform.right * dir * -1f * attackKnockbackForce, ForceMode2D.Impulse);
+        rb.AddForce(transform.right * Dir * -1f * attackKnockbackForce, ForceMode2D.Impulse);
         rb.gravityScale = initialGravityScale;
         EnableMovement(0.2f);
     }
@@ -366,7 +366,7 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = 0;
 
             //actual dash
-            rb.AddForce(transform.right * dashForce * dir, ForceMode2D.Impulse);
+            rb.AddForce(transform.right * dashForce * Dir, ForceMode2D.Impulse);
         }
     }
     public void EndDash()
@@ -390,7 +390,7 @@ public class PlayerController : MonoBehaviour
         if (colliders.Length == 0) wallSliding = false;
         else
         {
-            if ((dir == -1 && input_hor < 0) || (dir == 1 && input_hor > 0))
+            if ((Dir == -1 && input_hor < 0) || (Dir == 1 && input_hor > 0))
             {
                 WallSlide();
             }

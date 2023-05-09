@@ -32,6 +32,8 @@ public class Pixie : MonoBehaviour
 
     [SerializeField] CinemachineVirtualCamera virtualCamera;
 
+    Noise noise;
+
     bool pressingR;
 
     private void Awake()
@@ -41,6 +43,9 @@ public class Pixie : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.enabled = false;
         transitioning = false;
+
+        noise = GetComponent<Noise>();
+        noise.enabled = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -116,9 +121,45 @@ public class Pixie : MonoBehaviour
 
     void Follow()
     {
-        MoveSmooth(followTarget.position);
+        float _distanceToTarget = Vector3.Distance(tr.position, followTarget.position);
 
-        if (Input.GetKeyDown(KeyCode.R) && Vector3.Distance(tr.position, followTarget.position) <= minDistanceForCheckPoint)
+        //if (_distanceToTarget > 3f)
+        //{
+
+        //    MoveSmooth(followTarget.position);
+        //}
+        //else if(!noise.enabled && _distanceToTarget < .5f)
+        //{
+        //    noise.InitialPosition = tr.position;
+        //    noise.enabled = true;
+        //}
+      
+        if (_distanceToTarget < .5f)
+        {
+            if (!noise.enabled)
+            {
+                noise.InitialPosition = tr.position;
+                noise.enabled = true;
+            }
+        }
+        else
+        {
+            if (noise.enabled && _distanceToTarget > 3f)
+            {
+                noise.enabled = false;
+            }
+
+            if(!noise.enabled)
+            {
+                MoveSmooth(followTarget.position);
+            }
+        }
+
+        if (playerController.Dir == 1) tr.localScale = Vector3.one;
+        else tr.localScale = new Vector3(-1, 1, 1);
+
+
+        if (Input.GetKeyDown(KeyCode.R) && _distanceToTarget <= minDistanceForCheckPoint)
         {
             RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, ground);
             if (raycastHit2D)
@@ -178,6 +219,9 @@ public class Pixie : MonoBehaviour
 
         if (_x != 0) _y = 0;
         if (_y != 0) _x = 0;
+
+        if (_x > 0) tr.localScale = Vector3.one;
+        else if (_x < 0) tr.localScale = new Vector3(-1, 1, 1);
 
         Vector2 _moveDir = new Vector2(_x, _y).normalized;
         rb.velocity = _moveDir * movSpeed;
