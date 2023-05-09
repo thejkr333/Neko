@@ -20,8 +20,10 @@ public class Shield : MonoBehaviour
 
     void MoveToCursor()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Mathf.Abs(Camera.main.transform.position.z)));
+        mousePos.z = target.position.z;
+        
         Vector3 position = new Vector3(mousePos.x - target.position.x, mousePos.y - target.position.y, target.position.z);
         position = position.normalized * distanceFromPlayer;
 
