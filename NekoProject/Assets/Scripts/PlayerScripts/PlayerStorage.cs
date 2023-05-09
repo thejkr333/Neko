@@ -12,11 +12,11 @@ public class PlayerStorage : MonoBehaviour
 
     void Awake()
     {
-        foreach (Items item in Enum.GetValues(typeof(Items)))
-        {
-            ItemsUnlockedInfo.Add(item, false);
-        }
-        RefreshItemDictionary();
+        //foreach (Items item in Enum.GetValues(typeof(Items)))
+        //{
+        //    ItemsUnlockedInfo.Add(item, false);
+        //}
+        //RefreshItemDictionary();
     }
 
     public void AddCoins(int amount = 1)

@@ -10,7 +10,7 @@ public class Pixie : MonoBehaviour
     [SerializeField] AnimationCurve speed;
     [SerializeField] LayerMask ground;
     Transform player;
-    PlayerController playerController;
+    [SerializeField] PlayerController playerController;
 
     bool transitioning;
 
@@ -32,10 +32,11 @@ public class Pixie : MonoBehaviour
 
     [SerializeField] CinemachineVirtualCamera virtualCamera;
 
+    bool pressingR;
+
     private void Awake()
     {
-        player = transform.parent;
-        playerController = player.GetComponent<PlayerController>();
+        player = playerController.transform;
         rb = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.enabled = false;
@@ -45,6 +46,7 @@ public class Pixie : MonoBehaviour
     void Start()
     {
         tr = transform;
+        tr.position = followTarget.position;
 
         states = States.Following;
     }
@@ -80,20 +82,21 @@ public class Pixie : MonoBehaviour
             case States.Following:
                 if(states == States.Checkpoint)
                 {
-                    transform.parent = player;
+                    
                 }
                 break;
 
             case States.Checkpoint:
                 if (states == States.Following)
                 {
-                    transform.parent = null;
+                    
                 }
                 if (states == States.ChangeMinds)
                 {
                     playerController.enabled = true;
                     circleCollider.enabled = false;
                     virtualCamera.Follow = player;
+                    pressingR = Input.GetKeyDown(KeyCode.R);
                 }
                 pressTime = 0;
                 break;
@@ -113,11 +116,10 @@ public class Pixie : MonoBehaviour
 
     void Follow()
     {
-        /*if(Vector3.Distance(tr.position, followTarget.position) > .2f)*/ MoveSmooth(followTarget.position);
+        MoveSmooth(followTarget.position);
 
         if (Input.GetKeyDown(KeyCode.R) && Vector3.Distance(tr.position, followTarget.position) <= minDistanceForCheckPoint)
         {
-
             RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, ground);
             if (raycastHit2D)
             {
@@ -153,7 +155,9 @@ public class Pixie : MonoBehaviour
         {
             pressTime += Time.deltaTime;
 
-            if (pressTime > pressTolerance && Vector2.Distance(tr.position, player.position) < 2) ChangeStates(States.ChangeMinds);
+            Debug.Log("Press Time" + pressTime + " Press Tolerance" + pressTolerance);
+            Debug.Log("Player distance" + Vector2.Distance(tr.position, player.position));
+            if (pressTime > pressTolerance && Vector2.Distance(tr.position, player.position) < 4) ChangeStates(States.ChangeMinds);
         }
         else if (Input.GetKeyUp(KeyCode.R) && pressTime <= pressTolerance)
         {
@@ -177,6 +181,10 @@ public class Pixie : MonoBehaviour
 
         Vector2 _moveDir = new Vector2(_x, _y).normalized;
         rb.velocity = _moveDir * movSpeed;
+
+        if (Input.GetKeyUp(KeyCode.R)) pressingR = false;
+
+        if (pressingR) return;
 
         if (Input.GetKeyDown(KeyCode.R)) transitioning = true;
     }

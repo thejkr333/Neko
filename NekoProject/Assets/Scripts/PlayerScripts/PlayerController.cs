@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("PIXIE")]
     [SerializeField] Pixie pixie;
+    float tpYPos;
 
     [Header("ANTMAN")]
     [SerializeField] float antmanSpeed = 8f;
@@ -102,6 +103,8 @@ public class PlayerController : MonoBehaviour
         canShield = true;
 
         initialGravityScale = rb.gravityScale;
+
+        tpYPos = 1;
     }
 
     // Update is called once per frame
@@ -414,7 +417,7 @@ public class PlayerController : MonoBehaviour
     void TpToPixie()
     {
         //anim.SetTrigger("Disappear"); //animacion de tp
-        transform.position = pixie.transform.position;
+        transform.position = new Vector3(pixie.transform.position.x, pixie.transform.position.y + tpYPos, pixie.transform.position.z);
     }
 
     void CheckGround()
