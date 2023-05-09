@@ -61,7 +61,7 @@ public class PlayerUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) ToggleMenu();
         //if (!menuOn && Input.GetKey(KeyCode.M)) ToggleMap();
 
-        if (menuOn) {Menu(); map.SetActive(false);}
+        if (menuOn) Menu();
         else
         {
             menu.SetActive(Input.GetKey(KeyCode.M));
@@ -131,14 +131,14 @@ public class PlayerUI : MonoBehaviour
 
     void Menu()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             menuGameobjects[menuIndex].SetActive(false);
 
             if (menuIndex == 0) menuIndex = menuLength - 1;
             else menuIndex--;
         }
-        else if(Input.GetKeyDown(KeyCode.RightArrow))
+        else if(Input.GetKeyDown(KeyCode.E))
         {
             menuGameobjects[menuIndex].SetActive(false);
 
@@ -146,6 +146,7 @@ public class PlayerUI : MonoBehaviour
             else menuIndex++;
         }
 
+        if (menuGameobjects[menuIndex] != map && map.activeSelf) map.SetActive(false);
         menuGameobjects[menuIndex].SetActive(true);
     }
 }
