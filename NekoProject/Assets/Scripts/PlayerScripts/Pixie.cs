@@ -110,6 +110,7 @@ public class Pixie : MonoBehaviour
             case States.ChangeMinds:
                 if (states == States.Checkpoint)
                 {
+                    //pressingR = false;
                     playerController.enabled = false;
                     circleCollider.enabled = true;
                     virtualCamera.Follow = tr;
@@ -157,7 +158,6 @@ public class Pixie : MonoBehaviour
                 //anim de plantarse
                 tpTarget = raycastHit2D.point;
 
-                pressingR = true;
                 noise.enabled = false;
                 transitioning = true;
                 transform.parent = null;
@@ -185,9 +185,9 @@ public class Pixie : MonoBehaviour
             ChangeStates(States.Following);
         }
 
-        if (Input.GetKeyUp(KeyCode.R)) pressingR = false;
+        if (Input.GetKeyDown(KeyCode.R)) pressingR = true;
 
-        if (pressingR) return;
+        if (!pressingR) return;
 
         if (Input.GetKey(KeyCode.R))
         {
@@ -204,6 +204,7 @@ public class Pixie : MonoBehaviour
         else
         {
             pressTime = 0;
+            pressingR = false;
         }
     }
 
