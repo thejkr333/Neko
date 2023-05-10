@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  knockbackForce: 100
+  knockbackForce: 20
   currentHealth: 0
   coinPrefab: {fileID: 2744260340947091095, guid: 8255ce0106777e040860d5504dbafb57, type: 3}
   coinForce: 3

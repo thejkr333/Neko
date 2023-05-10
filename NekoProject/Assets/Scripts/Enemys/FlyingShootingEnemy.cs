@@ -11,13 +11,14 @@ public class FlyingShootingEnemy : FlyingEnemy
 
     protected override void Attack()
     {
+        if (!canMove) return;
+
         LookToPlayer();
 
         // Check if player has left attacking range
         if (Vector2.Distance(transform.position, playerTransform.position) > attackDistance)
         {
             ChangeState(States.Chasing);
-            attackTimer = 0;
             return;
         }
 

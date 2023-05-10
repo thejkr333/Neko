@@ -196,4 +196,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attractionForce: 3
-  maxMoveDistance: 0.075
+  maxMoveDistance: 0.1
