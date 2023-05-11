@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     SpriteRenderer sr;
     Rigidbody2D rb;
+    PlayerStorage playerStorage;
 
     //Movement variables
     [Header("MOVEMENT")]
@@ -82,6 +83,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        playerStorage = GetComponent<PlayerStorage>();
 
         jumpForce = CalculateJumpForce(Physics2D.gravity.magnitude, jumpHeight);
 
@@ -114,11 +116,11 @@ public class PlayerController : MonoBehaviour
 
         CheckAttack();
 
-        Dash();
+        if (playerStorage.ItemsUnlockedInfo[Items.Dash]) Dash();
 
-        Shield();
+        if (playerStorage.ItemsUnlockedInfo[Items.Shield]) Shield();
 
-        AntMan();
+        if (playerStorage.ItemsUnlockedInfo[Items.Antman]) AntMan();
 
         CheckTP();
 
@@ -139,9 +141,14 @@ public class PlayerController : MonoBehaviour
 
         CheckGround();
 
-        CheckWallSlide();
+        if (playerStorage.ItemsUnlockedInfo[Items.WallSlide]) CheckWallSlide();
 
         Movement();
+    }
+
+    private void LateUpdate()
+    {
+        PlaySounds();
     }
 
     #region Movement 
@@ -218,7 +225,7 @@ public class PlayerController : MonoBehaviour
 
             jumpKeyHeld = true;
             if (grounded || wallSliding) Jump();
-            else if (canDoubleJump) DoubleJump();
+            else if (playerStorage.ItemsUnlockedInfo[Items.DoubleJump] && canDoubleJump) DoubleJump();
         }
         else if (Input.GetKeyUp(KeyCode.Space)) jumpKeyHeld = false;
     }
@@ -418,6 +425,7 @@ public class PlayerController : MonoBehaviour
     {
         //anim.SetTrigger("Disappear"); //animacion de tp
         transform.position = new Vector3(pixie.transform.position.x, pixie.transform.position.y + tpYPos, pixie.transform.position.z);
+        AudioManager.Instance.PlaySound("TP");
     }
 
     void CheckGround()
@@ -512,6 +520,18 @@ public class PlayerController : MonoBehaviour
         canShield = false;
         shieldActiveTimer = 0;
         shieldCDTimer = 0;
+    }
+
+    void PlaySounds()
+    {
+        if(grounded && rb.velocity.magnitude > .1f)
+        {
+            AudioManager.Instance.PlaySound("GrassRun");
+        }
+        else
+        {
+            AudioManager.Instance.StopSound("GrassRun");
+        }
     }
 
     private void OnDrawGizmos()

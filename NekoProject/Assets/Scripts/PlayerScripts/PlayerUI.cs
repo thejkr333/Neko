@@ -27,6 +27,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Image antmanCDImg;
     float antmanTimeCD, antmanTimer;
 
+    [Header("INVENTORY")]
+    [SerializeField] GameObject[] inventorySlots;
+
     private void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();

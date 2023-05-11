@@ -1,38 +1,59 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 [System.Serializable]
 public class Sound
 {
-    public string name;
-
-    public AudioClip clip;
+    public string Name;
+    public AudioClip Clip;
 
     [Range(0f, 1f)]
-    public float volume;
-    [Range(0f, 1f)]
-    public float maxVolume;
-    [Range(0f, 3f)]
-    public float pitch;
+    public float Volume = 1f;
 
-    public bool music;
+    [Range(-3f, 3f)]
+    public float Pitch = 1f;
 
-    [HideInInspector]
-    public AudioSource source;
+    public bool Loop = false;
+}
+
+[System.Serializable]
+public class MusicTrack
+{
+    public string Name;
+    public AudioClip Clip;
 }
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    public static AudioManager Instance;
 
-    public static AudioManager instance;
-    public static AudioManager GetInstance() { return instance; }
+    public List<Sound> Sounds = new List<Sound>();
+    public List<MusicTrack> Music = new List<MusicTrack>();
+
+    private Dictionary<string, AudioSource> soundSources = new Dictionary<string, AudioSource>();
+    private Dictionary<string, AudioClip> musicClips = new Dictionary<string, AudioClip>();
+    private AudioSource musicSource;
+
+    [SerializeField] private float fadeDuration = 1f;
+
+    [Range(0f, 1f)]
+    public float MusicVolume = 1f;
+
+    [Range(0f, 1f)]
+    public float SfxVolume = 1f;
+
+    private bool isMuted, isPaused;
 
     void Awake()
     {
         // Singleton
-        if (instance == null)
-            instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
         {
             Destroy(gameObject);
@@ -40,79 +61,223 @@ public class AudioManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        foreach (Sound s in sounds)
+        foreach (Sound sound in Sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.music;
+            AudioSource _source = gameObject.AddComponent<AudioSource>();
+            _source.clip = sound.Clip;
+            _source.volume = sound.Volume;
+            _source.pitch = sound.Pitch;
+            _source.playOnAwake = false;
+            _source.loop = sound.Loop;
+            soundSources[sound.Name] = _source;
         }
 
-        // Valores iniciales de los sliders de musica y sonido
-        AudioVolume(PlayerPrefs.GetFloat("SoundVolume", 5), false);
-        AudioVolume(PlayerPrefs.GetFloat("MusicVolume", 5), true);
+        foreach (MusicTrack music in Music)
+        {
+            musicClips[music.Name] = music.Clip;
+        }
 
-        ChangeBackgroundMusic(SceneManager.GetActiveScene().name);
+        // Initialize musicSource
+        musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource.loop = true;
+        musicSource.volume = 1f;
+        musicSource.pitch = 1f;
     }
 
-    public void ChangeBackgroundMusic(string sceneName) // Cambia la muscia de fondo segun la escena, llamado desde 
+    #region SFX
+    public void PlaySound(string name, float pitch = 1)
     {
-        switch (sceneName)
+        if (isMuted) return;
+
+        if (soundSources.ContainsKey(name))
         {
-            case "MainMenu_Scene":
-                Stop("GameMusic");
-                Play("MainMenu_Music", 1);
-                break;
-            default:
-                Stop("MainMenu_Music");
-                Play("GameMusic", 1);
-                break;
+            AudioSource _source = soundSources[name];
+
+            if (_source.loop && _source.isPlaying) return;
+
+            _source.volume = SfxVolume;
+            _source.pitch = pitch;
+            _source.Play();
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager: Sound not found - " + name);
         }
     }
 
-    public void Play(string name, float pitch)
+    public void StopSound(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
+        if (isMuted) return;
+
+        if (soundSources.ContainsKey(name))
         {
-            Debug.LogWarning("Sound: " + name + " not found!");
-            return;
+            AudioSource _source = soundSources[name];
+            _source.Stop();
+
         }
-        s.source.pitch = pitch;
-        s.source.Play();
+        else
+        {
+            Debug.LogWarning("AudioManager: Sound not found - " + name);
+        }
+    }
+    #endregion
+
+    #region Music
+    public void PlayMusic(string name)
+    {
+        if (isMuted) return;
+
+        if (musicClips.ContainsKey(name))
+        {
+            if (musicSource.clip == null)
+            {
+                musicSource.clip = musicClips[name];
+                StartCoroutine(FadeInAudio(musicSource, MusicVolume));
+                StartCoroutine(PlayNextSong(name));
+            }
+            else if (musicSource.clip != musicClips[name])
+            {
+                StartCoroutine(FadeOutMusic(() =>
+                {
+                    musicSource.clip = musicClips[name];
+                    StartCoroutine(PlayNextSong(name));
+                    StartCoroutine(FadeInAudio(musicSource, MusicVolume));
+                }));
+            }
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager: Music not found - " + name);
+        }
     }
 
-    public void Stop(string name)
+    private IEnumerator FadeOutMusic(System.Action callback = null)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
+        float _startVolume = musicSource.volume;
+
+        while (musicSource.volume > 0)
         {
-            Debug.LogWarning("Sound: " + name + " not found!");
-            return;
+            musicSource.volume -= _startVolume * Time.deltaTime / fadeDuration;
+            yield return null;
         }
-        s.source.Stop();
+
+        musicSource.Stop();
+        musicSource.volume = _startVolume;
+
+        if (callback != null) callback();
     }
 
-    public void AudioVolume(float volume, bool isMusic) // Se llama cada vez que se modifica el sonido o la musica
+    IEnumerator FadeInAudio(AudioSource source, float targetVolume)
     {
-        // Almacenar valores en PlayerPref
-        if (isMusic)  // Volumen Musica
-            PlayerPrefs.SetFloat("MusicVolume", volume);
-
-        if (!isMusic) // Volumen Sonido
-            PlayerPrefs.SetFloat("SoundVolume", volume);
-
-        // Convertir a un valor sobre 1
-        volume = volume / 10;
-
-        AudioSource[] AllaudioSources = GetComponents<AudioSource>();
-
-        for (int i = 0; i < AllaudioSources.Length; i++)
+        // Fade in new music
+        source.volume = 0f;
+        source.Play();
+        while (Mathf.Abs(source.volume - targetVolume) > 0.01f)
         {
-            if (sounds[i].music == isMusic)
-                AllaudioSources[i].volume = volume * sounds[i].maxVolume; // Cambiar el volumen de todas las musicas/sonidos dependiendo de su "maxVolume"
+            source.volume += Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        source.volume = targetVolume;
+    }
+
+    IEnumerator PlayNextSong(string currentSong)
+    {
+        float timeForNextSong = musicClips[currentSong].length - fadeDuration * 2f;
+
+        yield return new WaitForSeconds(timeForNextSong);
+
+        string _newSong;
+        do
+        {
+            _newSong = Music[UnityEngine.Random.Range(1, Music.Count)].Name;
+        }
+        while (_newSong == currentSong);
+
+        PlayMusic(_newSong);
+    }
+    #endregion
+
+    public void SetMusicVolume(float volume)
+    {
+        MusicVolume = volume;
+
+        if (musicSource != null)
+        {
+            musicSource.volume = volume;
+        }
+
+        // Save the music volume to PlayerPrefs
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        SfxVolume = volume;
+
+        // Update the volume of all existing sound sources
+        foreach (AudioSource source in soundSources.Values)
+        {
+            source.volume = volume;
+        }
+
+        // Save the SFX volume to PlayerPrefs
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            musicSource.Pause();
+
+            foreach (KeyValuePair<string, AudioSource> sound in soundSources)
+            {
+                sound.Value.Pause();
+            }
+        }
+        else
+        {
+            musicSource.UnPause();
+
+            foreach (KeyValuePair<string, AudioSource> sound in soundSources)
+            {
+                if (sound.Value.isPlaying)
+                {
+                    sound.Value.UnPause();
+                }
+            }
+        }
+    }
+
+    public void ToggleMute()
+    {
+        isMuted = !isMuted;
+
+        if (isMuted)
+        {
+            musicSource.Stop();
+
+            foreach (KeyValuePair<string, AudioSource> sound in soundSources)
+            {
+                sound.Value.Stop();
+            }
+        }
+        else
+        {
+            musicSource.Play();
+
+            foreach (KeyValuePair<string, AudioSource> sound in soundSources)
+            {
+                if (sound.Value.isPlaying)
+                {
+                    sound.Value.Play();
+                }
+            }
         }
     }
 }

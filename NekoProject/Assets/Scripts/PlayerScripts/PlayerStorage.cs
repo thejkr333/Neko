@@ -3,20 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Items { }
 public class PlayerStorage : MonoBehaviour
 {
     public int Coins { get; private set; }
     public Dictionary<Items, bool> ItemsUnlockedInfo = new();
-    List<Item> inventory;
+    List<Item> inventory = new();
 
-    void Awake()
+    private void Start()
     {
-        //foreach (Items item in Enum.GetValues(typeof(Items)))
-        //{
-        //    ItemsUnlockedInfo.Add(item, false);
-        //}
-        //RefreshItemDictionary();
+        GameManager.Instance.SaveGameAction += UpdateDataToGameManager;
+        ItemsUnlockedInfo = GameManager.Instance.GetItemsInfo();
     }
 
     public void AddCoins(int amount = 1)
@@ -33,8 +29,13 @@ public class PlayerStorage : MonoBehaviour
     {
         foreach (var item in inventory)
         {
-            ItemsUnlockedInfo[item.thisItem] = true;
+            ItemsUnlockedInfo[item.ID] = true;
         }
+    }
+
+    void UpdateDataToGameManager()
+    {
+        GameManager.Instance.SetItemsInfo(ref ItemsUnlockedInfo);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

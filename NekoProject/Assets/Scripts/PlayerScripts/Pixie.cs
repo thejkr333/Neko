@@ -11,6 +11,7 @@ public class Pixie : MonoBehaviour
     [SerializeField] LayerMask ground;
     Transform player;
     [SerializeField] PlayerController playerController;
+    PlayerStorage playerStorage;
 
     bool transitioning;
 
@@ -41,6 +42,7 @@ public class Pixie : MonoBehaviour
         player = playerController.transform;
         rb = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        playerStorage = player.GetComponent<PlayerStorage>();
         circleCollider.enabled = false;
         transitioning = false;
 
@@ -149,6 +151,7 @@ public class Pixie : MonoBehaviour
         if (playerController.Dir == 1) tr.localScale = Vector3.one;
         else tr.localScale = new Vector3(-1, 1, 1);
 
+        if (!playerStorage.ItemsUnlockedInfo[Items.PixieCheckPoint]) return;
 
         if (Input.GetKeyDown(KeyCode.R) && _distanceToTarget <= minDistanceForCheckPoint)
         {
@@ -189,22 +192,34 @@ public class Pixie : MonoBehaviour
 
         if (!pressingR) return;
 
-        if (Input.GetKey(KeyCode.R))
+        if (playerStorage.ItemsUnlockedInfo[Items.PixieChangeMinds])
         {
-            pressTime += Time.deltaTime;
+            if (Input.GetKey(KeyCode.R))
+            {
+                pressTime += Time.deltaTime;
 
-            if (pressTime > pressTolerance && Vector2.Distance(tr.position, player.position) < 4) ChangeStates(States.ChangeMinds);
-        }
-        else if (Input.GetKeyUp(KeyCode.R) && pressTime <= pressTolerance)
-        {
-            //anim de salir de checkpoint
+                if (pressTime > pressTolerance && Vector2.Distance(tr.position, player.position) < 4) ChangeStates(States.ChangeMinds);
+            }
+            else if (Input.GetKeyUp(KeyCode.R) && pressTime <= pressTolerance)
+            {
+                //anim de salir de checkpoint
 
-            ChangeStates(States.Following);
+                ChangeStates(States.Following);
+            }
+            else
+            {
+                pressTime = 0;
+                pressingR = false;
+            }
         }
         else
         {
-            pressTime = 0;
-            pressingR = false;
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                //anim de salir de checkpoint
+
+                ChangeStates(States.Following);
+            }
         }
     }
 
