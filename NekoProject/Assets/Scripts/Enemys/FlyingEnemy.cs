@@ -23,6 +23,8 @@ public class FlyingEnemy : Enemy
 
     protected override void Patrol()
     {
+        base.Patrol();
+
         if (playerTransform != null)
         {
             if (Vector2.Distance(playerTransform.position, transform.position) <= chaseDistance && chasingTimer <= 0)
@@ -56,6 +58,8 @@ public class FlyingEnemy : Enemy
 
     protected override void Chase()
     {
+        base.Chase();
+
         LookToPlayer();
 
         Vector2 playerDirection = playerTransform.position - transform.position;
@@ -80,6 +84,8 @@ public class FlyingEnemy : Enemy
 
     protected override void Attack()
     {
+        base.Attack();
+
         LookToPlayer();
 
         if (Vector2.Distance(transform.position, playerTransform.position) > attackDistance)

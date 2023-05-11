@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     protected bool facingRight;
 
     public int coinsToSpawn;
+
+    protected bool canMove;
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -44,17 +46,17 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Patrol()
     {
-
+        if (!canMove) return;
     }
 
     protected virtual void Chase()
     {
-        
+        if (!canMove) return;
     }
 
     protected virtual void Attack()
     {
-        
+        if (!canMove) return;
     }
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
@@ -93,4 +95,19 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
 
+    public void DisableMovement()
+    {
+        canMove = false;
+        rb.velocity = Vector2.zero;
+    }
+
+    public void EnableMovement(float seconds)
+    {
+        Invoke(nameof(EnableMovement), seconds);
+    }
+
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
 }

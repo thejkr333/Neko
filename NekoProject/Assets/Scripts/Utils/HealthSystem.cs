@@ -39,6 +39,11 @@ public class HealthSystem : MonoBehaviour
             playerController.DisableMovement();
             playerController.EnableMovement(0.2f); 
         }
+        else if(TryGetComponent(out Enemy enemy))
+        {
+            enemy.DisableMovement();
+            enemy.EnableMovement(.2f);
+        }
         rb.gravityScale = 0;
         rb.AddForce(direction * -1f * knockbackForce, ForceMode2D.Impulse);
         rb.gravityScale = initialGravityScale;      

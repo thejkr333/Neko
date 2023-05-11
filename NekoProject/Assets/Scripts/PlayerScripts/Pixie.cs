@@ -94,10 +94,11 @@ public class Pixie : MonoBehaviour
             case States.Checkpoint:
                 if (states == States.Following)
                 {
-                    
+
                 }
                 if (states == States.ChangeMinds)
                 {
+                    rb.velocity = Vector2.zero;
                     playerController.enabled = true;
                     circleCollider.enabled = false;
                     virtualCamera.Follow = player;
@@ -109,6 +110,7 @@ public class Pixie : MonoBehaviour
             case States.ChangeMinds:
                 if (states == States.Checkpoint)
                 {
+                    //pressingR = false;
                     playerController.enabled = false;
                     circleCollider.enabled = true;
                     virtualCamera.Follow = tr;
@@ -122,17 +124,6 @@ public class Pixie : MonoBehaviour
     void Follow()
     {
         float _distanceToTarget = Vector3.Distance(tr.position, followTarget.position);
-
-        //if (_distanceToTarget > 3f)
-        //{
-
-        //    MoveSmooth(followTarget.position);
-        //}
-        //else if(!noise.enabled && _distanceToTarget < .5f)
-        //{
-        //    noise.InitialPosition = tr.position;
-        //    noise.enabled = true;
-        //}
       
         if (_distanceToTarget < .5f)
         {
@@ -161,12 +152,13 @@ public class Pixie : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R) && _distanceToTarget <= minDistanceForCheckPoint)
         {
-            RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, ground);
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, 5f, ground);
             if (raycastHit2D)
             {
                 //anim de plantarse
                 tpTarget = raycastHit2D.point;
 
+                noise.enabled = false;
                 transitioning = true;
                 transform.parent = null;
             }
@@ -178,9 +170,10 @@ public class Pixie : MonoBehaviour
         Move(tpTarget);
         if (Vector3.Distance(tr.position, tpTarget) < .2f) 
         {
+            ChangeStates(States.Checkpoint);
             transitioning = false;
-            ChangeStates(States.Checkpoint); 
         }
+        if (Input.GetKeyUp(KeyCode.R)) pressingR = false;
     }
 
     void Checkpoint()
@@ -192,12 +185,14 @@ public class Pixie : MonoBehaviour
             ChangeStates(States.Following);
         }
 
+        if (Input.GetKeyDown(KeyCode.R)) pressingR = true;
+
+        if (!pressingR) return;
+
         if (Input.GetKey(KeyCode.R))
         {
             pressTime += Time.deltaTime;
 
-            Debug.Log("Press Time" + pressTime + " Press Tolerance" + pressTolerance);
-            Debug.Log("Player distance" + Vector2.Distance(tr.position, player.position));
             if (pressTime > pressTolerance && Vector2.Distance(tr.position, player.position) < 4) ChangeStates(States.ChangeMinds);
         }
         else if (Input.GetKeyUp(KeyCode.R) && pressTime <= pressTolerance)
@@ -209,6 +204,7 @@ public class Pixie : MonoBehaviour
         else
         {
             pressTime = 0;
+            pressingR = false;
         }
     }
 

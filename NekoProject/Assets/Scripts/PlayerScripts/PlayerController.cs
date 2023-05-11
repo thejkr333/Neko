@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour
 
     public void EnableMovement(float seconds)
     {
-        Invoke("EnableMovement", seconds);
+        Invoke(nameof(EnableMovement), seconds);
     }
 
     #endregion
@@ -349,14 +349,13 @@ public class PlayerController : MonoBehaviour
         timeSinceLastDash += Time.deltaTime;
         if (timeSinceLastDash >= dashFrecuency) canDash = true;
 
+        if (!canDash || attacking || antman || dashing) return;
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (!canDash || attacking || antman) return;
-
             dashing = true;
 
             canDash = false;
-            timeSinceLastDash = 0;
 
             anim.SetTrigger("Dash");
 
@@ -373,6 +372,7 @@ public class PlayerController : MonoBehaviour
     {
         dashing = false;
 
+        timeSinceLastDash = 0;
         rb.gravityScale = initialGravityScale;
         rb.velocity = Vector2.zero;
         EnableMovement();
