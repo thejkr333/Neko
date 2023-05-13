@@ -18,11 +18,12 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(Instance);
+            return;
         }
 
         DataSaving = new DataSaving();
