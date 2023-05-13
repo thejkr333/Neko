@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     [Header("MOVEMENT")]
     bool movementDisabled;
     [SerializeField] float speed = 4f;
+    [SerializeField] ParticleSystem petals;
+    [SerializeField] Vector2 minMaxPetalsTime;
+    [SerializeField] Transform petalsPos;
+    float petalsTimer, petalsCD;
     float initialGravityScale, input_hor;
     public int Dir;
 
@@ -107,6 +111,9 @@ public class PlayerController : MonoBehaviour
         initialGravityScale = rb.gravityScale;
 
         tpYPos = 1;
+
+        petalsTimer = 0;
+        petalsCD = Random.Range(minMaxPetalsTime.x, minMaxPetalsTime.y);
     }
 
     // Update is called once per frame
@@ -187,6 +194,8 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector2(input_hor * currentSpeed, rb.velocity.y);
 
+        if (grounded && rb.velocity.magnitude > .1f) UpdatePetals();
+
         FlipSr();
     }
     void FlipSr()
@@ -195,6 +204,18 @@ public class PlayerController : MonoBehaviour
         {
             if (input_hor < 0) { Dir = -1; sr.transform.localScale = new Vector3(-1, 1, 0); }
             else { Dir = 1; sr.transform.localScale = new Vector3(1, 1, 0); }
+        }
+    }
+
+    void UpdatePetals()
+    {
+        petalsTimer += Time.fixedDeltaTime;
+        if(petalsTimer >= petalsCD)
+        {
+            petals.transform.position = petalsPos.position;
+            petals.Play();
+            petalsTimer = 0;
+            petalsCD = Random.Range(minMaxPetalsTime.x, minMaxPetalsTime.y);
         }
     }
 
