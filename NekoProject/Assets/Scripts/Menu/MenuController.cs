@@ -12,7 +12,7 @@ public class MenuController : MonoBehaviour
     }
     public void NewGame()
     {
-        
+        GameManager.Instance.NewGame();
     }
 
     public void LoadGame()

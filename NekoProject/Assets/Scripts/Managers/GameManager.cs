@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    static DataSaving DataSaving;
+    static DataSaving DataSavingInstance;
     public Action SaveGameAction;
 
     public bool Cheating;
@@ -26,30 +26,35 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        DataSaving = new DataSaving();
+        DataSavingInstance = new DataSaving();
 
         if (Cheating)
         {
-            DataSaving.Cheat();
+            DataSavingInstance.Cheat();
         }
         else
         {
-            if (DataSaving.IsThereSaveFiles()) DataSaving.LoadData();
+            if (DataSavingInstance.IsThereSaveFiles()) DataSavingInstance.LoadData();
         }
+    }
+    public void NewGame()
+    {
+        DataSavingInstance.EraseSaveFiles();
     }
 
     public void SaveGame()
     {
         SaveGameAction?.Invoke();
+        DataSavingInstance.SaveData();
     }
 
     public Dictionary<Items, bool> GetItemsInfo()
     {
-        return DataSaving.ItemsOwned;
+        return DataSavingInstance.ItemsOwned;
     }
     public void SetItemsInfo(ref Dictionary<Items, bool> itemsInfo)
     {
-        DataSaving.ItemsOwned  = itemsInfo;
+        DataSavingInstance.ItemsOwned  = itemsInfo;
     }
 
     public void LoadScene(int sceneNumber)

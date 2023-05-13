@@ -81,6 +81,8 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = true;
         musicSource.volume = 1f;
         musicSource.pitch = 1f;
+
+        PlayMusic("BG_noises");
     }
 
     #region SFX
