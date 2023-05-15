@@ -281,12 +281,13 @@ public class PlayerController : MonoBehaviour
     {
         timeSinceLastAttack += Time.deltaTime;
         if (timeSinceLastAttack >= attackFrecuency) canAttack = true;
-        if (timeSinceLastAttack >= timeToCombo) lastAttack = -1;
+        if (timeSinceLastAttack >= timeToCombo) lastAttack = 0;
 
         if (Input.GetMouseButtonDown(0))
         {
             if (!canAttack || dashing || wallSliding || antman || shielding) return;
 
+            AudioManager.Instance.PlaySound("Attack", lastAttack + 1);
             attacking = true;
             timeSinceLastAttack = 0;
             canAttack = false;
@@ -299,22 +300,22 @@ public class PlayerController : MonoBehaviour
             //Rest of attacks
             else
             {
-                if (lastAttack == 0)
+                if (lastAttack == 1)
                 {
                     //Attack 2
                     lastAttack++;
                     anim.SetTrigger("Attack2");
                 }
-                else if (lastAttack == 1)
+                else if (lastAttack == 2)
                 {
                     //attack 3
-                    lastAttack++;
+                    lastAttack = 0;
                     anim.SetTrigger("Attack3");
                 }
                 else
                 {
                     //attack 1
-                    lastAttack = 0;
+                    lastAttack++;
                     anim.SetTrigger("Attack1");
                 }
             }

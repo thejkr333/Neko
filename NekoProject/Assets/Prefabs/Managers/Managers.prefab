@@ -100,6 +100,11 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     Loop: 0
+  - Name: Attack
+    Clip: {fileID: 8300000, guid: 8d8d8eb3bfffc6740849587891ad555d, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
   Music:
   - Name: BG_noises
     Clip: {fileID: 8300000, guid: dc3883ab075ee2744a328658c9e7ff46, type: 3}
