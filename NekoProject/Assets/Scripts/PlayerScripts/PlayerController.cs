@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     float petalsTimer, petalsCD;
     float initialGravityScale, input_hor;
     public int Dir;
+    public bool Invincible;
 
     //Jump Variables
     [Header("JUMP")]
@@ -219,6 +220,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void GetHit()
+    {
+        Invincible = true;
+        int _playerInvincibleLayer = LayerMask.NameToLayer("PlayerInvincible");
+        gameObject.layer = _playerInvincibleLayer;
+        DisableMovement();
+        EnableMovement(.5f);
+    }
+
     public void DisableMovement()
     {
         movementDisabled = true;
@@ -226,12 +236,15 @@ public class PlayerController : MonoBehaviour
 
     public void EnableMovement()
     {
+        Invincible = false;
         movementDisabled = false;
+        int _playerLayer = LayerMask.NameToLayer("Player");
+        gameObject.layer = _playerLayer;
     }
 
     public void EnableMovement(float seconds)
     {
-        Invoke(nameof(EnableMovement), seconds);
+        Invoke("EnableMovement", seconds);
     }
 
     #endregion
@@ -555,6 +568,8 @@ public class PlayerController : MonoBehaviour
             AudioManager.Instance.StopSound("GrassRun");
         }
     }
+
+    
 
     private void OnDrawGizmos()
     {

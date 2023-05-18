@@ -76,6 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 387016081067476888}
   - component: {fileID: 387016081067476889}
+  - component: {fileID: 1789823332}
   m_Layer: 0
   m_Name: Camera Player
   m_TagString: Untagged
@@ -91,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387016081067476890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0000009536743, y: 1.9044414, z: -15}
+  m_LocalPosition: {x: -0.0000009536743, y: 2.42, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -137,6 +138,21 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 387016081210984103}
+--- !u!114 &1789823332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387016081067476890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1 &387016081210984104
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pixie
       objectReference: {fileID: 0}
+    - target: {fileID: 3594544878058398637, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3594544878058398639, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
       propertyPath: floatOnZ
       value: 0
@@ -455,6 +475,10 @@ PrefabInstance:
     - target: {fileID: 6975279850679145470, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279850679145470, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: pixie

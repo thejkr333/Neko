@@ -17,19 +17,22 @@ public class Enemy : MonoBehaviour
 
     public int coinsToSpawn;
 
-    protected bool canMove;
+    [SerializeField] protected bool canMove;
     // Start is called before the first frame update
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        canMove = true;
         state = States.Patrolling;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        if (!canMove) return;
+
         switch (state)
         {
             case States.Patrolling:
@@ -41,22 +44,22 @@ public class Enemy : MonoBehaviour
             case States.Attacking:
                 Attack();
                 break;
-        }
+        }      
     }
 
     protected virtual void Patrol()
     {
-        if (!canMove) return;
+        
     }
 
     protected virtual void Chase()
     {
-        if (!canMove) return;
+        
     }
 
     protected virtual void Attack()
     {
-        if (!canMove) return;
+        
     }
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
@@ -69,6 +72,16 @@ public class Enemy : MonoBehaviour
     protected virtual void ChangeState(States nextState)
     {
         state = nextState;
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.TryGetComponent(out PlayerController playerController))
+        {
+            if (playerController.Invincible) return;
+            Vector2 _dir = transform.position - playerTransform.position;
+            playerController.GetComponent<HealthSystem>().GetHurt(1, _dir);
+        }
     }
 
     protected void LookToPlayer()
@@ -98,12 +111,11 @@ public class Enemy : MonoBehaviour
     public void DisableMovement()
     {
         canMove = false;
-        rb.velocity = Vector2.zero;
     }
 
     public void EnableMovement(float seconds)
     {
-        Invoke(nameof(EnableMovement), seconds);
+        Invoke("EnableMovement", seconds);
     }
 
     public void EnableMovement()

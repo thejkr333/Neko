@@ -15,8 +15,6 @@ public class SimpleEnemy : Enemy
 
     protected override void Patrol()
     {
-        base.Patrol();
-
         if (playerTransform != null)
         {
             if (Mathf.Abs(playerTransform.position.x - transform.position.x) <= chaseDistance)
@@ -34,8 +32,6 @@ public class SimpleEnemy : Enemy
 
     protected override void Chase()
     {
-        base.Chase();
-
         LookToPlayer();
 
         //if player has left chase distance
@@ -61,8 +57,6 @@ public class SimpleEnemy : Enemy
 
     protected override void Attack()
     {
-        base.Attack();
-
         LookToPlayer();
 
         rb.velocity = Vector2.zero;
@@ -70,8 +64,10 @@ public class SimpleEnemy : Enemy
         if (Mathf.Abs(playerTransform.position.x - transform.position.x) > attackDistance) ChangeState(States.Chasing);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D (collision);
+
         if(state == States.Patrolling) dir *= -1;
     }
 }

@@ -20,7 +20,7 @@ public class HealthSystem : MonoBehaviour
     public void GetHurt(int damage, Vector2 direction)
     {
         currentHealth -= damage;
-        Knockback(direction);
+        Knockback(direction.normalized);
 
         if (currentHealth <= 0)
         {
@@ -33,20 +33,17 @@ public class HealthSystem : MonoBehaviour
     {
         if (rb == null) return;
 
-        float initialGravityScale = rb.gravityScale;
         if (TryGetComponent(out PlayerController playerController))
         {
-            playerController.DisableMovement();
-            playerController.EnableMovement(0.2f); 
+            playerController.GetHit();
         }
         else if(TryGetComponent(out Enemy enemy))
         {
             enemy.DisableMovement();
-            enemy.EnableMovement(.2f);
+            enemy.EnableMovement(.3f);
         }
-        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
         rb.AddForce(direction * -1f * knockbackForce, ForceMode2D.Impulse);
-        rb.gravityScale = initialGravityScale;      
     }
 
     void Die()
