@@ -246,71 +246,6 @@ PolygonCollider2D:
       - {x: -19.358053, y: 0.0070821047}
       - {x: 19.49407, y: 0.007082224}
       - {x: 19.721325, y: 21.935627}
---- !u!1001 &924547826
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2153924682056167696, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: maxHealth
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167696, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: knockbackForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167697, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_Name
-      value: SimpleEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.971
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.678
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
 --- !u!1 &981347328
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1042517307
 Rigidbody2D:
   serializedVersion: 4
@@ -470,21 +405,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042517305}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 429237ebe41532646b737e46024aa620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSpeed: 10
   jumpCounterSpeed: 4
-  jumpTime: 0.3
+  jumpTime: 0.4
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
   groundCheck_tr: {fileID: 1221787875}
-  grounded: 0
+  grounded: 1
   groundCheckRadius: 0.1
-  movSpeed: 12
+  movSpeed: 8
 --- !u!212 &1042517309
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -782,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 387016081111373171, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9130882534033757047, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
       propertyPath: m_IsActive
