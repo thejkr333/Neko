@@ -15,8 +15,9 @@ public class FlyingShootingEnemy : FlyingEnemy
 
         LookToPlayer();
 
+        float _distance = Vector2.Distance(transform.position, playerTransform.position);
         // Check if player has left attacking range
-        if (Vector2.Distance(transform.position, playerTransform.position) > attackDistance)
+        if (_distance > attackDistance)
         {
             ChangeState(States.Chasing);
             return;
@@ -32,7 +33,8 @@ public class FlyingShootingEnemy : FlyingEnemy
         }
         else if(attackTimer <= attackCD - 1)
         {
-            rb.velocity = rb.velocity = attackDirection.normalized * chaseSpeed;
+            if(_distance > attackDistance * .5f) rb.velocity = attackDirection.normalized * chaseSpeed;
+            else rb.velocity = -attackDirection.normalized * chaseSpeed;
         }
     }
 
