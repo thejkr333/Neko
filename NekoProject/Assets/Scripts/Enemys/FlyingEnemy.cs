@@ -98,8 +98,10 @@ public class FlyingEnemy : Enemy
         rb.velocity = attackDirection * attackSpeed;
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
+
         if (state == States.Patrolling) patrolTimer = 0;
         
         if(collision.gameObject.TryGetComponent(out PlayerController playerController))

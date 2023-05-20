@@ -19,7 +19,10 @@ public class PlayerController : MonoBehaviour
     float petalsTimer, petalsCD;
     float initialGravityScale, input_hor;
     public int Dir;
+
+    [Header("INVINCIBILITY")]
     public bool Invincible;
+    [SerializeField] float invincibiltyTime;
 
     //Jump Variables
     [Header("JUMP")]
@@ -225,8 +228,15 @@ public class PlayerController : MonoBehaviour
         Invincible = true;
         int _playerInvincibleLayer = LayerMask.NameToLayer("PlayerInvincible");
         gameObject.layer = _playerInvincibleLayer;
+        Invoke(nameof(DisableInvincibility), invincibiltyTime);
+
         DisableMovement();
         EnableMovement(.5f);
+    }
+
+    void DisableInvincibility()
+    {
+        Invincible = false;
     }
 
     public void DisableMovement()
@@ -236,7 +246,6 @@ public class PlayerController : MonoBehaviour
 
     public void EnableMovement()
     {
-        Invincible = false;
         movementDisabled = false;
         int _playerLayer = LayerMask.NameToLayer("Player");
         gameObject.layer = _playerLayer;
