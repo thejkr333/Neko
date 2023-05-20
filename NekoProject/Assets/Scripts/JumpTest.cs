@@ -74,8 +74,8 @@ public class JumpTest : MonoBehaviour
     {
         if (!jumpKeyHeld) return;
 
-        //rb.velocity = new Vector2(rb.velocity.x, -jumpCounterSpeed);
-        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.velocity = new Vector2(rb.velocity.x, -jumpCounterSpeed);
+        //rb.velocity = new Vector2(rb.velocity.x, 0);
         jumpTimer = 0;
         jumpKeyHeld = false;
         jumping = false;
@@ -83,7 +83,7 @@ public class JumpTest : MonoBehaviour
     
     void JumpFinished()
     {
-        //rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.velocity = new Vector2(rb.velocity.x, 0);
         jumpTimer = 0;
         jumpKeyHeld = false;
         jumping = false;
