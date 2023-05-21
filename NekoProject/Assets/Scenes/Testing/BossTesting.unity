@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 118215747}
   - component: {fileID: 118215748}
   - component: {fileID: 118215749}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ColliderMano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,6 +966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player & Cam
       objectReference: {fileID: 0}
+    - target: {fileID: 9130882534033757047, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
 --- !u!1 &1879362393
@@ -1466,7 +1470,7 @@ GameObject:
   - component: {fileID: 2137341854}
   - component: {fileID: 2137341853}
   - component: {fileID: 2137341852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1492,12 +1496,21 @@ MonoBehaviour:
   - attackName: SideAttack
     damage: 1
     range: 3
+    hitPoint: {fileID: 1225144808408781114}
+    radius: 1
     phase: -1
+    isHitting: 0
+    hasHit: 0
   - attackName: JumpAttack
     damage: 1
     range: 6
+    hitPoint: {fileID: 1225144808408781114}
+    radius: 1.5
     phase: -1
+    isHitting: 0
+    hasHit: 0
   movSpeed: 5
+  jumpSpeed: 5
 --- !u!50 &2137341853
 Rigidbody2D:
   serializedVersion: 4
@@ -1552,7 +1565,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137341851}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 13.6, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1560,7 +1573,7 @@ Transform:
   - {fileID: 1670789330287675366}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &159739981631819151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1585,7 @@ GameObject:
   - component: {fileID: 6638078168826533444}
   - component: {fileID: 8500933775672452331}
   - component: {fileID: 4955396812731033826}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BRAZO IZQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1640,7 +1653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4888216751231721888}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BRAZO DER_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1658,7 +1671,7 @@ GameObject:
   - component: {fileID: 1670789330287675366}
   - component: {fileID: 811253306}
   - component: {fileID: 1670789330287675367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BOSS BETA DESIGN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1674,7 +1687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7619534907942849685}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ANTEBRAZO IZQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1757,7 +1770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6903046313578873242}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BRAZO IZQ_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1773,7 +1786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3772730638127154550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PIE IZQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1805,7 +1818,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8257264723463117280}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BASE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1836,7 +1849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1380106108642839372}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PIERNA IZQ_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1861,8 +1874,8 @@ MonoBehaviour:
   - {fileID: 5627191124726920092}
   - {fileID: 4626309572260652837}
   m_Bounds:
-    m_Center: {x: -0.011810482, y: 0.0000021457672, z: 0}
-    m_Extent: {x: 0.53372085, y: 0.55478954, z: 0}
+    m_Center: {x: 0.42911297, y: -1.0597923, z: 0}
+    m_Extent: {x: 0.49443737, y: 0.5622662, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2031,7 +2044,7 @@ GameObject:
   - component: {fileID: 4702203567426770715}
   - component: {fileID: 7019503326153928988}
   - component: {fileID: 1299336649387630834}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CABEZA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2047,7 +2060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2265974352552326366}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MUSLO DER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2103,8 +2116,8 @@ MonoBehaviour:
   - {fileID: 4854706073698732023}
   - {fileID: 2265974352552326366}
   m_Bounds:
-    m_Center: {x: -0.4308244, y: 0.062368095, z: 0}
-    m_Extent: {x: 0.48752105, y: 0.7196654, z: 0}
+    m_Center: {x: -0.58114105, y: -0.47811908, z: 0}
+    m_Extent: {x: 0.68640107, y: 0.5001314, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2119,7 +2132,7 @@ GameObject:
   - component: {fileID: 759369125229454974}
   - component: {fileID: 979879966974526564}
   - component: {fileID: 5805729192662253019}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PIERNA DER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2150,7 +2163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1151052025425508110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MUSLO IZQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2184,7 +2197,7 @@ GameObject:
   - component: {fileID: 2480888531359103066}
   - component: {fileID: 1988166973029773527}
   - component: {fileID: 4539897108187010056}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BRAZO DER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2209,8 +2222,8 @@ MonoBehaviour:
   - {fileID: 7941555704942416844}
   - {fileID: 4888216751231721888}
   m_Bounds:
-    m_Center: {x: 0.0004339218, y: 0.00058555603, z: 0}
-    m_Extent: {x: 0.9827136, y: 1.7143021, z: 0}
+    m_Center: {x: 0.14870274, y: -0.24058306, z: 0}
+    m_Extent: {x: 1.0997632, y: 1.4647774, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2240,7 +2253,7 @@ GameObject:
   - component: {fileID: 5490458545427797364}
   - component: {fileID: 206544477565987117}
   - component: {fileID: 5735635904327739097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PIERNA IZQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2286,7 +2299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4068487829793759655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MANO DER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2302,7 +2315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5117582564569593695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CABEZA_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2320,7 +2333,7 @@ GameObject:
   - component: {fileID: 5446866113911266042}
   - component: {fileID: 2064534620786405301}
   - component: {fileID: 2859615551127852382}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CUERPO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2379,8 +2392,8 @@ MonoBehaviour:
   - {fileID: 7619534907942849685}
   - {fileID: 6903046313578873242}
   m_Bounds:
-    m_Center: {x: 0.00000017881393, y: 0.00019717216, z: 0}
-    m_Extent: {x: 0.9536512, y: 1.5324997, z: 0}
+    m_Center: {x: 0.3968041, y: -0.42731798, z: 0}
+    m_Extent: {x: 1.6163733, y: 1.1658413, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2412,7 +2425,7 @@ GameObject:
   - component: {fileID: 1225144808408781114}
   - component: {fileID: 5267624235587903748}
   - component: {fileID: 5267624235587903749}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MANO IZQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2529,8 +2542,8 @@ MonoBehaviour:
   - {fileID: 1380106108642839372}
   - {fileID: 1151052025425508110}
   m_Bounds:
-    m_Center: {x: -0.000029474497, y: 0.0000005364418, z: 0}
-    m_Extent: {x: 0.34184417, y: 0.57724667, z: 0}
+    m_Center: {x: -0.7508651, y: 0.42251474, z: 0}
+    m_Extent: {x: 0.5108899, y: 0.517364, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2552,8 +2565,8 @@ MonoBehaviour:
   - {fileID: 6370930101894835687}
   - {fileID: 2265974352552326366}
   m_Bounds:
-    m_Center: {x: -0.00000008940697, y: 0.00031608343, z: 0}
-    m_Extent: {x: 0.29213488, y: 0.669479, z: 0}
+    m_Center: {x: -0.8128173, y: 0.77470887, z: 0}
+    m_Extent: {x: 0.56169015, y: 0.5474881, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2566,7 +2579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7941555704942416844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ANTEBRAZO DER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2613,7 +2626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4854706073698732023}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CUERPO_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2697,7 +2710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6370930101894835687}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PIERNA DER_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2745,7 +2758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4626309572260652837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OREJA DER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2779,7 +2792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5627191124726920092}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OREJA IZQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2847,7 +2860,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4696893985832377851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PIE DER
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float jumpCounterSpeed;
     [SerializeField] float jumpTime;
-    bool isJumping, canDoubleJump, jumpKeyHeld; 
+    bool canDoubleJump, jumpKeyHeld; 
     float jumpTimer;
 
     //Attack variables
@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour
 
         movementDisabled = false;
 
-        isJumping = false;
         canDoubleJump = true;
         jumpKeyHeld = false;
 
@@ -110,6 +109,7 @@ public class PlayerController : MonoBehaviour
 
         shielding = false;
         canShield = true;
+        shield.SetActive(false);
 
         initialGravityScale = rb.gravityScale;
 
@@ -237,6 +237,8 @@ public class PlayerController : MonoBehaviour
     void DisableInvincibility()
     {
         Invincible = false;
+        int _playerLayer = LayerMask.NameToLayer("Player");
+        gameObject.layer = _playerLayer;
     }
 
     public void DisableMovement()
@@ -247,8 +249,6 @@ public class PlayerController : MonoBehaviour
     public void EnableMovement()
     {
         movementDisabled = false;
-        int _playerLayer = LayerMask.NameToLayer("Player");
-        gameObject.layer = _playerLayer;
     }
 
     public void EnableMovement(float seconds)
@@ -281,13 +281,11 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Jump");
 
         jumpKeyHeld = true;
-        isJumping = true;
     }
     private void DoubleJump()
     {
         jumpKeyHeld = true;
         canDoubleJump = false;
-        isJumping = true;
 
         anim.SetTrigger("Jump");
     }
@@ -300,7 +298,6 @@ public class PlayerController : MonoBehaviour
         //rb.velocity = new Vector2(rb.velocity.x, 0);
         jumpTimer = 0;
         jumpKeyHeld = false;
-        isJumping = false;
     }
 
     void JumpFinished()
@@ -308,7 +305,6 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * .5f);
         jumpTimer = 0;
         jumpKeyHeld = false;
-        isJumping = false;
     }
 
     public static float CalculateJumpForce(float gravityStrength, float jumpHeight)
@@ -376,7 +372,8 @@ public class PlayerController : MonoBehaviour
             HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
             if (hitHealth == null) continue;
 
-            hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
+            //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
+            hitHealth.GetHurt(attackDmg, Vector2.right * Dir);
         }
     }
     public void EndAttack()
@@ -387,7 +384,7 @@ public class PlayerController : MonoBehaviour
     {
         DisableMovement();
         rb.gravityScale = 0;
-        rb.AddForce(transform.right * Dir * -1f * attackKnockbackForce, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.right * Dir * -1f * attackKnockbackForce, ForceMode2D.Impulse);
         rb.gravityScale = initialGravityScale;
         EnableMovement(0.2f);
     }
@@ -403,7 +400,8 @@ public class PlayerController : MonoBehaviour
             HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
             if (hitHealth == null) continue;
 
-            hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
+            //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
+            hitHealth.GetHurt(attackDmg, Vector2.down);
         }
     }
 

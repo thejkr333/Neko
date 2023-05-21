@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,14 +13,21 @@ public class Boss : MonoBehaviour
     [Header("ATTACKS")]
     [SerializeField] List<Attack> attacks;
     List<Attack> pastAttacks, initialAttacks, midAttacks, finalAttacks;
-    Attack nextAttack;
-    bool attackSelected, attackDone;
+    Attack currentAttack;
+    bool attackSelected, attackDone, attacking;
 
     Transform player;
     Animator anim;
     Rigidbody2D rb;
 
     [SerializeField] float movSpeed;
+    bool inIdle;
+    float idleTimer = 0, idleTime;
+
+    int direction;
+
+    [Header("JUMP ATTACK")]
+    [SerializeField] float jumpSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +40,8 @@ public class Boss : MonoBehaviour
 
         currentLife = initialLife;
         SeparateAttacksIntoPhases();
+
+        Idle();
     }
     void SeparateAttacksIntoPhases()
     {
@@ -61,6 +69,8 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        direction = transform.position.x > player.position.x ? -1 : 1;
+
         switch (currentPhase)
         {
             case Phases.Initial:
@@ -76,6 +86,13 @@ public class Boss : MonoBehaviour
                 break;
         }
     }
+
+    private void FixedUpdate()
+    {
+        if(currentAttack == null) return;
+
+        if (currentAttack.isHitting) AttackHit();       
+    }
     void InitialPhase()
     {
         if (currentLife <= 0)
@@ -84,7 +101,17 @@ public class Boss : MonoBehaviour
             return;
         }
 
-        if (!attackSelected) nextAttack = DecideAttack(initialAttacks);
+        if (inIdle)
+        {
+            idleTimer += Time.deltaTime;
+            if(idleTimer > idleTime)
+            {
+                inIdle = false;
+            }
+            return;
+        }
+
+        if (!attackSelected) currentAttack = DecideAttack(initialAttacks);
         else
         {
             if (attackDone)
@@ -93,11 +120,11 @@ public class Boss : MonoBehaviour
                 return;
             }
 
-            if (Vector2.Distance(transform.position, player.position) > nextAttack.range)
+            if (Vector2.Distance(transform.position, player.position) > currentAttack.range)
             {
                 MoveTowardsPlayer();
             }
-            else
+            else if(!attacking)
             {
                 ExecuteAttack();
             }
@@ -125,6 +152,9 @@ public class Boss : MonoBehaviour
 
     void Idle()
     {
+        inIdle = true;
+        idleTimer = 0;
+        idleTime = Random.Range(1f, 2f);
         anim.SetTrigger("Idle");
         rb.velocity = Vector2.zero;
     }
@@ -132,33 +162,80 @@ public class Boss : MonoBehaviour
     Attack DecideAttack(List<Attack> possibleAttacks)
     {
         int randomAttack = Random.Range(0, possibleAttacks.Count);
-        nextAttack = possibleAttacks[randomAttack];
+        currentAttack = possibleAttacks[randomAttack];
         attackSelected = true;
         attackDone = false;
-        return nextAttack;
+        return currentAttack;
     }
 
     void ExecuteAttack()
     {
+        attacking = true;
         rb.velocity = Vector3.zero;
-        anim.SetTrigger(nextAttack.attackName);
+        anim.SetTrigger(currentAttack.attackName);
     }
 
     public void EndAttack()
     {
         Idle();
-        pastAttacks.Add(nextAttack);
-        nextAttack = null;
+        pastAttacks.Add(currentAttack);
+        currentAttack = null;
         attackSelected = false;
         attackDone = true;
+        attacking = false;
+    }
+
+    public void JumpAttackMove()
+    {
+        rb.velocity = new Vector2(jumpSpeed * direction, rb.velocity.y);
+    }
+
+    public void StopBoss()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
+    public void StartHit()
+    {
+        currentAttack.isHitting = true;
+    }
+
+    public void StopHit()
+    {
+        currentAttack.isHitting = false;
+    }
+
+    void AttackHit()
+    {
+        if (currentAttack.hasHit) return;
+
+        Collider2D[] _col = Physics2D.OverlapCircleAll(currentAttack.hitPoint.position, currentAttack.radius);
+
+        if (_col.Length < 0) return;
+        for (int i = 0; i < _col.Length; i++)
+        {
+            if (_col[i].TryGetComponent(out PlayerController playerController))
+            {
+                if (playerController.Invincible) return;
+                playerController.GetComponent<HealthSystem>().GetHurt(currentAttack.damage, Vector2.right * direction);
+                currentAttack.hasHit = true;
+                return;
+            }
+        }
     }
 
     private void OnDrawGizmos()
     {
         for (int i = 0; i < attacks.Count; i++)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, attacks[i].range);
+        }
+
+        for (int i = 0; i < attacks.Count; i++)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attacks[i].hitPoint.position, attacks[i].radius);
         }
     }
 }
@@ -169,7 +246,11 @@ public class Attack
     public string attackName;
     public int damage;
     public float range;
+    public Transform hitPoint;
+    public float radius;
     public Phases phase;
+    public bool isHitting = false;
+    public bool hasHit = false;
 
     public Attack(int _damage, float _range)
     {

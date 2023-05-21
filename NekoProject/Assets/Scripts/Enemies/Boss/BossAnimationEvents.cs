@@ -14,4 +14,25 @@ public class BossAnimationEvents : MonoBehaviour
     {
         boss.EndAttack();
     }
+
+    public void JumpAttackMove()
+    {
+        boss.JumpAttackMove();
+    }
+
+    public void StartHit()
+    {
+        boss.StartHit();
+    }
+
+    public void StopHit()
+    {
+        boss.StopHit();
+    }
+
+
+    public void StopBoss()
+    {
+        boss.StopBoss();
+    }
 }

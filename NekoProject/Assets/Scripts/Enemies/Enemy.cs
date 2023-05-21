@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float patrolSpeed, chaseSpeed, attackCD, chaseDistance, attackDistance;
     protected Transform playerTransform;
 
+    [SerializeField] protected int damage;
+
     protected enum States { Patrolling, Chasing , Attacking}
     [SerializeField] protected States state;
 
@@ -79,11 +81,13 @@ public class Enemy : MonoBehaviour
         if(collision.transform.TryGetComponent(out PlayerController playerController))
         {
             if (playerController.Invincible) return;
-            Vector2 _dir = transform.position - playerTransform.position;
-            playerController.GetComponent<HealthSystem>().GetHurt(1, _dir);
+            //Vector2 _dir = transform.position - playerTransform.position;
+            //playerController.GetComponent<HealthSystem>().GetHurt(1, _dir);
+            int xDir = playerTransform.position.x > transform.position.x ? 1 : -1;
+            playerController.GetComponent<HealthSystem>().GetHurt(damage, new Vector2(xDir, 1));
         }
     }
-
+    
     protected void LookToPlayer()
     {
         if (playerTransform.position.x < transform.position.x) facingRight = false;

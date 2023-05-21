@@ -43,7 +43,7 @@ public class HealthSystem : MonoBehaviour
             enemy.EnableMovement(.3f);
         }
         rb.velocity = Vector2.zero;
-        rb.AddForce(direction * -1f * knockbackForce, ForceMode2D.Impulse);
+        rb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
     }
 
     void Die()
