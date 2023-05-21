@@ -92,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387016081067476890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9220545, y: -5.0499997, z: -15}
+  m_LocalPosition: {x: 0, y: -4.75, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -118,8 +118,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 387016080710016745}
+  m_Follow: {fileID: 387016080710016745}
   m_Lens:
     FieldOfView: 34
     OrthographicSize: 9
@@ -344,6 +344,18 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3594544878058398627, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594544878058398627, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594544878058398627, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594544878058398627, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.116
       objectReference: {fileID: 0}
@@ -382,6 +394,10 @@ PrefabInstance:
     - target: {fileID: 3594544878058398627, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594544878058398627, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3594544878058398637, guid: 82c5c3411a5eac74cadc536268a8d713, type: 3}
       propertyPath: m_Name
@@ -422,7 +438,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1955881976758851066, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1955881978323523523, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: knockbackForce
@@ -431,6 +447,10 @@ PrefabInstance:
     - target: {fileID: 6975279850009385060, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279850450915938, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.3
       objectReference: {fileID: 0}
     - target: {fileID: 6975279850679145441, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_Offset.y
@@ -509,12 +529,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3962807743555226167}
     - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: jumpTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: jumpSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: petalsPos
       value: 
       objectReference: {fileID: 1534526206}
     - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: wallSlideSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: invincibiltyTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: jumpCounterSpeed
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: minMaxPetalsTime.x

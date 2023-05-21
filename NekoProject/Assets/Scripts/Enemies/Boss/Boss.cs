@@ -8,8 +8,10 @@ public class Boss : MonoBehaviour
 {
     Phases currentPhase;
 
+    [SerializeField] int initialLife, midLife, finalLife;
+    int currentLife;
+
     [Header("ATTACKS")]
-    int initialLife, midLife, finalLife;
     [SerializeField] List<Attack> attacks;
     List<Attack> pastAttacks, initialAttacks, midAttacks, finalAttacks;
     Attack nextAttack;
@@ -24,12 +26,13 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         player = FindObjectOfType<PlayerController>().transform;
         currentPhase = Phases.Initial;
 
+        currentLife = initialLife;
         SeparateAttacksIntoPhases();
     }
     void SeparateAttacksIntoPhases()
@@ -65,33 +68,29 @@ public class Boss : MonoBehaviour
                 break;
 
             case Phases.Mid:
+                MidPhase();
                 break;
 
             case Phases.Final:
+                FinalPhase();
                 break;
         }
     }
-
-    void MoveTowardsPlayer()
-    {
-        int dir = transform.position.x > player.position.x ? -1 : 1;
-        rb.velocity = dir * movSpeed * transform.right;
-    }
-
-    void Idle()
-    {
-        rb.velocity = Vector2.zero;
-    }
-
     void InitialPhase()
     {
-        if(!attackSelected) nextAttack = DecideAttack(initialAttacks);
+        if (currentLife <= 0)
+        {
+            currentPhase = Phases.Mid;
+            return;
+        }
+
+        if (!attackSelected) nextAttack = DecideAttack(initialAttacks);
         else
         {
-            if(attackDone)
-            { 
+            if (attackDone)
+            {
                 attackSelected = false;
-                return; 
+                return;
             }
 
             if (Vector2.Distance(transform.position, player.position) > nextAttack.range)
@@ -105,25 +104,62 @@ public class Boss : MonoBehaviour
         }
     }
 
+    private void MidPhase()
+    {
+        throw new System.NotImplementedException();
+    }
+    private void FinalPhase()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    void MoveTowardsPlayer()
+    {
+        int dir = transform.position.x > player.position.x ? -1 : 1;
+
+        if (dir == 1) transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        else transform.eulerAngles = new Vector3(0f, 180f, 0);
+
+        rb.velocity = movSpeed * transform.right;
+    }
+
+    void Idle()
+    {
+        anim.SetTrigger("Idle");
+        rb.velocity = Vector2.zero;
+    }
+
     Attack DecideAttack(List<Attack> possibleAttacks)
     {
         int randomAttack = Random.Range(0, possibleAttacks.Count);
         nextAttack = possibleAttacks[randomAttack];
         attackSelected = true;
+        attackDone = false;
         return nextAttack;
     }
 
     void ExecuteAttack()
     {
+        rb.velocity = Vector3.zero;
         anim.SetTrigger(nextAttack.attackName);
     }
 
     public void EndAttack()
     {
+        Idle();
         pastAttacks.Add(nextAttack);
         nextAttack = null;
         attackSelected = false;
         attackDone = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        for (int i = 0; i < attacks.Count; i++)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attacks[i].range);
+        }
     }
 }
 

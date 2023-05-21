@@ -26,10 +26,11 @@ public class PlayerController : MonoBehaviour
 
     //Jump Variables
     [Header("JUMP")]
-    [SerializeField] float jumpHeight = 5f;
-    [SerializeField] float counterJumpForce = 2f;
-    bool isJumping, canDoubleJump, jumpKeyHeld;
-    float jumpForce;
+    [SerializeField] float jumpSpeed;
+    [SerializeField] float jumpCounterSpeed;
+    [SerializeField] float jumpTime;
+    bool isJumping, canDoubleJump, jumpKeyHeld; 
+    float jumpTimer;
 
     //Attack variables
     [Header("ATTACK")]
@@ -93,8 +94,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerStorage = GetComponent<PlayerStorage>();
 
-        jumpForce = CalculateJumpForce(Physics2D.gravity.magnitude, jumpHeight);
-
         Dir = 1;
 
         movementDisabled = false;
@@ -140,13 +139,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isJumping)
+        if (jumpKeyHeld)
         {
-            if (dashing) return;
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
 
-            if (!jumpKeyHeld || rb.velocity.y < 0)
+            jumpTimer += Time.deltaTime;
+            if (jumpTimer > jumpTime)
             {
-                rb.AddForce(Vector2.down * counterJumpForce, ForceMode2D.Force);
+                JumpFinished();
             }
         }
 
@@ -264,32 +264,53 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (dashing || attacking) return;
-
-            jumpKeyHeld = true;
+            if (dashing || attacking || !canDoubleJump) return;
             if (grounded || wallSliding) Jump();
             else if (playerStorage.ItemsUnlockedInfo[Items.DoubleJump] && canDoubleJump) DoubleJump();
+
         }
-        else if (Input.GetKeyUp(KeyCode.Space)) jumpKeyHeld = false;
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            if(jumpTimer <= .1f) Invoke(nameof(StopJump), .1f -  jumpTimer);
+            else StopJump();
+        }
     }
 
     void Jump()
     {
-        isJumping = true;
         anim.SetTrigger("Jump");
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+        jumpKeyHeld = true;
+        isJumping = true;
     }
     private void DoubleJump()
     {
+        jumpKeyHeld = true;
         canDoubleJump = false;
         isJumping = true;
 
         anim.SetTrigger("Jump");
-        //Stop velocity in y axis so it doesn't affect the new jump
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
+
+    void StopJump()
+    {
+        if (!jumpKeyHeld) return;
+
+        rb.velocity = new Vector2(rb.velocity.x, -jumpCounterSpeed);
+        //rb.velocity = new Vector2(rb.velocity.x, 0);
+        jumpTimer = 0;
+        jumpKeyHeld = false;
+        isJumping = false;
+    }
+
+    void JumpFinished()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * .5f);
+        jumpTimer = 0;
+        jumpKeyHeld = false;
+        isJumping = false;
+    }
+
     public static float CalculateJumpForce(float gravityStrength, float jumpHeight)
     {
         return Mathf.Sqrt(2 * gravityStrength * jumpHeight * 1000f);
