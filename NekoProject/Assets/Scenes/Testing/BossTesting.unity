@@ -403,11 +403,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -18.63425, y: 21.538475}
-      - {x: -19.449291, y: 21.935627}
+    - - {x: -19.559149, y: 15.523548}
+      - {x: -19.563086, y: 15.506265}
       - {x: -19.268286, y: -0.09469342}
       - {x: 19.66965, y: -0.13562226}
-      - {x: 19.721325, y: 21.935627}
+      - {x: 19.501102, y: 15.549144}
 --- !u!1 &622073413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,7 +1213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069716751}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 22, z: 0}
+  m_LocalPosition: {x: 0, y: 15.52, z: 0}
   m_LocalScale: {x: 40, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1438,6 +1438,10 @@ PrefabInstance:
     - target: {fileID: 387016081111373167, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 387016081111373170, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
+      propertyPath: wallJumpForce
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 9130882534033757040, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
       propertyPath: m_MatchWidthOrHeight
@@ -1715,7 +1719,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046847095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.7427683, y: 7.53437, z: -25}
+  m_LocalPosition: {x: -5.8236456, y: 7.5344496, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

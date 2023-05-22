@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float jumpCounterSpeed;
     [SerializeField] float jumpTime;
+    [SerializeField] private float wallJumpForce;
     bool canDoubleJump, jumpKeyHeld; 
     float jumpTimer;
 
@@ -167,6 +168,7 @@ public class PlayerController : MonoBehaviour
     // Variables para el control del movimiento del jugador
     [HideInInspector] public bool controllingPlayerMovement;
     [HideInInspector] public float controllingDir = 0;
+
     public void ControlPlayer(float dir)
     {
         controllingPlayerMovement = true;
@@ -265,7 +267,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (dashing || attacking || !canDoubleJump) return;
-            if (grounded || wallSliding) Jump();
+            if (grounded) Jump();
+            else if (wallSliding) WallSlideJump();
             else if (playerStorage.ItemsUnlockedInfo[Items.DoubleJump] && canDoubleJump) DoubleJump();
 
         }
@@ -274,6 +277,16 @@ public class PlayerController : MonoBehaviour
             if(jumpTimer <= .1f) Invoke(nameof(StopJump), .1f -  jumpTimer);
             else StopJump();
         }
+    }
+
+    private void WallSlideJump()
+    {
+        anim.SetTrigger("Jump");
+
+        DisableMovement();
+        EnableMovement(.2f);
+        rb.AddForce(transform.right * -Dir * wallJumpForce, ForceMode2D.Impulse);
+        jumpKeyHeld = true;
     }
 
     void Jump()
