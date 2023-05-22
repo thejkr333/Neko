@@ -482,11 +482,11 @@ public class PlayerController : MonoBehaviour
         if (colliders.Length == 0) wallSliding = false;
         else
         {
-            if ((Dir == -1 && input_hor < 0) || (Dir == 1 && input_hor > 0))
+            if ((Dir == -1 && input_hor < 0) || (Dir == 1 && input_hor > 0) || wallSliding == true)
             {
                 WallSlide();
             }
-            else wallSliding = false;
+            else if((Dir == -1 && input_hor > 0) || (Dir == 1 && input_hor < 0) ) wallSliding = false;
         }
     }
 
