@@ -30,6 +30,10 @@ public class BossAnimationEvents : MonoBehaviour
         boss.StopHit();
     }
 
+    public void CreateRock()
+    {
+        boss.CreateRock();
+    }
 
     public void StopBoss()
     {

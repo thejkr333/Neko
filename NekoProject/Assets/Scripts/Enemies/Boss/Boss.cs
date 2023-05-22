@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Flags]
 public enum Phases { None = 0, Initial = 1, Mid = 1 << 1, Final = 1 << 2}
@@ -7,7 +9,7 @@ public class Boss : MonoBehaviour
 {
     Phases currentPhase;
 
-    [SerializeField] int initialLife, midLife, finalLife;
+    [SerializeField] int initialLife, finalLife;
     int currentLife;
 
     [Header("ATTACKS")]
@@ -19,6 +21,7 @@ public class Boss : MonoBehaviour
     Transform player;
     Animator anim;
     Rigidbody2D rb;
+    Transform cachedTr;
 
     [SerializeField] float movSpeed;
     bool inIdle;
@@ -29,19 +32,34 @@ public class Boss : MonoBehaviour
     [Header("JUMP ATTACK")]
     [SerializeField] float jumpSpeed;
 
+    [Header("THROW ROCKS")]
+    [SerializeField] private GameObject rockPrefab;
+    [SerializeField] private Transform minPoint, maxPoint;
+    [SerializeField] private float rockSpeed;
+    private bool throwingRocks, inPos;
+
+    [SerializeField] private Transform midPhasePos;
+    Vector3 initialPosition;
+
+    [SerializeField] Slider healthSlider;
+    [SerializeField] private Collider2D[] colliders;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        cachedTr = transform;
 
         player = FindObjectOfType<PlayerController>().transform;
-        currentPhase = Phases.Initial;
 
-        currentLife = initialLife;
+        ChangePhase(Phases.Initial);
+
         SeparateAttacksIntoPhases();
 
+        initialPosition = cachedTr.position;
         Idle();
+        UpdateUI();
     }
     void SeparateAttacksIntoPhases()
     {
@@ -85,6 +103,9 @@ public class Boss : MonoBehaviour
                 FinalPhase();
                 break;
         }
+
+        UpdateAnim();
+        UpdateUI();
     }
 
     private void FixedUpdate()
@@ -93,11 +114,47 @@ public class Boss : MonoBehaviour
 
         if (currentAttack.isHitting) AttackHit();       
     }
+
+    #region Phases
+    void ChangePhase(Phases nextPhase)
+    {
+        switch (nextPhase)
+        {
+            case Phases.Initial:
+                healthSlider.maxValue = initialLife;
+                currentLife = initialLife;
+                break;
+
+            case Phases.Mid:
+                healthSlider.gameObject.SetActive(false);
+                anim.SetTrigger("Rage");
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    colliders[i].enabled = false;
+                }
+                StartCoroutine(Co_GoToMidPhasePosition());
+                break;
+
+            case Phases.Final:
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    colliders[i].enabled = true;
+                }
+                healthSlider.gameObject.SetActive(true);
+                anim.SetTrigger("Rage");
+                healthSlider.maxValue = finalLife;
+                currentLife = finalLife;
+                break;
+        }
+
+        currentPhase = nextPhase;
+    }
+
     void InitialPhase()
     {
         if (currentLife <= 0)
         {
-            currentPhase = Phases.Mid;
+            ChangePhase(Phases.Mid);
             return;
         }
 
@@ -131,23 +188,53 @@ public class Boss : MonoBehaviour
         }
     }
 
+    IEnumerator Co_GoToMidPhasePosition()
+    {
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > .9f);
+
+        anim.SetTrigger("Idle");
+
+        while(Vector3.Distance(cachedTr.position, midPhasePos.position) > .5f)
+        {
+            Vector3 _direction = midPhasePos.position - cachedTr.position;
+            rb.velocity = _direction.normalized * movSpeed;
+
+            Vector3 z = Vector3.MoveTowards(cachedTr.position, midPhasePos.position, movSpeed*Time.deltaTime);
+            cachedTr.position = new Vector3(cachedTr.position.x, cachedTr.position.y, z.z);
+           
+            int dir = cachedTr.position.x > midPhasePos.position.x ? -1 : 1;
+
+            if (dir == 1) cachedTr.eulerAngles = new Vector3(0f, 0f, 0f);
+            else cachedTr.eulerAngles = new Vector3(0f, 180f, 0);
+            yield return 0;
+        }
+
+        rb.velocity = Vector2.zero;
+        inPos = true;
+    }
     private void MidPhase()
     {
-        throw new System.NotImplementedException();
+        if(!inPos) return;
+
+        throwingRocks = true;
     }
     private void FinalPhase()
     {
-        throw new System.NotImplementedException();
+        if (currentLife <= 0)
+        {
+            anim.SetTrigger("Die");
+            return;
+        }
     }
-
+    #endregion
     void MoveTowardsPlayer()
     {
-        int dir = transform.position.x > player.position.x ? -1 : 1;
+        int dir = cachedTr.position.x > player.position.x ? -1 : 1;
 
-        if (dir == 1) transform.eulerAngles = new Vector3(0f, 0f, 0f);
-        else transform.eulerAngles = new Vector3(0f, 180f, 0);
+        if (dir == 1) cachedTr.eulerAngles = new Vector3(0f, 0f, 0f);
+        else cachedTr.eulerAngles = new Vector3(0f, 180f, 0);
 
-        rb.velocity = movSpeed * transform.right;
+        rb.velocity = movSpeed * cachedTr.right;
     }
 
     void Idle()
@@ -163,6 +250,7 @@ public class Boss : MonoBehaviour
     {
         int randomAttack = Random.Range(0, possibleAttacks.Count);
         currentAttack = possibleAttacks[randomAttack];
+        currentAttack.hasHit = false;
         attackSelected = true;
         attackDone = false;
         return currentAttack;
@@ -224,6 +312,24 @@ public class Boss : MonoBehaviour
         }
     }
 
+    public void CreateRock()
+    {
+        float x = Random.Range(minPoint.position.x, maxPoint.position.x);
+        GameObject clon = Instantiate(rockPrefab, new Vector2(x, minPoint.position.y), Quaternion.identity);
+        clon.GetComponent<Rigidbody2D>().velocity = Vector2.down * rockSpeed;
+    }
+
+    void UpdateAnim()
+    {
+        anim.SetFloat("xVel", rb.velocity.magnitude);
+        anim.SetBool("Throwing", throwingRocks);
+    }
+
+    void UpdateUI()
+    {
+        healthSlider.value = currentLife;
+    }
+
     private void OnDrawGizmos()
     {
         for (int i = 0; i < attacks.Count; i++)
@@ -237,6 +343,12 @@ public class Boss : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(attacks[i].hitPoint.position, attacks[i].radius);
         }
+    }
+
+    public void GetHurt(int damage)
+    {
+        anim.SetTrigger("Hurt");
+        currentLife -= damage;
     }
 }
 

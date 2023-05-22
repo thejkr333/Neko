@@ -369,11 +369,15 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < hit.Length; i++)
         {
             AttackKnockback();
-            HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
-            if (hitHealth == null) continue;
-
-            //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
-            hitHealth.GetHurt(attackDmg, Vector2.right * Dir);
+            if (hit[i].TryGetComponent(out HealthSystem hitHealth))
+            {
+                //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
+                hitHealth.GetHurt(attackDmg, Vector2.right * Dir);
+            }
+            else if (hit[i].TryGetComponent(out Boss boss))
+            {
+                boss.GetHurt(attackDmg);
+            }
         }
     }
     public void EndAttack()
@@ -397,11 +401,16 @@ public class PlayerController : MonoBehaviour
         JumpAttackKnockback();
         for (int i = 0; i < hit.Length; i++)
         {
-            HealthSystem hitHealth = hit[i].GetComponent<HealthSystem>();
-            if (hitHealth == null) continue;
 
-            //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
-            hitHealth.GetHurt(attackDmg, Vector2.down);
+            if (hit[i].TryGetComponent(out HealthSystem hitHealth))
+            {
+                //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
+                hitHealth.GetHurt(attackDmg, Vector2.down);
+            }
+            else if (hit[i].TryGetComponent(out Boss boss))
+            {
+                boss.GetHurt(attackDmg);
+            }
         }
     }
 

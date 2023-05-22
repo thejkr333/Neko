@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
             playerController.GetComponent<HealthSystem>().GetHurt(damage, new Vector2(xDir, 1));
         }
     }
-    
+
     protected void LookToPlayer()
     {
         if (playerTransform.position.x < transform.position.x) facingRight = false;
