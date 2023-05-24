@@ -1,19 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
     PlayerController playerController;
+    PlayerStorage playerStorage;
 
     HealthSystem healthSystem;
 
     [SerializeField] Image[] healthOrbs;
+    [SerializeField] TMP_Text moneyText;
 
     [Header("MENU")]
     [SerializeField] GameObject menu;
+    [SerializeField] GameObject[] menuGameobjects;
     bool menuOn;
     int menuIndex, menuLength;
-    GameObject[] menuGameobjects;
 
     [Header("MAP")]
     [SerializeField] GameObject map;
@@ -28,24 +31,31 @@ public class PlayerUI : MonoBehaviour
     float antmanTimeCD, antmanTimer;
 
     [Header("INVENTORY")]
-    [SerializeField] GameObject[] inventorySlots;
+    [SerializeField] GameObject inventory;
+    [SerializeField] TMP_Text moneyTextInventory;
+    GameObject[] inventorySlots;
 
     private void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
         playerController = GetComponent<PlayerController>();
+        playerStorage = GetComponent<PlayerStorage>();  
 
         //Set starting UI
         map.SetActive(false);
         menu.SetActive(false);
 
         //Set menu child objects
-        menuLength = menu.transform.childCount;
-        menuGameobjects = new GameObject[menuLength];
-        for (int i = 0; i < menuLength; i++)
+        for (int i = 1; i < menuGameobjects.Length; i++)
         {
-            menuGameobjects[i] = menu.transform.GetChild(i).gameObject;
             menuGameobjects[i].SetActive(false);
+        }
+
+        //Set inventory slots
+        inventorySlots = new GameObject[inventory.transform.childCount];
+        for (int i = 0; i < inventory.transform.childCount; i++)
+        {
+            inventorySlots[i] = inventory.transform.GetChild(i).gameObject;
         }
     }
 
@@ -60,6 +70,7 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         UpdateHealthOrbs();
+        UpdateMoneyTexts();
 
         if (Input.GetKeyDown(KeyCode.Escape)) ToggleMenu();
         //if (!menuOn && Input.GetKey(KeyCode.M)) ToggleMap();
@@ -138,18 +149,24 @@ public class PlayerUI : MonoBehaviour
         {
             menuGameobjects[menuIndex].SetActive(false);
 
-            if (menuIndex == 0) menuIndex = menuLength - 1;
+            if (menuIndex == 0) menuIndex = menuGameobjects.Length - 1;
             else menuIndex--;
         }
         else if(Input.GetKeyDown(KeyCode.E))
         {
             menuGameobjects[menuIndex].SetActive(false);
 
-            if (menuIndex == menuLength - 1) menuIndex = 0;
+            if (menuIndex == menuGameobjects.Length - 1) menuIndex = 0;
             else menuIndex++;
         }
 
         if (menuGameobjects[menuIndex] != map && map.activeSelf) map.SetActive(false);
         menuGameobjects[menuIndex].SetActive(true);
+    }
+
+    void UpdateMoneyTexts()
+    {
+        moneyText.text = playerStorage.Coins.ToString();
+        moneyTextInventory.text = playerStorage.Coins.ToString();
     }
 }
