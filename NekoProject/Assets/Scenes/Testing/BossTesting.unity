@@ -998,10 +998,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5158325738975921294, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
-      propertyPath: Cheating
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5158325738975921295, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1431,8 +1427,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player & Cam
       objectReference: {fileID: 0}
+    - target: {fileID: 9130882535614943561, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1789823331}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
+--- !u!1 &1789823331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4801676764794943355, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
+  m_PrefabInstance: {fileID: 1789823330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1879362393
 GameObject:
   m_ObjectHideFlags: 0

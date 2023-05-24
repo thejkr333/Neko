@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public Action SaveGameAction;
 
     public bool Cheating;
+
+    [SerializeField] ItemData[] itemData;
+
     private void Awake()
     {
         if (Instance == null)
@@ -55,6 +58,17 @@ public class GameManager : MonoBehaviour
     public void SetItemsInfo(ref Dictionary<Items, bool> itemsInfo)
     {
         DataSavingInstance.ItemsOwned  = itemsInfo;
+    }
+
+    public Sprite GetItemSprite(Items item)
+    {
+        for (int i = 0; i < itemData.Length; i++)
+        {
+            if (itemData[i].ID == item) return itemData[i].Sprite;
+        }
+
+        Debug.LogError("Item not in list");
+        return null;
     }
 
     public void LoadScene(int sceneNumber)

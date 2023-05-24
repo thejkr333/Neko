@@ -45,3 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cheating: 1
+  ItemData:
+  - {fileID: 11400000, guid: 2963a4c54ea35c24ea720e41f5700da2, type: 2}
+  - {fileID: 11400000, guid: 4b54962956e8a9840be9f08b1a867c85, type: 2}
+  - {fileID: 11400000, guid: ad05dc11e24e2eb4ca985ea627358c71, type: 2}
+  - {fileID: 11400000, guid: ce13bb3ff4a8f6b40a1eec4cb2ef80b7, type: 2}
+  - {fileID: 11400000, guid: c3d986d576251f84bbb8186e640c9014, type: 2}
+  - {fileID: 11400000, guid: 3422b3db879f391489ecbf53a317c968, type: 2}
+  - {fileID: 11400000, guid: 3cf03e99c70510443aad4e8ddbc53508, type: 2}

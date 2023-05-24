@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -56,7 +57,10 @@ public class PlayerUI : MonoBehaviour
         for (int i = 0; i < inventory.transform.childCount; i++)
         {
             inventorySlots[i] = inventory.transform.GetChild(i).gameObject;
+            inventorySlots[i].SetActive(false);
         }
+
+        playerStorage.ItemUnlocked += AddItemToInventory;
     }
 
     private void Start()
@@ -168,5 +172,17 @@ public class PlayerUI : MonoBehaviour
     {
         moneyText.text = playerStorage.Coins.ToString();
         moneyTextInventory.text = playerStorage.Coins.ToString();
+    }
+
+    void AddItemToInventory(Items item)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            Image _img = inventorySlots[i].GetComponent<Image>();
+            if (_img != null) return;
+
+            inventorySlots[i].SetActive(true);
+            _img.sprite = GameManager.Instance.GetItemSprite(item);
+        }
     }
 }

@@ -7,12 +7,17 @@ public class PlayerStorage : MonoBehaviour
 {
     public int Coins { get; private set; }
     public Dictionary<Items, bool> ItemsUnlockedInfo = new();
-    List<Item> inventory = new();
+    public Action<Items> ItemUnlocked;
 
     private void Start()
     {
         GameManager.Instance.SaveGameAction += UpdateDataToGameManager;
         ItemsUnlockedInfo = GameManager.Instance.GetItemsInfo();
+
+        foreach (var item in ItemsUnlockedInfo.Keys)
+        {
+            if (ItemsUnlockedInfo[item]) ItemUnlocked?.Invoke(item);
+        }
     }
 
     public void AddCoins(int amount = 1)
@@ -25,12 +30,9 @@ public class PlayerStorage : MonoBehaviour
         Coins -= amount;
     }
 
-    void RefreshItemDictionary()
+    void UnlockItem(Items item)
     {
-        foreach (var item in inventory)
-        {
-            ItemsUnlockedInfo[item.ID] = true;
-        }
+        ItemsUnlockedInfo[item] = true;
     }
 
     void UpdateDataToGameManager()
@@ -42,8 +44,8 @@ public class PlayerStorage : MonoBehaviour
     {
         if (!collision.transform.TryGetComponent(out Item item)) return;
 
-        inventory.Add(item);
-        RefreshItemDictionary();
+        UnlockItem(item.ID);
+        ItemUnlocked?.Invoke(item.ID);
         Destroy(item.gameObject);
     }
 }
