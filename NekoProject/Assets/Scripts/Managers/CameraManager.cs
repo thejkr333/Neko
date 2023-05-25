@@ -21,6 +21,7 @@ public class CameraManager : MonoBehaviour
 
         instance = this;
         // Initialization logic
+        DontDestroyOnLoad(gameObject);
         anim = GetComponent<Animator>();
     }
 

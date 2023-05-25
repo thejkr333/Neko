@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopEntry : Interactable
+public class ShopExit : Interactable
 {
     [SerializeField] GameObject highLightObject;
     [SerializeField] Transform tpPosition;
 
     public override void Interact(Transform player)
     {
-        GoToShop(player);
+        GoToWorld(player);
     }
 
     public override void StartHighLight()
@@ -22,9 +22,9 @@ public class ShopEntry : Interactable
         highLightObject.SetActive(false);
     }
 
-    void GoToShop(Transform player)
+    void GoToWorld(Transform player)
     {
-        CameraManager.Instance.ChangeCamera(CameraManager.CameraStates.ShopCam);
+        CameraManager.Instance.ChangeCamera(CameraManager.CameraStates.PlayerCam);
         StartCoroutine(TPPlayer(player, 1));
     }
 
