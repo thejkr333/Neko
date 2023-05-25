@@ -10,5 +10,5 @@ public abstract class Interactable : MonoBehaviour
     }
     public abstract void StartHighLight();
     public abstract void StopHighLight();
-    public abstract void Interact();
+    public abstract void Interact(Transform player);
 }

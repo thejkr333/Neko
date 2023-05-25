@@ -27,6 +27,21 @@ public class CameraManager : MonoBehaviour
     public void ChangeCamera(CameraStates cameraState)
     {
         currentCameraState = cameraState;
+        StartCoroutine(Co_Transition());
+    }
+
+    IEnumerator Co_Transition()
+    {
+        anim.Play("FadeIn");
+
+        yield return null;
+
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > .95f);
+
         anim.Play(currentCameraState.ToString());
+
+        yield return null;
+
+        anim.Play("FadeOut");
     }
 }

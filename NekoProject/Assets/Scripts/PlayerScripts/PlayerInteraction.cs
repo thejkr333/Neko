@@ -12,7 +12,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (interactableList.Count == 0) return;
 
-            interactableList[0].Interact();
+            interactableList[0].Interact(transform);
         }
     }
 

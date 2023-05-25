@@ -5,10 +5,11 @@ using UnityEngine;
 public class ShopEntry : Interactable
 {
     [SerializeField] GameObject highLightObject;
+    [SerializeField] Transform tpPosition;
 
-    public override void Interact()
+    public override void Interact(Transform player)
     {
-        GoToShop();
+        GoToShop(player);
     }
 
     public override void StartHighLight()
@@ -21,8 +22,9 @@ public class ShopEntry : Interactable
         highLightObject.SetActive(false);
     }
 
-    void GoToShop()
+    void GoToShop(Transform player)
     {
         CameraManager.Instance.ChangeCamera(CameraManager.CameraStates.ShopCam);
+        player.position = tpPosition.position;
     }
 }
