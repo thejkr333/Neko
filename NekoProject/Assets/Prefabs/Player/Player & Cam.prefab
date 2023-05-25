@@ -577,6 +577,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 387016080464923944}
     m_Modifications:
+    - target: {fileID: 1955881978323523524, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 4801676764794943355}
+    - target: {fileID: 1955881978403994172, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
     - target: {fileID: 6975279850679145442, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -659,5 +667,10 @@ MonoBehaviour:
 --- !u!4 &618336094033761730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7856279294233088847, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+  m_PrefabInstance: {fileID: 7319432422182504077}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4801676764794943355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2824076450900161014, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
   m_PrefabInstance: {fileID: 7319432422182504077}
   m_PrefabAsset: {fileID: 0}

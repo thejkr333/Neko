@@ -179,10 +179,11 @@ public class PlayerUI : MonoBehaviour
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             Image _img = inventorySlots[i].GetComponent<Image>();
-            if (_img != null) return;
+            if (_img.sprite != null) continue;
 
             inventorySlots[i].SetActive(true);
             _img.sprite = GameManager.Instance.GetItemSprite(item);
+            return;
         }
     }
 }

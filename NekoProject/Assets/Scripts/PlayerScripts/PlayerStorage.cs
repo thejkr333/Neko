@@ -33,6 +33,7 @@ public class PlayerStorage : MonoBehaviour
     void UnlockItem(Items item)
     {
         ItemsUnlockedInfo[item] = true;
+        ItemUnlocked?.Invoke(item);
     }
 
     void UpdateDataToGameManager()
@@ -45,7 +46,6 @@ public class PlayerStorage : MonoBehaviour
         if (!collision.transform.TryGetComponent(out Item item)) return;
 
         UnlockItem(item.ID);
-        ItemUnlocked?.Invoke(item.ID);
         Destroy(item.gameObject);
     }
 }

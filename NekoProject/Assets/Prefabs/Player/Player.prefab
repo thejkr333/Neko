@@ -2991,6 +2991,7 @@ GameObject:
   - component: {fileID: 6975279850679145442}
   - component: {fileID: 6975279850679145471}
   - component: {fileID: 1955881978323523524}
+  - component: {fileID: 6279168229979338076}
   - component: {fileID: 1955881978323523523}
   - component: {fileID: 6502083635978950689}
   - component: {fileID: 6975279850679145441}
@@ -3113,8 +3114,20 @@ MonoBehaviour:
   map: {fileID: 7862586306594666426}
   shieldCDImg: {fileID: 1955881977795323602}
   antmanCDImg: {fileID: 1955881976673159045}
-  inventorySlots: []
+  inventory: {fileID: 0}
   moneyTextInventory: {fileID: 925563991}
+--- !u!114 &6279168229979338076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6975279850679145470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb4705d1c2de394f9c380a3e87ef713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1955881978323523523
 MonoBehaviour:
   m_ObjectHideFlags: 0

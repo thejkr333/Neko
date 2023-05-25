@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             if (itemData[i].ID == item) return itemData[i].Sprite;
         }
 
-        Debug.LogError("Item not in list");
+        Debug.LogError(item + " not in list");
         return null;
     }
 

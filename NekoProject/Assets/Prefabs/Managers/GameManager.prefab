@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cheating: 1
-  ItemData:
+  itemData:
   - {fileID: 11400000, guid: 2963a4c54ea35c24ea720e41f5700da2, type: 2}
   - {fileID: 11400000, guid: 4b54962956e8a9840be9f08b1a867c85, type: 2}
   - {fileID: 11400000, guid: ad05dc11e24e2eb4ca985ea627358c71, type: 2}
