@@ -7,7 +7,9 @@ public class PlayerStorage : MonoBehaviour
 {
     public int Coins { get; private set; }
     public Dictionary<Items, bool> ItemsUnlockedInfo = new();
+    public Dictionary<Boosters, int> BoostersAmount = new();
     public Action<Items> ItemUnlocked;
+    public Action<Boosters, int> BoosterAmountChanged;
 
     private void Start()
     {
@@ -34,6 +36,18 @@ public class PlayerStorage : MonoBehaviour
     {
         ItemsUnlockedInfo[item] = true;
         ItemUnlocked?.Invoke(item);
+    }
+
+    public void AddBooster(Boosters booster)
+    {
+        BoostersAmount[booster]++; 
+        BoosterAmountChanged?.Invoke(booster, BoostersAmount[booster]);
+    }
+
+    public void ConsumeBooster(Boosters booster)
+    {
+        BoostersAmount[booster]--;
+        BoosterAmountChanged?.Invoke(booster, BoostersAmount[booster]);
     }
 
     void UpdateDataToGameManager()

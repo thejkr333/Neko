@@ -4,22 +4,11 @@ using UnityEngine;
 
 public class ShopExit : Interactable
 {
-    [SerializeField] GameObject highLightObject;
     [SerializeField] Transform tpPosition;
 
     public override void Interact(Transform player)
     {
         GoToWorld(player);
-    }
-
-    public override void StartHighLight()
-    {
-        highLightObject.SetActive(true);
-    }
-
-    public override void StopHighLight()
-    {
-        highLightObject.SetActive(false);
     }
 
     void GoToWorld(Transform player)

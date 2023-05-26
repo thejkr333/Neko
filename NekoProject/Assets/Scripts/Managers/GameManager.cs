@@ -86,6 +86,7 @@ public class DataSaving
 {
     public int Money;
     public Dictionary<Items, bool> ItemsOwned;
+    public Dictionary<Boosters, bool> BoostersOwned;
     public float LastPlayerPosX, LastPlayerPosY;
 
     public DataSaving ()
@@ -95,6 +96,11 @@ public class DataSaving
         foreach (Items item in Enum.GetValues(typeof(Items)))
         {
             ItemsOwned.Add(item, false);
+        }
+        BoostersOwned = new();
+        foreach (Boosters booster in Enum.GetValues(typeof(Boosters)))
+        {
+            BoostersOwned.Add(booster, false);
         }
         LastPlayerPosX = 0;
         LastPlayerPosY = 0;
@@ -110,6 +116,11 @@ public class DataSaving
         {
             ItemsOwned[item] = true;
         }
+
+        foreach (var booster in BoostersOwned.Keys.ToList())
+        {
+            BoostersOwned[booster] = true;
+        }
     }
 
     public void SaveData()
@@ -124,6 +135,12 @@ public class DataSaving
             PlayerPrefs.SetInt(nameof(item), value);
         }
 
+        foreach(var booster in BoostersOwned.Keys)
+        {
+            int value = BoostersOwned[booster] ? 1 : 0;
+            PlayerPrefs.SetInt(nameof(booster), value);
+        }
+
         PlayerPrefs.Save();
     }
 
@@ -136,7 +153,12 @@ public class DataSaving
         foreach (var item in ItemsOwned.Keys.ToList())
         {
             ItemsOwned[item] = PlayerPrefs.GetInt(nameof(item)) == 1;
-        }   
+        }
+
+        foreach (var booster in BoostersOwned.Keys.ToList())
+        {
+            BoostersOwned[booster] = PlayerPrefs.GetInt(nameof(booster)) == 1;
+        }
     }
 
     public bool IsThereSaveFiles()
