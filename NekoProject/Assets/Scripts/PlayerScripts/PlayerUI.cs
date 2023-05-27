@@ -36,6 +36,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TMP_Text moneyTextInventory;
     GameObject[] inventorySlots;
 
+    [Header("Boosters")]
+    [SerializeField] BoostersUIHandler boostersHandler;
+
     private void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
@@ -61,6 +64,11 @@ public class PlayerUI : MonoBehaviour
         }
 
         playerStorage.ItemUnlocked += AddItemToInventory;
+        playerStorage.BoosterUnlocked += AddBoosterToPool;
+        playerStorage.BoosterEquipped += EquipBooster;
+
+        boostersHandler.BoosterEquipped += playerController.ActivateBooster;
+        boostersHandler.BoosterUnequipped += playerController.DeactivateBooster;
     }
 
     private void Start()
@@ -185,5 +193,15 @@ public class PlayerUI : MonoBehaviour
             _img.sprite = GameManager.Instance.GetItemSprite(item);
             return;
         }
+    }
+
+    void AddBoosterToPool(Boosters booster)
+    {
+        boostersHandler.AddBoosterUnequipped(booster);
+    }
+
+    void EquipBooster(Boosters booster)
+    {
+        boostersHandler.AddBoosterEquipped(booster);
     }
 }

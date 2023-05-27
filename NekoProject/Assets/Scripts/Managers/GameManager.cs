@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool Cheating;
 
     [SerializeField] ItemData[] itemData;
+    [SerializeField] BoosterData[] boosterData;
 
     private void Awake()
     {
@@ -57,7 +59,22 @@ public class GameManager : MonoBehaviour
     }
     public void SetItemsInfo(ref Dictionary<Items, bool> itemsInfo)
     {
-        DataSavingInstance.ItemsOwned  = itemsInfo;
+        DataSavingInstance.ItemsOwned = itemsInfo;
+    }
+
+    public Dictionary<Boosters, bool> GetUnlockedBoostersInfo()
+    {
+        return DataSavingInstance.BoostersOwned;
+    }
+    public Boosters[] GetEquippedBoosters()
+    {
+        return DataSavingInstance.BoostersEquipped;
+    }
+
+    public void SetBoostersInfo(ref Dictionary<Boosters, bool> boostersInfo, Boosters[] equippedBoosters)
+    {
+        DataSavingInstance.BoostersOwned = boostersInfo;
+        DataSavingInstance.BoostersEquipped = equippedBoosters;
     }
 
     public Sprite GetItemSprite(Items item)
@@ -71,6 +88,27 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
+    public Sprite GetBoosterSprite(Boosters booster)
+    {
+        for (int i = 0; i < boosterData.Length; i++)
+        {
+            if (boosterData[i].ID == booster) return boosterData[i].Sprite;
+        }
+
+        Debug.LogError(booster + " not in list");
+        return null;
+    }
+
+    public Boosters GetBoosterIDFromSprite(Sprite boosterSprite)
+    {
+        for (int i = 0; i < boosterData.Length; i++)
+        {
+            if (boosterData[i].Sprite == boosterSprite) return boosterData[i].ID;
+        }
+
+        Debug.LogError(boosterSprite + " not in list");
+        return Boosters.x2Damage;
+    }
     public void LoadScene(int sceneNumber)
     {
         SceneManager.LoadScene(sceneNumber);
@@ -87,6 +125,7 @@ public class DataSaving
     public int Money;
     public Dictionary<Items, bool> ItemsOwned;
     public Dictionary<Boosters, bool> BoostersOwned;
+    public Boosters[] BoostersEquipped = new Boosters[3];
     public float LastPlayerPosX, LastPlayerPosY;
 
     public DataSaving ()
@@ -100,6 +139,8 @@ public class DataSaving
         BoostersOwned = new();
         foreach (Boosters booster in Enum.GetValues(typeof(Boosters)))
         {
+            if (booster == Boosters.None) continue;
+
             BoostersOwned.Add(booster, false);
         }
         LastPlayerPosX = 0;
@@ -121,6 +162,11 @@ public class DataSaving
         {
             BoostersOwned[booster] = true;
         }
+
+        for (int i = 0; i < BoostersEquipped.Length; i++)
+        {
+            BoostersEquipped[i] = Boosters.None;
+        }
     }
 
     public void SaveData()
@@ -141,6 +187,11 @@ public class DataSaving
             PlayerPrefs.SetInt(nameof(booster), value);
         }
 
+        for (int i = 0; i < BoostersEquipped.Length; i++)
+        {
+            PlayerPrefs.SetInt("BoosterEquipped" + i, (int)BoostersEquipped[i]);
+        }
+
         PlayerPrefs.Save();
     }
 
@@ -158,6 +209,11 @@ public class DataSaving
         foreach (var booster in BoostersOwned.Keys.ToList())
         {
             BoostersOwned[booster] = PlayerPrefs.GetInt(nameof(booster)) == 1;
+        }
+
+        for (int i = 0; i < BoostersEquipped.Length; i++)
+        {
+            BoostersEquipped[i] = (Boosters)PlayerPrefs.GetInt("BoosterEquipped" + i);
         }
     }
 

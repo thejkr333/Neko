@@ -88,6 +88,11 @@ public class PlayerController : MonoBehaviour
     float shieldActiveTimer;
     [HideInInspector] public float shieldCDTimer;
 
+    [Header("BOOSTERS")]
+    [SerializeField] bool extraLifeActivated, damageMultiplierActivated, coinAttractingActivated;
+    [SerializeField] int extraLifesAmount;
+    [SerializeField] int damageMultiplier;
+
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -382,14 +387,15 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < hit.Length; i++)
         {
             AttackKnockback();
+            int _dmg = damageMultiplierActivated ? attackDmg * damageMultiplier : attackDmg;
             if (hit[i].TryGetComponent(out HealthSystem hitHealth))
             {
                 //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
-                hitHealth.GetHurt(attackDmg, Vector2.right * Dir);
+                hitHealth.GetHurt(_dmg, Vector2.right * Dir);
             }
             else if (hit[i].TryGetComponent(out Boss boss))
             {
-                boss.GetHurt(attackDmg);
+                boss.GetHurt(_dmg);
             }
         }
     }
@@ -414,15 +420,15 @@ public class PlayerController : MonoBehaviour
         JumpAttackKnockback();
         for (int i = 0; i < hit.Length; i++)
         {
-
+            int _dmg = damageMultiplierActivated ? attackDmg * damageMultiplier : attackDmg;
             if (hit[i].TryGetComponent(out HealthSystem hitHealth))
             {
                 //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
-                hitHealth.GetHurt(attackDmg, Vector2.down);
+                hitHealth.GetHurt(_dmg, Vector2.down);
             }
             else if (hit[i].TryGetComponent(out Boss boss))
             {
-                boss.GetHurt(attackDmg);
+                boss.GetHurt(_dmg);
             }
         }
     }
@@ -619,7 +625,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    public void ActivateBooster(Boosters booster)
+    {
+        switch (booster)
+        {
+            case Boosters.CoinAttract:
+                coinAttractingActivated = true;
+                break;
+            case Boosters.x2Damage:
+                damageMultiplierActivated = true;
+                break;
+            case Boosters.ExtraHealth:
+                extraLifeActivated = true;
+                break;
+        }
+    }
+
+    public void DeactivateBooster(Boosters booster)
+    {
+        switch (booster)
+        {
+            case Boosters.CoinAttract:
+                coinAttractingActivated = false;
+                break;
+            case Boosters.x2Damage:
+                damageMultiplierActivated = false;
+                break;
+            case Boosters.ExtraHealth:
+                extraLifeActivated = false;
+                break;
+        }
+    }
 
     private void OnDrawGizmos()
     {
