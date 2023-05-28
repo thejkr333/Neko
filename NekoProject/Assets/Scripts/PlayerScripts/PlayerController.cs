@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public float shieldCDTimer;
 
     [Header("BOOSTERS")]
-    [SerializeField] bool extraLifeActivated, damageMultiplierActivated, coinAttractingActivated;
     [SerializeField] int extraLifesAmount;
     [SerializeField] int damageMultiplier;
 
@@ -387,7 +386,7 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < hit.Length; i++)
         {
             AttackKnockback();
-            int _dmg = damageMultiplierActivated ? attackDmg * damageMultiplier : attackDmg;
+            int _dmg = GameManager.Instance.EquippedBoosters[Boosters.x2Damage] ? attackDmg * damageMultiplier : attackDmg;
             if (hit[i].TryGetComponent(out HealthSystem hitHealth))
             {
                 //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
@@ -420,7 +419,7 @@ public class PlayerController : MonoBehaviour
         JumpAttackKnockback();
         for (int i = 0; i < hit.Length; i++)
         {
-            int _dmg = damageMultiplierActivated ? attackDmg * damageMultiplier : attackDmg;
+            int _dmg = GameManager.Instance.EquippedBoosters[Boosters.x2Damage] ? attackDmg * damageMultiplier : attackDmg;
             if (hit[i].TryGetComponent(out HealthSystem hitHealth))
             {
                 //hitHealth.GetHurt(attackDmg, transform.position - hit[i].transform.position);
@@ -615,45 +614,13 @@ public class PlayerController : MonoBehaviour
 
     void PlaySounds()
     {
-        if(grounded && rb.velocity.magnitude > .1f)
+        if (grounded && rb.velocity.magnitude > .1f)
         {
             AudioManager.Instance.PlaySound("GrassRun");
         }
         else
         {
             AudioManager.Instance.StopSound("GrassRun");
-        }
-    }
-
-    public void ActivateBooster(Boosters booster)
-    {
-        switch (booster)
-        {
-            case Boosters.CoinAttract:
-                coinAttractingActivated = true;
-                break;
-            case Boosters.x2Damage:
-                damageMultiplierActivated = true;
-                break;
-            case Boosters.ExtraHealth:
-                extraLifeActivated = true;
-                break;
-        }
-    }
-
-    public void DeactivateBooster(Boosters booster)
-    {
-        switch (booster)
-        {
-            case Boosters.CoinAttract:
-                coinAttractingActivated = false;
-                break;
-            case Boosters.x2Damage:
-                damageMultiplierActivated = false;
-                break;
-            case Boosters.ExtraHealth:
-                extraLifeActivated = false;
-                break;
         }
     }
 

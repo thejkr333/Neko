@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,8 +14,12 @@ public class GameManager : MonoBehaviour
 
     public bool Cheating;
 
+    [Header("Data")]
     [SerializeField] ItemData[] itemData;
     [SerializeField] BoosterData[] boosterData;
+
+    [Header("BOOSTERS")]
+    public Dictionary<Boosters, bool> EquippedBoosters = new();
 
     private void Awake()
     {
@@ -40,6 +43,22 @@ public class GameManager : MonoBehaviour
         else
         {
             if (DataSavingInstance.IsThereSaveFiles()) DataSavingInstance.LoadData();
+        }
+
+        foreach (Boosters booster in Enum.GetValues(typeof(Boosters)))
+        {
+            if (booster == Boosters.None) continue;
+
+            bool _value = false;
+            foreach (var boosterEquipped in DataSavingInstance.BoostersEquipped)
+            {
+                if (booster == boosterEquipped)
+                {
+                    _value = true;
+                    break;
+                }
+            }
+            EquippedBoosters.Add(booster, _value);
         }
     }
     public void NewGame()
@@ -66,6 +85,17 @@ public class GameManager : MonoBehaviour
     {
         return DataSavingInstance.BoostersOwned;
     }
+
+    public void EquipBooster(Boosters booster)
+    {
+        EquippedBoosters[booster] = true;
+    }
+
+    public void UnequipBooster(Boosters booster)
+    {
+        EquippedBoosters[booster] = false;
+    }
+
     public Boosters[] GetEquippedBoosters()
     {
         return DataSavingInstance.BoostersEquipped;

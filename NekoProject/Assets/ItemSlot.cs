@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     public Action<ItemSlot> Clicked;
-    public Boosters BoosterInSlot;
+    public Boosters Booster;
     public Image Image;
 
     private void Awake()

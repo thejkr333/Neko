@@ -256,9 +256,6 @@ public class Pixie : MonoBehaviour
         float _x = Input.GetAxis("Horizontal");
         float _y = Input.GetAxis("Vertical");
 
-        if (_x != 0) _y = 0;
-        if (_y != 0) _x = 0;
-
         if (_x > 0) tr.localScale = Vector3.one;
         else if (_x < 0) tr.localScale = new Vector3(-1, 1, 1);
 
@@ -268,6 +265,21 @@ public class Pixie : MonoBehaviour
         //if (Input.GetKeyUp(KeyCode.R)) pressingR = false;
 
         //if (pressingR) return;
+    }
+
+    void FourDirectionsMovement()
+    {
+        float _x = Input.GetAxis("Horizontal");
+        float _y = Input.GetAxis("Vertical");
+
+        if (_x != 0) _y = 0;
+        if (_y != 0) _x = 0;
+
+        if (_x > 0) tr.localScale = Vector3.one;
+        else if (_x < 0) tr.localScale = new Vector3(-1, 1, 1);
+
+        Vector2 _moveDir = new Vector2(_x, _y).normalized;
+        rb.velocity = _moveDir * movSpeed;
     }
 
 

@@ -66,9 +66,6 @@ public class PlayerUI : MonoBehaviour
         playerStorage.ItemUnlocked += AddItemToInventory;
         playerStorage.BoosterUnlocked += AddBoosterToPool;
         playerStorage.BoosterEquipped += EquipBooster;
-
-        boostersHandler.BoosterEquipped += playerController.ActivateBooster;
-        boostersHandler.BoosterUnequipped += playerController.DeactivateBooster;
     }
 
     private void Start()

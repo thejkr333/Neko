@@ -68,20 +68,20 @@ public class BoostersUIHandler : MonoBehaviour
         if (lastSelectedItem.Image.sprite == null) lastSelectedItem.Image.color = new Color(1, 1, 1, 0);
         else lastSelectedItem.Image.color = new Color(1, 1, 1, 1);
 
-        Boosters _tempBooster = firstSelectedSlot.BoosterInSlot;
-        firstSelectedSlot.BoosterInSlot = lastSelectedItem.BoosterInSlot;
-        lastSelectedItem.BoosterInSlot = _tempBooster;
+        Boosters _tempBooster = firstSelectedSlot.Booster;
+        firstSelectedSlot.Booster = lastSelectedItem.Booster;
+        lastSelectedItem.Booster = _tempBooster;
 
         //Si los dos items vienen uno del pool y otro de equipped
         if (equippedBoostersPosition.Contains(firstSelectedSlot) && nonEquippedBoostersPosition.Contains(lastSelectedItem))
         {
-            BoosterEquipped?.Invoke(firstSelectedSlot.BoosterInSlot);
-            BoosterUnequipped?.Invoke(lastSelectedItem.BoosterInSlot);
+            GameManager.Instance.EquipBooster(firstSelectedSlot.Booster);
+            GameManager.Instance.UnequipBooster(lastSelectedItem.Booster);
         }
         else if (equippedBoostersPosition.Contains(lastSelectedItem) && nonEquippedBoostersPosition.Contains(firstSelectedSlot))
         {
-            BoosterEquipped?.Invoke(lastSelectedItem.BoosterInSlot);
-            BoosterUnequipped?.Invoke(firstSelectedSlot.BoosterInSlot);
+            GameManager.Instance.EquipBooster(lastSelectedItem.Booster);
+            GameManager.Instance.UnequipBooster(firstSelectedSlot.Booster);
         }
 
         ResetClickHandler();
@@ -93,11 +93,9 @@ public class BoostersUIHandler : MonoBehaviour
         {
             if (nonEquippedBoostersPosition[i].Image.sprite != null) continue;
 
-            nonEquippedBoostersPosition[i].BoosterInSlot= booster;
+            nonEquippedBoostersPosition[i].Booster= booster;
             nonEquippedBoostersPosition[i].Image.sprite = GameManager.Instance.GetBoosterSprite(booster);
             nonEquippedBoostersPosition[i].Image.color = new Color(1, 1, 1, 1);
-
-            Debug.Log("alpha de " + nonEquippedBoostersPosition[i].name+ " " +nonEquippedBoostersPosition[i].Image.color.a);
             return;
         }
     }
@@ -108,7 +106,7 @@ public class BoostersUIHandler : MonoBehaviour
         {
             if (equippedBoostersPosition[i].Image.sprite != null) continue;
 
-            equippedBoostersPosition[i].BoosterInSlot = booster;
+            equippedBoostersPosition[i].Booster = booster;
             equippedBoostersPosition[i].Image.sprite = GameManager.Instance.GetBoosterSprite(booster);
             equippedBoostersPosition[i].Image.color = new Color(1, 1, 1, 1);
             return;

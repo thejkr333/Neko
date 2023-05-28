@@ -16,7 +16,7 @@ public class Coin : MonoBehaviour
 
     private void Update()
     {
-        if (playerStorage == null) return;
+        if (playerStorage == null || !GameManager.Instance.EquippedBoosters[Boosters.CoinAttract]) return;
 
         rb.gravityScale = 0;
         if(Vector2.Distance(tr.position, playerStorage.transform.position) < .5f)
@@ -35,6 +35,15 @@ public class Coin : MonoBehaviour
         if(collision.TryGetComponent(out PlayerStorage storage))
         {
             playerStorage = storage;
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out PlayerStorage storage))
+        {
+            storage.AddCoins();
+            Destroy(tr.gameObject);
         }
     }
 
