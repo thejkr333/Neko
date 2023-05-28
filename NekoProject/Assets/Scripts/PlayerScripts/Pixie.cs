@@ -253,8 +253,8 @@ public class Pixie : MonoBehaviour
 
     void ChangeMinds()
     {
-        float _x = Input.GetAxis("Horizontal");
-        float _y = Input.GetAxis("Vertical");
+        float _x = Input.GetAxisRaw("Horizontal");
+        float _y = Input.GetAxisRaw("Vertical");
 
         if (_x > 0) tr.localScale = Vector3.one;
         else if (_x < 0) tr.localScale = new Vector3(-1, 1, 1);
