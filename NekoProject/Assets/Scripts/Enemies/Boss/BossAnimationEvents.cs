@@ -39,4 +39,9 @@ public class BossAnimationEvents : MonoBehaviour
     {
         boss.StopBoss();
     }
+
+    public void WaveAttack()
+    {
+        boss.WaveAttack();
+    }
 }

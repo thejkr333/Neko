@@ -39,6 +39,11 @@ public class Boss : MonoBehaviour
     [SerializeField] private float rockSpeed;
     private bool throwingRocks, inPos;
 
+    [Header("WAVE ATTACK")]
+    [SerializeField] GameObject waveAttackPrefab;
+    [SerializeField] Transform waveAttackPos;
+    [SerializeField] float waveAttackSpeed;
+
     [SerializeField] private Transform midPhasePos;
     Vector3 initialPosition;
 
@@ -441,6 +446,14 @@ public class Boss : MonoBehaviour
         float x = Random.Range(minPoint.position.x, maxPoint.position.x);
         GameObject clon = Instantiate(rockPrefab, new Vector2(x, minPoint.position.y), Quaternion.identity);
         clon.GetComponent<Rigidbody2D>().velocity = Vector2.down * rockSpeed;
+    }
+
+    public void WaveAttack()
+    {
+        GameObject _clon = Instantiate(waveAttackPrefab);
+        _clon.transform.position = waveAttackPos.position;
+        _clon.transform.rotation = transform.rotation;
+        _clon.GetComponent<Rigidbody2D>().velocity = transform.right * waveAttackSpeed;
     }
 
     void UpdateAnim()

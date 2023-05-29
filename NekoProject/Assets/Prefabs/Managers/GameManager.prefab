@@ -53,3 +53,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3d986d576251f84bbb8186e640c9014, type: 2}
   - {fileID: 11400000, guid: 3422b3db879f391489ecbf53a317c968, type: 2}
   - {fileID: 11400000, guid: 3cf03e99c70510443aad4e8ddbc53508, type: 2}
+  boosterData:
+  - {fileID: 11400000, guid: b5b8d2b16bec3a949b00240a7bd355cf, type: 2}
+  - {fileID: 11400000, guid: bb1ea9bdf4bf165428c13486bd90b815, type: 2}
+  - {fileID: 11400000, guid: a73d6a33d5e77ea4481ae0713e193a79, type: 2}
