@@ -81,7 +81,7 @@ public class PlayerUI : MonoBehaviour
         UpdateHealthOrbs();
         UpdateMoneyTexts();
 
-        if (Input.GetKeyDown(KeyCode.Escape)) ToggleMenu();
+        if (Input.GetKeyDown(KeyCode.Tab)) ToggleMenu();
         //if (!menuOn && Input.GetKey(KeyCode.M)) ToggleMap();
 
         if (menuOn) Menu();
@@ -93,8 +93,6 @@ public class PlayerUI : MonoBehaviour
 
         UpdateShieldCD();
         UpdateAntmanCD();
-
-        Time.timeScale = menuOn ? 0 : 1;
     }
 
     void UpdateShieldCD()
@@ -143,6 +141,7 @@ public class PlayerUI : MonoBehaviour
     {
         menuOn = !menuOn;
 
+        Time.timeScale = menuOn ? 0 : 1;
         menu.SetActive(menuOn);
 
         if(!menuOn)

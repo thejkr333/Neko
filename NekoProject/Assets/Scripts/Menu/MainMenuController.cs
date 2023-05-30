@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuController : MonoBehaviour
+public class  MainMenuController : MonoBehaviour
 {
     [SerializeField] GameObject settings, mainMenu;
     // Start is called before the first frame update
