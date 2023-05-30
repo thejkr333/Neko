@@ -261,7 +261,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
         }
     }
 
-    public void OnPixie(InputAction.CallbackContext context)
+    public void OnPixieTP(InputAction.CallbackContext context)
     {
         if (context.started && pixie.states == Pixie.States.Checkpoint)
         {

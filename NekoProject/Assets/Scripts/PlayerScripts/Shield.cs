@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Layouts;
 
 public class Shield : MonoBehaviour, NekoInput.IShieldActions
 {
@@ -9,6 +10,8 @@ public class Shield : MonoBehaviour, NekoInput.IShieldActions
     [SerializeField] float rotationSpeed, distanceFromPlayer;
 
     private NekoInput controlInput;
+
+    [SerializeField] Vector3 inputPos;
 
     private void Awake()
     {
@@ -28,17 +31,24 @@ public class Shield : MonoBehaviour, NekoInput.IShieldActions
     }
 
     void MoveToCursor()
-    {
-        //Vector3 mousePos = Input.mousePosition;
-        Vector3 mousePos = controlInput.Shield.ShieldPosition.ReadValue<Vector2>();
-        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Mathf.Abs(Camera.main.transform.position.z)));
-        mousePos.z = target.position.z;
-        
-        Vector3 position = new Vector3(mousePos.x - target.position.x, mousePos.y - target.position.y, target.position.z);
-        position = position.normalized * distanceFromPlayer;
+    {       
+        Vector3 _position;
+        if(GameManager.Instance.currentController == Controllers.KbMouse)
+        {
+            inputPos = Mouse.current.position.ReadValue();
+            inputPos = Camera.main.ScreenToWorldPoint(new Vector3(inputPos.x, inputPos.y, Mathf.Abs(Camera.main.transform.position.z)));
+            inputPos.z = target.position.z;
+            _position = new Vector3(inputPos.x - target.position.x, inputPos.y - target.position.y, target.position.z);
+        }
+        else
+        {
+            inputPos = controlInput.Shield.ShieldPosition.ReadValue<Vector2>();
+            _position = inputPos != Vector3.zero ? inputPos : new Vector3(1, 0, 0); 
+        }
 
-        transform.right = position.normalized;
-        transform.position = target.position + position;
+        _position = _position.normalized * distanceFromPlayer;
+        transform.right = _position.normalized;
+        transform.position = target.position + _position;
     }
 
     private void OnEnable()

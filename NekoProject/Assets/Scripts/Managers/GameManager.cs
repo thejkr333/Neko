@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 using UnityEngine.SceneManagement;
 
+public enum Controllers { KbMouse, Controller}
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -20,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     [Header("BOOSTERS")]
     public Dictionary<Boosters, bool> EquippedBoosters = new();
+
+    public bool UsingMouse;
+    public Controllers currentController;
 
     private void Awake()
     {
@@ -61,6 +67,19 @@ public class GameManager : MonoBehaviour
             EquippedBoosters.Add(booster, _value);
         }
     }
+
+    public void OnControlsChanged(PlayerInput input)
+    {
+        if (input.currentControlScheme == "Controller")
+        {
+            currentController = Controllers.Controller;
+        }
+        else
+        {
+            currentController = Controllers.KbMouse;
+        }
+    }
+
     public void NewGame()
     {
         DataSavingInstance.EraseSaveFiles();

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5158325738975921295}
   - component: {fileID: 5158325738975921294}
+  - component: {fileID: 959475049}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -57,3 +58,94 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b5b8d2b16bec3a949b00240a7bd355cf, type: 2}
   - {fileID: 11400000, guid: bb1ea9bdf4bf165428c13486bd90b815, type: 2}
   - {fileID: 11400000, guid: a73d6a33d5e77ea4481ae0713e193a79, type: 2}
+  UsingMouse: 0
+--- !u!114 &959475049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5158325738975921292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1a045a749097c5645a3bb03aed97db7f, type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2131478e-ccd2-43a2-837c-18b45a929762
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DualShock4GamepadHID/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3a11d660-9664-4eba-93cc-8c3df2c4de5f
+    m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e135677b-b43d-4540-9999-f64f90706060
+    m_ActionName: Player/Attack[/Mouse/leftButton,/DualShock4GamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d7e2948e-8550-4f14-bf57-6481856a5c12
+    m_ActionName: Player/Dash[/Keyboard/shift,/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 92cbdcaa-6f52-4836-98b0-0bbd43c27c4f
+    m_ActionName: Player/Antman[/Keyboard/ctrl,/DualShock4GamepadHID/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a53b0a4-0cc9-40cd-a760-fa993206c6b8
+    m_ActionName: Player/Shield[/Mouse/rightButton,/DualShock4GamepadHID/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8785e6a1-b5f5-4223-8ee7-9eeff4a8edb0
+    m_ActionName: Player/PixieTP[/Keyboard/t,/DualShock4GamepadHID/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a5745527-69c0-4299-a51a-eaa7a003695e
+    m_ActionName: Pixie/Pixie[/Keyboard/r,/DualShock4GamepadHID/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3ea3f21-4178-4d0f-9fcd-071715ac47ff
+    m_ActionName: Pixie/PixieMovement[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a840084-d910-418d-abd7-dfdeb16b7526
+    m_ActionName: Shield/ShieldPosition[/DualShock4GamepadHID/rightStick,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f561759d-cb56-4b65-a27f-48776b97a979
+    m_ActionName: UI/Select[/Mouse/leftButton,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c8afc077-bfea-4d1e-8a3a-3341749c92b0
+    m_ActionName: Interaction/Interact[/Keyboard/e]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
