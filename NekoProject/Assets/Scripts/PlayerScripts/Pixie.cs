@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using System;
+using UnityEngine.InputSystem;
 
-public class Pixie : MonoBehaviour
+public class Pixie : MonoBehaviour, NekoInput.IPixieActions
 {
     [SerializeField] Transform followTarget;
     [SerializeField] float maxDistance, smoothTime, minDistanceForCheckPoint;
@@ -38,10 +39,13 @@ public class Pixie : MonoBehaviour
 
     Noise noise;
 
-    bool pressingR;
+    private NekoInput controlsInput;
 
     private void Awake()
     {
+        controlsInput = new NekoInput();
+        controlsInput.Pixie.SetCallbacks(this);
+
         player = playerController.transform;
         rb = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
@@ -65,17 +69,72 @@ public class Pixie : MonoBehaviour
     {
         if (transitioning) return;
 
-        switch (states)
+        //switch (states)
+        //{
+        //    case States.Following:
+        //        FollowInput();
+        //        break;
+        //    case States.Checkpoint:
+        //        CheckpointInput();
+        //        break;
+        //    case States.ChangeMinds:
+        //        ChangeMindsInput();
+        //        break;
+        //}
+    }
+    private void OnEnable()
+    {
+        controlsInput.Pixie.Enable();
+    }
+    private void OnDisable()
+    {
+        controlsInput.Pixie.Disable();
+    }
+    public void OnPixie(InputAction.CallbackContext context)
+    {
+        if (context.started)
         {
-            case States.Following:
-                FollowInput();
-                break;
-            case States.Checkpoint:
-                CheckpointInput();
-                break;
-            case States.ChangeMinds:
-                ChangeMindsInput();
-                break;
+            switch (states)
+            {
+                case States.Following:
+                    if (!playerStorage.ItemsUnlockedInfo[Items.PixieCheckPoint]) return;
+                    distanceToTarget = Vector3.Distance(tr.position, followTarget.position);
+                    if (distanceToTarget <= minDistanceForCheckPoint)
+                    {
+                        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, 5f, ground);
+                        if (raycastHit2D)
+                        {
+                            //anim de plantarse
+                            tpTarget = raycastHit2D.point;
+
+                            noise.enabled = false;
+                            transitioning = true;
+                            transform.parent = null;
+                        }
+                    }
+                    break;
+                case States.Checkpoint:
+                    if (playerStorage.ItemsUnlockedInfo[Items.PixieChangeMinds]) return;
+                    break;
+                case States.ChangeMinds:
+                    transitioning = true;
+                    break;
+            }
+        }
+        else if (context.performed)
+        {
+            if (states == States.Checkpoint)
+            {
+                if (playerStorage.ItemsUnlockedInfo[Items.PixieChangeMinds]) return;
+                ChangeStates(States.ChangeMinds);
+            }
+        }
+        else if (context.canceled)
+        {
+            if (states == States.Checkpoint)
+            {
+                ChangeStates(States.Following);
+            }
         }
     }
 
@@ -253,13 +312,15 @@ public class Pixie : MonoBehaviour
 
     void ChangeMinds()
     {
-        float _x = Input.GetAxisRaw("Horizontal");
-        float _y = Input.GetAxisRaw("Vertical");
+        //float _x = Input.GetAxisRaw("Horizontal");
+        //float _y = Input.GetAxisRaw("Vertical");
 
-        if (_x > 0) tr.localScale = Vector3.one;
-        else if (_x < 0) tr.localScale = new Vector3(-1, 1, 1);
+        Vector2 _inputDir = controlsInput.Pixie.PixieMovement.ReadValue<Vector2>();
 
-        Vector2 _moveDir = new Vector2(_x, _y).normalized;
+        if (_inputDir.x > 0) tr.localScale = Vector3.one;
+        else if (_inputDir.x < 0) tr.localScale = new Vector3(-1, 1, 1);
+
+        Vector2 _moveDir = _inputDir.normalized;
         rb.velocity = _moveDir * movSpeed;
 
         //if (Input.GetKeyUp(KeyCode.R)) pressingR = false;
@@ -294,5 +355,11 @@ public class Pixie : MonoBehaviour
     void Move(Vector3 target)
     {
         tr.position = Vector3.MoveTowards(tr.position, target, speed.Evaluate(1) * Time.deltaTime);
+    }
+
+
+    public void OnPixieMovement(InputAction.CallbackContext context)
+    {
+        
     }
 }

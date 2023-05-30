@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 {
     Animator anim;
     SpriteRenderer sr;
@@ -92,8 +94,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int extraLifesAmount;
     [SerializeField] int damageMultiplier;
 
+    private NekoInput controlsInput;
+
     private void Awake()
     {
+        controlsInput = new NekoInput();
+        controlsInput.Player.SetCallbacks(this);
+
         anim = GetComponentInChildren<Animator>();
         sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -127,7 +134,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckJump();
+        //CheckJump();
 
         CheckAttack();
 
@@ -161,6 +168,146 @@ public class PlayerController : MonoBehaviour
 
         Movement();
     }
+
+    #region Input
+    private void OnEnable()
+    {
+        controlsInput.Player.Enable();
+    }
+    private void OnDisable()
+    {
+        controlsInput.Player.Disable();
+    }
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (dashing || attacking || !canDoubleJump) return;
+            if (grounded) Jump();
+            else if (wallSliding) WallSlideJump();
+            else if (playerStorage.ItemsUnlockedInfo[Items.DoubleJump] && canDoubleJump) DoubleJump();
+        }
+        else if (context.canceled)
+        {
+            if (jumpTimer <= .1f) Invoke(nameof(StopJump), .1f - jumpTimer);
+            else StopJump();
+        }
+    }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (!canAttack || dashing || wallSliding || antman || shielding) return;
+
+        if (context.started)
+        {
+            AudioManager.Instance.PlaySound("Attack", lastAttack + 1);
+            attacking = true;
+            timeSinceLastAttack = 0;
+            canAttack = false;
+
+            //Check if jump attack
+            if (controlsInput.Player.Movement.ReadValue<Vector2>().y < 0 && !grounded)
+            {
+                anim.SetTrigger("JumpAttack");
+            }
+            //Rest of attacks
+            else
+            {
+                if (lastAttack == 1)
+                {
+                    //Attack 2
+                    lastAttack++;
+                    anim.SetTrigger("Attack2");
+                }
+                else if (lastAttack == 2)
+                {
+                    //attack 3
+                    lastAttack = 0;
+                    anim.SetTrigger("Attack3");
+                }
+                else
+                {
+                    //attack 1
+                    lastAttack++;
+                    anim.SetTrigger("Attack1");
+                }
+            }
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (!canDash || attacking || antman || dashing) return;
+
+        if (context.started)
+        {
+            dashing = true;
+
+            canDash = false;
+
+            anim.SetTrigger("Dash");
+
+            //Stop and disable movement and gravity
+            DisableMovement();
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+
+            //actual dash
+            rb.AddForce(transform.right * dashForce * Dir, ForceMode2D.Impulse);
+        }
+    }
+
+    public void OnPixie(InputAction.CallbackContext context)
+    {
+        if (context.started && pixie.states == Pixie.States.Checkpoint)
+        {
+            TpToPixie();
+        }
+    }
+
+    public void OnAntman(InputAction.CallbackContext context)
+    {
+        if (wallSliding || dashing || attacking || shielding) return;
+
+        if (context.started)
+        {
+            antman = !antman;
+            antmanTimer = 0;
+
+            if (antman)
+            {
+                anim.SetTrigger("ConvertToSmall");
+                canAntman = false;
+            }
+            else
+            {
+                anim.SetTrigger("ConvertToBig");
+                canAntman = false;
+            }
+        }
+    }
+
+    public void OnShield(InputAction.CallbackContext context)
+    {
+        if (!canShield || wallSliding || dashing || attacking) return;
+
+        if (context.started)
+        {
+            //Mantain to be active
+            shielding = true;
+            shield.SetActive(true);
+
+            shieldActiveTimer += Time.deltaTime;
+
+            if (shieldActiveTimer >= shieldActiveTime) EndShield();
+        }
+        else if(context.canceled && shielding) EndShield(); 
+}
+    #endregion
 
     private void LateUpdate()
     {
@@ -196,7 +343,8 @@ public class PlayerController : MonoBehaviour
         if (controllingPlayerMovement)
             input_hor = controllingDir;
         else
-            input_hor = Input.GetAxisRaw("Horizontal");
+            //input_hor = Input.GetAxisRaw("Horizontal");
+            input_hor = controlsInput.Player.Movement.ReadValue<Vector2>().x;
 
         float currentSpeed;
         if (antman) currentSpeed = antmanSpeed;
@@ -339,43 +487,43 @@ public class PlayerController : MonoBehaviour
         if (timeSinceLastAttack >= attackFrecuency) canAttack = true;
         if (timeSinceLastAttack >= timeToCombo) lastAttack = 0;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (!canAttack || dashing || wallSliding || antman || shielding) return;
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (!canAttack || dashing || wallSliding || antman || shielding) return;
 
-            AudioManager.Instance.PlaySound("Attack", lastAttack + 1);
-            attacking = true;
-            timeSinceLastAttack = 0;
-            canAttack = false;
+        //    AudioManager.Instance.PlaySound("Attack", lastAttack + 1);
+        //    attacking = true;
+        //    timeSinceLastAttack = 0;
+        //    canAttack = false;
 
-            //Check if jump attack
-            if (Input.GetKey(KeyCode.S) && !grounded)
-            {
-                anim.SetTrigger("JumpAttack");
-            }
-            //Rest of attacks
-            else
-            {
-                if (lastAttack == 1)
-                {
-                    //Attack 2
-                    lastAttack++;
-                    anim.SetTrigger("Attack2");
-                }
-                else if (lastAttack == 2)
-                {
-                    //attack 3
-                    lastAttack = 0;
-                    anim.SetTrigger("Attack3");
-                }
-                else
-                {
-                    //attack 1
-                    lastAttack++;
-                    anim.SetTrigger("Attack1");
-                }
-            }
-        }
+        //    //Check if jump attack
+        //    if (Input.GetKey(KeyCode.S) && !grounded)
+        //    {
+        //        anim.SetTrigger("JumpAttack");
+        //    }
+        //    //Rest of attacks
+        //    else
+        //    {
+        //        if (lastAttack == 1)
+        //        {
+        //            //Attack 2
+        //            lastAttack++;
+        //            anim.SetTrigger("Attack2");
+        //        }
+        //        else if (lastAttack == 2)
+        //        {
+        //            //attack 3
+        //            lastAttack = 0;
+        //            anim.SetTrigger("Attack3");
+        //        }
+        //        else
+        //        {
+        //            //attack 1
+        //            lastAttack++;
+        //            anim.SetTrigger("Attack1");
+        //        }
+        //    }
+        //}
     }
 
     public void Attack()
@@ -446,24 +594,24 @@ public class PlayerController : MonoBehaviour
         timeSinceLastDash += Time.deltaTime;
         if (timeSinceLastDash >= dashFrecuency) canDash = true;
 
-        if (!canDash || attacking || antman || dashing) return;
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //{
+        //    if (!canDash || attacking || antman || dashing) return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            dashing = true;
+        //    dashing = true;
 
-            canDash = false;
+        //    canDash = false;
 
-            anim.SetTrigger("Dash");
+        //    anim.SetTrigger("Dash");
 
-            //Stop and disable movement and gravity
-            DisableMovement();
-            rb.velocity = Vector2.zero;
-            rb.gravityScale = 0;
+        //    //Stop and disable movement and gravity
+        //    DisableMovement();
+        //    rb.velocity = Vector2.zero;
+        //    rb.gravityScale = 0;
 
-            //actual dash
-            rb.AddForce(transform.right * dashForce * Dir, ForceMode2D.Impulse);
-        }
+        //    //actual dash
+        //    rb.AddForce(transform.right * dashForce * Dir, ForceMode2D.Impulse);
+        //}
     }
     public void EndDash()
     {
@@ -506,10 +654,10 @@ public class PlayerController : MonoBehaviour
 
     void CheckTP()
     {
-        if(Input.GetKeyDown(KeyCode.T) && pixie.states == Pixie.States.Checkpoint)
-        {
-            TpToPixie();
-        }
+        //if(Input.GetKeyDown(KeyCode.T) && pixie.states == Pixie.States.Checkpoint)
+        //{
+        //    TpToPixie();
+        //}
     }
     void TpToPixie()
     {
@@ -554,22 +702,22 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            antman = !antman;
-            antmanTimer = 0;
+        //if (Input.GetKeyDown(KeyCode.LeftControl))
+        //{
+        //    antman = !antman;
+        //    antmanTimer = 0;
 
-            if (antman)
-            {
-                anim.SetTrigger("ConvertToSmall");
-                canAntman = false;
-            }
-            else
-            {
-                anim.SetTrigger("ConvertToBig");
-                canAntman = false; 
-            }
-        }
+        //    if (antman)
+        //    {
+        //        anim.SetTrigger("ConvertToSmall");
+        //        canAntman = false;
+        //    }
+        //    else
+        //    {
+        //        anim.SetTrigger("ConvertToBig");
+        //        canAntman = false; 
+        //    }
+        //}
     }
 
     void Shield()
@@ -588,20 +736,18 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        //if (!canShield || wallSliding || dashing || attacking) return;
+        //if (Input.GetMouseButton(1))
+        //{
+        //    //Mantain to be active
+        //    shielding = true;
+        //    shield.SetActive(true);
 
-        if (!canShield || wallSliding || dashing || attacking) return;
+        //    shieldActiveTimer += Time.deltaTime;
 
-        if (Input.GetMouseButton(1))
-        {
-            //Mantain to be active
-            shielding = true;
-            shield.SetActive(true);
-
-            shieldActiveTimer += Time.deltaTime;
-
-            if (shieldActiveTimer >= shieldActiveTime) EndShield();
-        }
-        else if (shielding) EndShield();
+        //    if (shieldActiveTimer >= shieldActiveTime) EndShield();
+        //}
+        //else if (shielding) EndShield();
     }
 
     void EndShield()

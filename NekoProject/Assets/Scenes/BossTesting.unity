@@ -3625,6 +3625,11 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!4 &1770291395 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 387016080710016745, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
+  m_PrefabInstance: {fileID: 1789823330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1789823330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6350,11 +6355,11 @@ PrefabInstance:
     - target: {fileID: 1263194846299923473, guid: 49fdb734a9b15174792d453e0ffc35c1, type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1770291395}
     - target: {fileID: 1263194846299923473, guid: 49fdb734a9b15174792d453e0ffc35c1, type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1770291395}
     - target: {fileID: 3361429722827218785, guid: 49fdb734a9b15174792d453e0ffc35c1, type: 3}
       propertyPath: m_Name
       value: CM StateDrivenCamera1
