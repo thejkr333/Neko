@@ -40,6 +40,8 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
     Noise noise;
 
     private NekoInput controlsInput;
+    bool canChangedStates;
+    float changeStatesCD = .5f, changeStatesTimer;
 
     private void Awake()
     {
@@ -63,35 +65,19 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
         tr.position = followTarget.position;
 
         states = States.Following;
+
+        GameManager.Instance.EnablePixieInput += OnEnableInput;
+        GameManager.Instance.DisablePixieInput += OnDisableInput;
     }
 
-    private void Update()
-    {
-        if (transitioning) return;
-
-        //switch (states)
-        //{
-        //    case States.Following:
-        //        FollowInput();
-        //        break;
-        //    case States.Checkpoint:
-        //        CheckpointInput();
-        //        break;
-        //    case States.ChangeMinds:
-        //        ChangeMindsInput();
-        //        break;
-        //}
-    }
-    private void OnEnable()
-    {
-        controlsInput.Pixie.Enable();
-    }
-    private void OnDisable()
-    {
-        controlsInput.Pixie.Disable();
-    }
+    private void OnEnable() => OnEnableInput();
+    private void OnDisable() => OnDisableInput();
+    void OnEnableInput() => controlsInput.Pixie.Enable();
+    void OnDisableInput() => controlsInput.Pixie.Disable();
     public void OnPixie(InputAction.CallbackContext context)
     {
+        if (transitioning || !canChangedStates) return;
+
         if (context.started)
         {
             switch (states)
@@ -125,7 +111,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
         {
             if (states == States.Checkpoint)
             {
-                if (playerStorage.ItemsUnlockedInfo[Items.PixieChangeMinds]) return;
+                if (!playerStorage.ItemsUnlockedInfo[Items.PixieChangeMinds]) return;
                 ChangeStates(States.ChangeMinds);
             }
         }
@@ -134,6 +120,21 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
             if (states == States.Checkpoint)
             {
                 ChangeStates(States.Following);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        distanceToTarget = Vector3.Distance(tr.position, followTarget.position);
+
+        if (!canChangedStates)
+        {
+            changeStatesTimer += Time.deltaTime;
+            if(changeStatesTimer > changeStatesCD) 
+            { 
+                changeStatesTimer = 0;
+                canChangedStates = true;
             }
         }
     }
@@ -223,6 +224,8 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
 
     public void ChangeStates(States nextState)
     {
+        canChangedStates = false;
+
         switch (nextState)
         {
             case States.Following:
@@ -240,7 +243,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
                 if (states == States.ChangeMinds)
                 {
                     rb.velocity = Vector2.zero;
-                    playerController.enabled = true;
+                    GameManager.Instance.EnablePlayerInputs();
                     circleCollider.enabled = false;
                     virtualCamera.Follow = player;
                     //pressingR = Input.GetKeyDown(KeyCode.R);
@@ -251,8 +254,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
             case States.ChangeMinds:
                 if (states == States.Checkpoint)
                 {
-                    //pressingR = false;
-                    playerController.enabled = false;
+                    GameManager.Instance.DisablePlayerInputs();
                     circleCollider.enabled = true;
                     virtualCamera.Follow = tr;
                 }

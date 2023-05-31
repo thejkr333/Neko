@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BoostersUIHandler : MonoBehaviour
 {
@@ -118,5 +118,6 @@ public class BoostersUIHandler : MonoBehaviour
         firstClicked = false;
         firstSelectedSlot = null;
         highLightBorder.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(nonEquippedBoostersPosition[0].gameObject);
     }
 }

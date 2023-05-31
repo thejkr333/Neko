@@ -2,8 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using System;
+using UnityEngine.EventSystems;
 
-public class PlayerUI : MonoBehaviour
+public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayerUIActions
 {
     PlayerController playerController;
     PlayerStorage playerStorage;
@@ -15,9 +18,13 @@ public class PlayerUI : MonoBehaviour
 
     [Header("MENU")]
     [SerializeField] GameObject menu;
-    [SerializeField] GameObject[] menuGameobjects;
-    bool menuOn;
-    int menuIndex, menuLength;
+    bool menuOpen;
+
+    [Header("INVENTORY")]
+    [SerializeField] GameObject inventory;
+    [SerializeField] GameObject[] inventoryGameobjects;
+    bool inventoryOpen;
+    int inventoryIndex;
 
     [Header("MAP")]
     [SerializeField] GameObject map;
@@ -32,35 +39,42 @@ public class PlayerUI : MonoBehaviour
     float antmanTimeCD, antmanTimer;
 
     [Header("INVENTORY")]
-    [SerializeField] GameObject inventory;
-    [SerializeField] TMP_Text moneyTextInventory;
-    GameObject[] inventorySlots;
+    [SerializeField] GameObject items;
+    [SerializeField] TMP_Text moneyTextItems;
+    GameObject[] itemSlots;
 
     [Header("Boosters")]
     [SerializeField] BoostersUIHandler boostersHandler;
 
+    private NekoInput controlsInput;
+
     private void Awake()
     {
+        controlsInput = new NekoInput();
+        controlsInput.PlayerUI.SetCallbacks(this);
+        controlsInput.Menu.SetCallbacks(this);
+
         healthSystem = GetComponent<HealthSystem>();
         playerController = GetComponent<PlayerController>();
         playerStorage = GetComponent<PlayerStorage>();  
 
         //Set starting UI
         map.SetActive(false);
+        inventory.SetActive(false);
         menu.SetActive(false);
 
         //Set menu child objects
-        for (int i = 1; i < menuGameobjects.Length; i++)
+        for (int i = 1; i < inventoryGameobjects.Length; i++)
         {
-            menuGameobjects[i].SetActive(false);
+            inventoryGameobjects[i].SetActive(false);
         }
 
         //Set inventory slots
-        inventorySlots = new GameObject[inventory.transform.childCount];
-        for (int i = 0; i < inventory.transform.childCount; i++)
+        itemSlots = new GameObject[items.transform.childCount];
+        for (int i = 0; i < items.transform.childCount; i++)
         {
-            inventorySlots[i] = inventory.transform.GetChild(i).gameObject;
-            inventorySlots[i].SetActive(false);
+            itemSlots[i] = items.transform.GetChild(i).gameObject;
+            itemSlots[i].SetActive(false);
         }
 
         playerStorage.ItemUnlocked += AddItemToInventory;
@@ -70,6 +84,9 @@ public class PlayerUI : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.EnableUIInput += OnEnableUIInputs;
+        GameManager.Instance.DisableUIInput += OnDisableUIInputs;
+
         //Set abilities info
         shieldTimeCD = playerController.shieldCD;
         antmanTimeCD = playerController.antmanCD;
@@ -81,15 +98,15 @@ public class PlayerUI : MonoBehaviour
         UpdateHealthOrbs();
         UpdateMoneyTexts();
 
-        if (Input.GetKeyDown(KeyCode.Tab)) ToggleMenu();
-        //if (!menuOn && Input.GetKey(KeyCode.M)) ToggleMap();
+        //if (Input.GetKeyDown(KeyCode.Tab)) ToggleInventory();
+        ////if (!menuOn && Input.GetKey(KeyCode.M)) ToggleMap();
 
-        if (menuOn) Menu();
-        else
-        {
-            menu.SetActive(Input.GetKey(KeyCode.M));
-            map.SetActive(Input.GetKey(KeyCode.M));
-        }
+        //if (inventoryOpen) Inventory();
+        //else
+        //{
+        //    inventory.SetActive(Input.GetKey(KeyCode.M));
+        //    map.SetActive(Input.GetKey(KeyCode.M));
+        //}
 
         UpdateShieldCD();
         UpdateAntmanCD();
@@ -137,55 +154,64 @@ public class PlayerUI : MonoBehaviour
         map.SetActive(mapOn);   
     }
 
-    void ToggleMenu()
+    private void ToggleMenu()
     {
-        menuOn = !menuOn;
+        menuOpen = !menuOpen;
 
-        Time.timeScale = menuOn ? 0 : 1;
-        menu.SetActive(menuOn);
+        Time.timeScale = menuOpen ? 0 : 1;
+        menu.SetActive(menuOpen);
+    }
 
-        if(!menuOn)
-            for (int i = 0; i < menuLength; i++)
+    void ToggleInventory()
+    {
+        inventoryOpen = !inventoryOpen;
+
+        Time.timeScale = inventoryOpen ? 0 : 1;
+        inventory.SetActive(inventoryOpen);
+
+        if(!inventoryOpen)
+            for (int i = 0; i < inventoryGameobjects.Length; i++)
             {
-                menuGameobjects[menuIndex].SetActive(false);
+                if (i == 0) inventoryGameobjects[i].gameObject.SetActive(true);
+                else inventoryGameobjects[inventoryIndex].SetActive(false);
             }
     }
 
-    void Menu()
+    void Inventory()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            menuGameobjects[menuIndex].SetActive(false);
+            inventoryGameobjects[inventoryIndex].SetActive(false);
 
-            if (menuIndex == 0) menuIndex = menuGameobjects.Length - 1;
-            else menuIndex--;
+            if (inventoryIndex == 0) inventoryIndex = inventoryGameobjects.Length - 1;
+            else inventoryIndex--;
         }
         else if(Input.GetKeyDown(KeyCode.E))
         {
-            menuGameobjects[menuIndex].SetActive(false);
+            inventoryGameobjects[inventoryIndex].SetActive(false);
 
-            if (menuIndex == menuGameobjects.Length - 1) menuIndex = 0;
-            else menuIndex++;
+            if (inventoryIndex == inventoryGameobjects.Length - 1) inventoryIndex = 0;
+            else inventoryIndex++;
         }
 
-        if (menuGameobjects[menuIndex] != map && map.activeSelf) map.SetActive(false);
-        menuGameobjects[menuIndex].SetActive(true);
+        if (inventoryGameobjects[inventoryIndex] != map && map.activeSelf) map.SetActive(false);
+        inventoryGameobjects[inventoryIndex].SetActive(true);
     }
 
     void UpdateMoneyTexts()
     {
         moneyText.text = playerStorage.Coins.ToString();
-        moneyTextInventory.text = playerStorage.Coins.ToString();
+        moneyTextItems.text = playerStorage.Coins.ToString();
     }
 
     void AddItemToInventory(Items item)
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            Image _img = inventorySlots[i].GetComponent<Image>();
+            Image _img = itemSlots[i].GetComponent<Image>();
             if (_img.sprite != null) continue;
 
-            inventorySlots[i].SetActive(true);
+            itemSlots[i].SetActive(true);
             _img.sprite = GameManager.Instance.GetItemSprite(item);
             return;
         }
@@ -199,5 +225,151 @@ public class PlayerUI : MonoBehaviour
     void EquipBooster(Boosters booster)
     {
         boostersHandler.AddBoosterEquipped(booster);
+    }
+
+
+    private void OnEnable()
+    {
+        controlsInput.Menu.Enable();
+    }
+    private void OnDisable()
+    {
+        controlsInput.Menu.Disable();
+    }
+
+    void OnEnableUIInputs() => controlsInput.PlayerUI.Enable();
+    void OnDisableUIInputs() => controlsInput.PlayerUI.Disable();
+
+    #region InputNotUsed
+    public void OnRightClick(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnMiddleClick(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnScrollWheel(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnPoint(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnNavigate(InputAction.CallbackContext context)
+    {
+        
+    }
+    #endregion
+    public void OnClick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameObject _selected = EventSystem.current.currentSelectedGameObject;
+            if (_selected != null && _selected.activeSelf)
+            {
+                if(_selected.TryGetComponent(out IClickable clickable))
+                {
+                    clickable.OnClick();
+                }
+            }
+        }
+    }
+
+    public void OnToggleMenu(InputAction.CallbackContext context)
+    {
+        if (inventoryOpen) return;
+
+        if (context.started)
+        {
+            ToggleMenu();
+            if (menuOpen)
+            {
+                GameManager.Instance.DisablePlayerInputs();
+                GameManager.Instance.DisablePixieInputs();
+                GameManager.Instance.EnableUIInputs();
+            }
+            else
+            {
+                GameManager.Instance.EnablePlayerInputs();
+                GameManager.Instance.EnablePixieInputs();
+                GameManager.Instance.DisableUIInputs();
+            }
+        }
+    }
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (menuOpen) return;
+
+        if (context.started)
+        {
+            ToggleInventory();
+            if (inventoryOpen)
+            {
+                GameManager.Instance.DisablePlayerInputs();
+                GameManager.Instance.EnableUIInputs();
+            }
+            else
+            {
+                GameManager.Instance.EnablePlayerInputs();
+                GameManager.Instance.DisableUIInputs();
+            }
+        }
+    }
+    public void OnNextPage(InputAction.CallbackContext context)
+    {
+        if (!inventoryOpen) return;
+
+        if (context.started)
+        {
+            inventoryGameobjects[inventoryIndex].SetActive(false);
+
+            if (inventoryIndex == inventoryGameobjects.Length - 1) inventoryIndex = 0;
+            else inventoryIndex++;
+
+            if (inventoryGameobjects[inventoryIndex] != map && map.activeSelf) map.SetActive(false);
+            inventoryGameobjects[inventoryIndex].SetActive(true);
+        }
+    }
+
+    public void OnPreviousPage(InputAction.CallbackContext context)
+    {
+        if (!inventoryOpen) return;
+
+        if(context.started)
+        {
+            inventoryGameobjects[inventoryIndex].SetActive(false);
+
+            if (inventoryIndex == 0) inventoryIndex = inventoryGameobjects.Length - 1;
+            else inventoryIndex--;
+
+            if (inventoryGameobjects[inventoryIndex] != map && map.activeSelf) map.SetActive(false);
+            inventoryGameobjects[inventoryIndex].SetActive(true);
+        }
+    }
+
+    public void OnMap(InputAction.CallbackContext context)
+    {
+        if (inventoryOpen) return;
+
+        if (context.started)
+        {
+            inventory.SetActive(true);
+            for (int i = 0; i < inventoryGameobjects.Length; i++)
+            {
+                inventoryGameobjects[i].SetActive(false);
+            }
+            map.SetActive(true);
+        }
+        else if(context.canceled)
+        {
+            inventory.SetActive(false);
+            map.SetActive(false);
+        }
     }
 }

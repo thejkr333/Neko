@@ -24,8 +24,10 @@ public class GameManager : MonoBehaviour
     [Header("BOOSTERS")]
     public Dictionary<Boosters, bool> EquippedBoosters = new();
 
-    public bool UsingMouse;
     public Controllers currentController;
+    public Action EnablePlayerInput, DisablePlayerInput; 
+    public Action EnablePixieInput, DisablePixieInput; 
+    public Action EnableUIInput, DisableUIInput; 
 
     private void Awake()
     {
@@ -80,10 +82,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void NewGame()
-    {
-        DataSavingInstance.EraseSaveFiles();
-    }
+    public void EnablePlayerInputs() => EnablePlayerInput?.Invoke();
+    public void DisablePlayerInputs() => DisablePlayerInput?.Invoke();
+
+    public void EnablePixieInputs() => EnablePixieInput?.Invoke();
+    public void DisablePixieInputs() => DisablePixieInput?.Invoke();   
+    public void EnableUIInputs() => EnableUIInput?.Invoke();
+    public void DisableUIInputs() => DisableUIInput?.Invoke();
+    
+    public void NewGame() => DataSavingInstance.EraseSaveFiles();
 
     public void SaveGame()
     {

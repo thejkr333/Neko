@@ -131,6 +131,12 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
         petalsCD = Random.Range(minMaxPetalsTime.x, minMaxPetalsTime.y);
     }
 
+    private void Start()
+    {
+        GameManager.Instance.EnablePlayerInput += OnEnableInput;
+        GameManager.Instance.DisablePlayerInput += OnDisableInput;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -138,11 +144,11 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
         CheckAttack();
 
-        if (playerStorage.ItemsUnlockedInfo[Items.Dash]) Dash();
+        Dash();
 
-        if (playerStorage.ItemsUnlockedInfo[Items.Shield]) Shield();
+        Shield();
 
-        if (playerStorage.ItemsUnlockedInfo[Items.Antman]) AntMan();
+        AntMan();
 
         CheckTP();
 
@@ -151,6 +157,12 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     private void FixedUpdate()
     {
+        Movement();
+
+        CheckGround();
+
+        if (playerStorage.ItemsUnlockedInfo[Items.WallSlide]) CheckWallSlide();
+
         if (jumpKeyHeld)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
@@ -161,23 +173,14 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
                 JumpFinished();
             }
         }
-
-        CheckGround();
-
-        if (playerStorage.ItemsUnlockedInfo[Items.WallSlide]) CheckWallSlide();
-
-        Movement();
     }
 
     #region Input
-    private void OnEnable()
-    {
-        controlsInput.Player.Enable();
-    }
-    private void OnDisable()
-    {
-        controlsInput.Player.Disable();
-    }
+    private void OnEnable() => OnEnableInput();
+    private void OnDisable() => OnDisableInput();
+
+    void OnEnableInput() => controlsInput.Player.Enable();
+    void OnDisableInput() => controlsInput.Player.Disable();
     public void OnMovement(InputAction.CallbackContext context)
     {
 
@@ -241,6 +244,8 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        if (playerStorage.ItemsUnlockedInfo[Items.Dash])
+
         if (!canDash || attacking || antman || dashing) return;
 
         if (context.started)
@@ -271,6 +276,8 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void OnAntman(InputAction.CallbackContext context)
     {
+        if (playerStorage.ItemsUnlockedInfo[Items.Antman]) return;
+
         if (wallSliding || dashing || attacking || shielding) return;
 
         if (context.started)
@@ -293,6 +300,8 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void OnShield(InputAction.CallbackContext context)
     {
+        if (playerStorage.ItemsUnlockedInfo[Items.Shield]) return;
+
         if (!canShield || wallSliding || dashing || attacking) return;
 
         if (context.started)
@@ -300,10 +309,6 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
             //Mantain to be active
             shielding = true;
             shield.SetActive(true);
-
-            shieldActiveTimer += Time.deltaTime;
-
-            if (shieldActiveTimer >= shieldActiveTime) EndShield();
         }
         else if(context.canceled && shielding) EndShield(); 
 }
@@ -689,8 +694,6 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
     
     void AntMan()
     {
-        if (wallSliding || dashing || attacking || shielding) return;
-
         if (!canAntman)
         {
             antmanTimer += Time.deltaTime;
@@ -701,28 +704,17 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
             }
             return;
         }
-
-        //if (Input.GetKeyDown(KeyCode.LeftControl))
-        //{
-        //    antman = !antman;
-        //    antmanTimer = 0;
-
-        //    if (antman)
-        //    {
-        //        anim.SetTrigger("ConvertToSmall");
-        //        canAntman = false;
-        //    }
-        //    else
-        //    {
-        //        anim.SetTrigger("ConvertToBig");
-        //        canAntman = false; 
-        //    }
-        //}
     }
 
     void Shield()
     {
-        if (!shielding)
+        if(shielding)
+        {
+            shieldActiveTimer += Time.deltaTime;
+
+            if (shieldActiveTimer >= shieldActiveTime) EndShield();
+        }
+        else
         {
             shield.SetActive(false);
 
