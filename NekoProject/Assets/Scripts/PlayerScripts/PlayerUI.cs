@@ -162,6 +162,17 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
         menu.SetActive(menuOpen);
     }
 
+    public void CloseMenu()
+    {
+        menuOpen = false;
+        Time.timeScale = 1;
+        menu.SetActive(false);
+
+        GameManager.Instance.EnablePlayerInputs();
+        GameManager.Instance.EnablePixieInputs();
+        GameManager.Instance.DisableUIInputs();
+    }
+
     void ToggleInventory()
     {
         inventoryOpen = !inventoryOpen;
@@ -173,8 +184,10 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
             for (int i = 0; i < inventoryGameobjects.Length; i++)
             {
                 if (i == 0) inventoryGameobjects[i].gameObject.SetActive(true);
-                else inventoryGameobjects[inventoryIndex].SetActive(false);
+                else inventoryGameobjects[i].SetActive(false);
             }
+
+        inventoryIndex = 0;
     }
 
     void Inventory()
@@ -275,7 +288,7 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
             {
                 if(_selected.TryGetComponent(out IClickable clickable))
                 {
-                    clickable.OnClick();
+                    clickable.OnSelected();
                 }
             }
         }
@@ -290,6 +303,7 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
             ToggleMenu();
             if (menuOpen)
             {
+                EventSystem.current.SetSelectedGameObject(menu.transform.GetChild(0).gameObject);
                 GameManager.Instance.DisablePlayerInputs();
                 GameManager.Instance.DisablePixieInputs();
                 GameManager.Instance.EnableUIInputs();

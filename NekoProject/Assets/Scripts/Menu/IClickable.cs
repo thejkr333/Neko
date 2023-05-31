@@ -6,5 +6,5 @@ using UnityEngine.Events;
 
 public interface IClickable
 {
-    public void OnClick();
+    public void OnSelected();
 }

@@ -1,30 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameMenuController : MonoBehaviour
 {
     [SerializeField] GameObject settings, mainMenu;
 
-    bool inMenu;
     // Start is called before the first frame update
     void Start()
     {
         settings.SetActive(false);
-        inMenu = false;
         mainMenu.SetActive(false);
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape)) 
-        { 
-            inMenu = !inMenu;
-            Time.timeScale = inMenu ? 0 : 1;
-            mainMenu.SetActive(inMenu);
-            settings.SetActive(false);
-        }
-    }
 
     public void QuitGame()
     {
@@ -37,7 +26,6 @@ public class GameMenuController : MonoBehaviour
 
     public void ReturnToGame()
     {
-        inMenu = false;
         Time.timeScale = 1;
         mainMenu.SetActive(false);
     }
@@ -46,12 +34,14 @@ public class GameMenuController : MonoBehaviour
     {
         mainMenu.SetActive(false);
         settings.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(settings.transform.GetChild(0).gameObject);
     }
 
     public void MainMenu()
     {
         mainMenu.SetActive(true);
         settings.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(mainMenu.transform.GetChild(0).gameObject);
     }
 }
 

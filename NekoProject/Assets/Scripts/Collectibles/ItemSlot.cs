@@ -16,7 +16,7 @@ public class ItemSlot : MonoBehaviour, IClickable
         Image = GetComponent<Image>();
     }
 
-    public void OnClick()
+    public void OnSelected()
     {
         Clicked?.Invoke(this);
     }
