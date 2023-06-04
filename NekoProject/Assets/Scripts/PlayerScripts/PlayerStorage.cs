@@ -47,7 +47,7 @@ public class PlayerStorage : MonoBehaviour
         Coins -= amount;
     }
 
-    void UnlockItem(Items item)
+    public void UnlockItem(Items item)
     {
         ItemsUnlockedInfo[item] = true;
         ItemUnlocked?.Invoke(item);
@@ -67,15 +67,15 @@ public class PlayerStorage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.TryGetComponent(out Item item))
-        {
-            UnlockItem(item.ID);
-            Destroy(item.gameObject);
-        }
-        else if(collision.transform.TryGetComponent(out Booster booster))
-        {
-            UnlockBooster(booster.ID);
-            Destroy(item.gameObject);
-        }
+        //if (collision.transform.TryGetComponent(out Item item))
+        //{
+        //    UnlockItem(item.ID);
+        //    Destroy(item.gameObject);
+        //}
+        //else if(collision.transform.TryGetComponent(out Booster booster))
+        //{
+        //    UnlockBooster(booster.ID);
+        //    Destroy(item.gameObject);
+        //}
     }
 }
