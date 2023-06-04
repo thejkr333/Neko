@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "68a97525-9516-4710-90e2-c8e24a5cccea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "3a11d660-9664-4eba-93cc-8c3df2c4de5f",
@@ -265,6 +274,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "PixieTP",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b9ddcaf0-4bfe-4d1c-9ea8-cb85fcfdf8aa",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e158d16-8b6f-43da-b97d-0f1fb11822f8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -718,45 +749,6 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "PreviousPage",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Interaction",
-            "id": "f8375cc8-bab3-4bbd-83ad-54664d3a6215",
-            "actions": [
-                {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "c8afc077-bfea-4d1e-8a3a-3341749c92b0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "459a2bf3-3eb2-4afe-8512-6ea5921ddb0a",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d447e9c7-3751-4279-8a7a-9e631e4e05ae",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

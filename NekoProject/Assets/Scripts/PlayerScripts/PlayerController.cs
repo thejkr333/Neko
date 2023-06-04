@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
     SpriteRenderer sr;
     Rigidbody2D rb;
     PlayerStorage playerStorage;
+    PlayerInteraction playerInteraction;
 
     //Movement variables
     [Header("MOVEMENT")]
@@ -105,6 +106,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
         sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         playerStorage = GetComponent<PlayerStorage>();
+        playerInteraction = GetComponent<PlayerInteraction>();
 
         Dir = 1;
 
@@ -310,8 +312,13 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
             shielding = true;
             shield.SetActive(true);
         }
-        else if(context.canceled && shielding) EndShield(); 
-}
+        else if (context.canceled && shielding) EndShield();
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.started) playerInteraction.Interact();
+    }
     #endregion
 
     private void LateUpdate()
@@ -357,7 +364,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
         rb.velocity = new Vector2(input_hor * currentSpeed, rb.velocity.y);
 
-        if (grounded && rb.velocity.magnitude > .1f) UpdatePetals();
+        if (grounded && Mathf.Abs(rb.velocity.x) > .1f) UpdatePetals();
 
         FlipSr();
     }

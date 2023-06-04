@@ -6,14 +6,11 @@ public class PlayerInteraction : MonoBehaviour
 {
     List<Interactable> interactableList = new();
 
-    private void Update()
+    public void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (interactableList.Count == 0) return;
+        if (interactableList.Count == 0) return;
 
-            interactableList[0].Interact(transform);
-        }
+        interactableList[0].Interact(transform);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
