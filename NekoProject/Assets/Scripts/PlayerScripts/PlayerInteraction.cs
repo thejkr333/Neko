@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    PlayerController playerController;
     List<Interactable> interactableList = new();
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
     public void Interact()
     {
@@ -15,6 +20,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (playerController.Antman) return;
+
         if(collision.TryGetComponent(out Interactable interactable))
         {
             interactable.StartHighLight();

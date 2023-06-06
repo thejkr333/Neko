@@ -81,7 +81,8 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
     [SerializeField] float antmanSpeed = 8f;
     [SerializeField] Collider2D nekoCollider, antmanCollider;
     public float antmanCD;
-    bool antman, canAntman;
+    public bool Antman;
+    bool canAntman;
     [HideInInspector] public float antmanTimer;
 
     [Header("SHIELD")]
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
         lastAttack = -1;
         canAttack = true;
 
-        antman = false;
+        Antman = false;
         canAntman = true;
         nekoCollider.enabled = true;
         antmanCollider.enabled = false;
@@ -208,7 +209,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (!canAttack || dashing || wallSliding || antman || shielding) return;
+        if (!canAttack || dashing || wallSliding || Antman || shielding) return;
 
         if (context.started)
         {
@@ -251,7 +252,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
     {
         if (!playerStorage.ItemsUnlockedInfo[Items.Dash]) return;
 
-        if (!canDash || attacking || antman || dashing) return;
+        if (!canDash || attacking || Antman || dashing) return;
 
         if (context.started)
         {
@@ -273,6 +274,8 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void OnPixieTP(InputAction.CallbackContext context)
     {
+        if (Antman) return;
+
         if (context.started && pixie.states == Pixie.States.Checkpoint)
         {
             TpToPixie();
@@ -287,10 +290,10 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
         if (context.started)
         {
-            antman = !antman;
+            Antman = !Antman;
             antmanTimer = 0;
 
-            if (antman)
+            if (Antman)
             {
                 anim.SetTrigger("ConvertToSmall");
                 canAntman = false;
@@ -311,7 +314,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
     {
         if (!playerStorage.ItemsUnlockedInfo[Items.Shield]) return;
 
-        if (!canShield || wallSliding || dashing || attacking) return;
+        if (!canShield || wallSliding || dashing || attacking || Antman) return;
 
         if (context.started)
         {
@@ -324,7 +327,12 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.started) playerInteraction.Interact();
+        if (Antman) return;
+
+        if (context.started)
+        {
+            playerInteraction.Interact();
+        }
     }
     #endregion
 
@@ -366,7 +374,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
             input_hor = controlsInput.Player.Movement.ReadValue<Vector2>().x;
 
         float currentSpeed;
-        if (antman) currentSpeed = antmanSpeed;
+        if (Antman) currentSpeed = antmanSpeed;
         else currentSpeed = speed;
 
         rb.velocity = new Vector2(input_hor * currentSpeed, rb.velocity.y);
@@ -648,7 +656,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     void CheckWallSlide()
     {
-        if (grounded || antman) { wallSliding = false; return; }
+        if (grounded || Antman) { wallSliding = false; return; }
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(wallSlideContact.position, wallSlideCheckRadius, wallLayer);
 
@@ -704,7 +712,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
         anim.SetFloat("YVel", rb.velocity.y);
         anim.SetBool("Grounded", grounded);
         anim.SetBool("WallSliding", wallSliding);
-        anim.SetBool("Antman", antman);
+        anim.SetBool("Antman", Antman);
     }
     
     void AntMan()

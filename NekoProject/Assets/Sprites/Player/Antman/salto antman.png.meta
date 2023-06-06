@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a446e32eab6b94c41866e75edac9f707
+guid: 94a855eed8d0988408b3754ca263b6f4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,190 +128,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: walk antman_0
+      name: salto antman_0
       rect:
         serializedVersion: 2
-        x: 88
-        y: 285
-        width: 562
-        height: 290
+        x: 1025
+        y: 130
+        width: 502
+        height: 538
       alignment: 9
-      pivot: {x: 0.6525604, y: 0.29344872}
+      pivot: {x: 0.5454206, y: 0.5211906}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5e6f20ce850bd245a97002819ddce57
-      internalID: -984328055
+      spriteID: 6defefafbaf3fda48bfbea7e4ee18804
+      internalID: 439084369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk antman_1
+      name: salto antman_1
       rect:
         serializedVersion: 2
-        x: 907
-        y: 224
-        width: 663
-        height: 330
+        x: 1752
+        y: 244
+        width: 560
+        height: 309
       alignment: 9
-      pivot: {x: 0.60943854, y: 0.40905067}
+      pivot: {x: 0.5610744, y: 0.61068517}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 934ce103b8e6b8c41be136675d2f8754
-      internalID: 1467466030
+      spriteID: 375f735937ca2744cbc59c0b97b8c761
+      internalID: -1296825295
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk antman_2
+      name: salto antman_2
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 188
-        width: 612
-        height: 330
+        x: 2502
+        y: 162
+        width: 621
+        height: 456
       alignment: 9
-      pivot: {x: 0.62090504, y: 0.5284731}
+      pivot: {x: 0.6009712, y: 0.52500135}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25b88f10fdcc49f4ca7e70725b0c0c8e
-      internalID: 1918196364
+      spriteID: 30b09f7872ae7bd49842c43d4e2ab4f6
+      internalID: 518238737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk antman_3
+      name: salto antman_4
       rect:
         serializedVersion: 2
-        x: 2601
-        y: 188
-        width: 597
-        height: 330
+        x: 3483
+        y: 161
+        width: 455
+        height: 557
       alignment: 9
-      pivot: {x: 0.61957043, y: 0.5213549}
+      pivot: {x: 0.5250558, y: 0.40789494}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abc82ad75faa7d648825a0cd78305b55
-      internalID: 1749345200
+      spriteID: de0cb4cdb9e1c144ab02c6a71e497eda
+      internalID: 244498673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk antman_4
+      name: salto antman_5
       rect:
         serializedVersion: 2
-        x: 3399
-        y: 185
-        width: 612
-        height: 326
+        x: 73
+        y: 161
+        width: 608
+        height: 323
       alignment: 9
-      pivot: {x: 0.61706704, y: 0.5072058}
+      pivot: {x: 0.64531976, y: 0.47352833}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e248e5742f1979640945c2ce09b3e2c7
-      internalID: -1371674524
+      spriteID: e7705089d8065db47b5dd502acf82545
+      internalID: -2069289422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk antman_5
+      name: salto antman_7
       rect:
         serializedVersion: 2
-        x: 4226
-        y: 213
-        width: 597
-        height: 298
+        x: 4196
+        y: 161
+        width: 607
+        height: 323
       alignment: 9
-      pivot: {x: 0.6278782, y: 0.47635224}
+      pivot: {x: 0.62677693, y: 0.5000002}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ec058ba617d01e438cebeb564808514
-      internalID: -987956142
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: walk antman_6
-      rect:
-        serializedVersion: 2
-        x: 5031
-        y: 199
-        width: 627
-        height: 348
-      alignment: 9
-      pivot: {x: 0.5867895, y: 0.462875}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 274bbb663df97dd4da9855202aceaf15
-      internalID: -1443790358
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: walk antman_7
-      rect:
-        serializedVersion: 2
-        x: 5869
-        y: 201
-        width: 601
-        height: 347
-      alignment: 9
-      pivot: {x: 0.5716352, y: 0.45699704}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7096562374ec3d48bc012af5816813f
-      internalID: -413274665
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: walk antman_8
-      rect:
-        serializedVersion: 2
-        x: 6558
-        y: 262
-        width: 641
-        height: 299
-      alignment: 9
-      pivot: {x: 0.5997259, y: 0.37732565}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a2b8c93a4774f74ebd339e70edaf027
-      internalID: -439225183
+      spriteID: 8caafc78199ce9d46bbeb9c7889b69c1
+      internalID: 926705983
       vertices: []
       indices: 
       edges: []
@@ -327,18 +264,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      walk antman_9: 639067781
-      walk antman_6: -1443790358
-      walk antman_4: -1371674524
-      walk antman_11: 1411027173
-      walk antman_7: -413274665
-      walk antman_2: 1918196364
-      walk antman_0: -984328055
-      walk antman_1: 1467466030
-      walk antman_10: -1754665754
-      walk antman_5: -987956142
-      walk antman_3: 1749345200
-      walk antman_8: -439225183
+      salto antman_2: 518238737
+      salto antman_6: 163785974
+      salto antman_1: -1296825295
+      salto antman_5: -2069289422
+      salto antman_7: 926705983
+      salto antman_4: 244498673
+      salto antman_0: 439084369
+      salto antman_3: 58058323
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

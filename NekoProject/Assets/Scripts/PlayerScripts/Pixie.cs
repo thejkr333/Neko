@@ -76,7 +76,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
     void OnDisableInput() => controlsInput.Pixie.Disable();
     public void OnPixie(InputAction.CallbackContext context)
     {
-        if (transitioning || !canChangedStates) return;
+        if (transitioning || !canChangedStates || playerController.Antman) return;
 
         if (context.started)
         {
