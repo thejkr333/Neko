@@ -75,6 +75,7 @@ public class FlyingEnemy : Enemy
         {
             attackDirection = playerDirection.normalized;
             ChangeState(States.Attacking);
+            anim.SetTrigger("Attack");
             return;
         }
 
@@ -106,6 +107,7 @@ public class FlyingEnemy : Enemy
         
         if(collision.gameObject.TryGetComponent(out PlayerController playerController))
         {
+            anim.SetTrigger("Idle");
             ChangeState(States.Patrolling);
             chasingTimer = waitForChase;
         }

@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8767107735053118419}
   - component: {fileID: 8767107735053118418}
+  - component: {fileID: 1441738085564442527}
   - component: {fileID: 8767107735053118417}
   - component: {fileID: 8767107735053118416}
   - component: {fileID: 8767107735053118423}
@@ -99,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8767107735053118419
 Transform:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8767107735053118421}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.660923, y: 3.4555392, z: 0.13958015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -162,12 +163,32 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.9681818, y: 1.1954546}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1441738085564442527
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8767107735053118421}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a05aaaa7f6cb39647a111fafa2ab1b01, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &8767107735053118417
 Rigidbody2D:
   serializedVersion: 4
@@ -202,18 +223,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.09}
   m_SpriteTilingProperty:
     border: {x: 0.11, y: 0, z: 0.14, w: 0}
     pivot: {x: 0.4342543, y: 0.5682362}
     oldSize: {x: 1.8266667, y: 1.76}
-    newSize: {x: 1, y: 2}
+    newSize: {x: 0.9681818, y: 1.1954546}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.8828125}
+  m_Size: {x: 0.79, y: 0.8828125}
   m_EdgeRadius: 0
 --- !u!114 &8767107735053118423
 MonoBehaviour:
@@ -228,11 +249,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolSpeed: 2
-  chaseSpeed: 3
+  chaseSpeed: 4
   attackCD: 2
-  chaseDistance: 10
-  attackDistance: 5
-  damage: 0
+  chaseDistance: 15
+  attackDistance: 10
+  damage: 1
   state: 0
   coinsToSpawn: 0
   canMove: 0
@@ -254,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  knockbackForce: 20
+  knockbackForce: 200
   currentHealth: 0
   coinPrefab: {fileID: 2744260340947091095, guid: 8255ce0106777e040860d5504dbafb57, type: 3}
   coinForce: 3

@@ -5,6 +5,11 @@ public class SimpleEnemy : Enemy
     [Tooltip("Only values '-1' or '1")]
     [SerializeField] int initialDir;
     int dir;
+
+    bool attacking = true;
+
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRadius;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -15,6 +20,8 @@ public class SimpleEnemy : Enemy
 
     protected override void Patrol()
     {
+        base.Patrol();
+
         if (playerTransform != null)
         {
             if (Mathf.Abs(playerTransform.position.x - transform.position.x) <= chaseDistance)
@@ -32,6 +39,8 @@ public class SimpleEnemy : Enemy
 
     protected override void Chase()
     {
+        base.Chase();
+
         LookToPlayer();
 
         //if player has left chase distance
@@ -57,11 +66,49 @@ public class SimpleEnemy : Enemy
 
     protected override void Attack()
     {
+        if (!attacking)
+        {
+            anim.SetTrigger("Attack");
+            attacking = true;
+        }
+
         LookToPlayer();
 
         rb.velocity = Vector2.zero;
 
-        if (Mathf.Abs(playerTransform.position.x - transform.position.x) > attackDistance) ChangeState(States.Chasing);
+        if (Mathf.Abs(playerTransform.position.x - transform.position.x) > attackDistance)
+        {
+            ChangeState(States.Chasing);
+            attacking = false;
+        }
+    }
+
+    public void CheckHit()
+    {
+        Collider2D[] _hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius);
+        if (_hits.Length == 0) return;
+
+        foreach (var hit in _hits)
+        {
+            if(hit.TryGetComponent(out PlayerController playerController))
+            {
+                Vector2 _hitDir = new(playerController.transform.position.x < transform.position.x ? -1 : 1, 1);
+                playerController.GetComponent<HealthSystem>().GetHurt(damage, _hitDir);
+            }
+        }
+    }
+
+    public void FinishAttack()
+    {
+        attacking = false;
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)

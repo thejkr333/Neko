@@ -28,7 +28,7 @@ public class FlyingShootingEnemy : FlyingEnemy
         {
             rb.velocity = Vector2.zero;
             attackDirection = (playerTransform.position - transform.position).normalized;
-            Shoot();
+            anim.SetTrigger("Shoot");
             attackTimer = attackCD;
         }
         else if(attackTimer <= attackCD - 1)
@@ -38,7 +38,7 @@ public class FlyingShootingEnemy : FlyingEnemy
         }
     }
 
-    void Shoot()
+    public void CreateBullet()
     {
         GameObject clon = Instantiate(projectilePrefab);
         clon.transform.position = shootingPoint.position;

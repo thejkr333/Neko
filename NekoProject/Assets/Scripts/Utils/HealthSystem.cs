@@ -55,9 +55,9 @@ public class HealthSystem : MonoBehaviour
 
         if (TryGetComponent(out Enemy enemy))
         {
+            enemy.Die();
             SpawnCoins(enemy.coinsToSpawn);
         }
-        Destroy(gameObject);
     }
 
     void SpawnCoins(int coinAmount)

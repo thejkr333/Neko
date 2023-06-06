@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,12 +52,12 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Patrol()
     {
-        
+        if(!canMove) return;
     }
 
     protected virtual void Chase()
     {
-        
+        if (!canMove) return;
     }
 
     protected virtual void Attack()
@@ -125,5 +126,15 @@ public class Enemy : MonoBehaviour
     public void EnableMovement()
     {
         canMove = true;
+    }
+
+    public void Die()
+    {
+        anim.SetTrigger("Die");
+    }
+
+    public void Disappear()
+    {
+        Destroy(gameObject);
     }
 }
