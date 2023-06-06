@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Antman
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   ID: 4
-  Sprite: {fileID: 962967114, guid: f2874c1f070d44a46a79a233bf1b9809, type: 3}
+  Sprite: {fileID: 21300000, guid: dc0d5b9f93d5fe84791a939ef454afb4, type: 3}

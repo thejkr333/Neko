@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DoubleJump
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   ID: 0
-  Sprite: {fileID: 103319813, guid: f2874c1f070d44a46a79a233bf1b9809, type: 3}
+  Sprite: {fileID: 21300000, guid: 4c551b8c605851245b71138f501c3de6, type: 3}
