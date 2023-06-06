@@ -7,5 +7,6 @@ public class SaveStation : Interactable
     public override void Interact(Transform player)
     {
         GameManager.Instance.SaveGame();
+        StopHighLight();
     }
 }
