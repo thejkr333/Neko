@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     [Header("ANTMAN")]
     [SerializeField] float antmanSpeed = 8f;
+    [SerializeField] Collider2D nekoCollider, antmanCollider;
     public float antmanCD;
     bool antman, canAntman;
     [HideInInspector] public float antmanTimer;
@@ -120,6 +121,8 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
         antman = false;
         canAntman = true;
+        nekoCollider.enabled = true;
+        antmanCollider.enabled = false;
 
         shielding = false;
         canShield = true;
@@ -291,11 +294,15 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
             {
                 anim.SetTrigger("ConvertToSmall");
                 canAntman = false;
+                antmanCollider.enabled = true;
+                nekoCollider.enabled = false;
             }
             else
             {
                 anim.SetTrigger("ConvertToBig");
                 canAntman = false;
+                antmanCollider.enabled = false;
+                nekoCollider.enabled = true;
             }
         }
     }

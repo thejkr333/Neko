@@ -18,7 +18,7 @@ public class  MainMenuController : MonoBehaviour
 
     public void LoadGame()
     {
-
+        GameManager.Instance.LoadGame();
     }
 
     public void QuitGame()

@@ -97,6 +97,22 @@ public class GameManager : MonoBehaviour
         DataSaving.SaveData();
     }
 
+    public void LoadGame()
+    {
+        SceneManager.sceneLoaded += LoadSceneAssetsAndPlayer;
+        LoadScene("BosqueTurquesa");
+    }
+
+    void LoadSceneAssetsAndPlayer(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        if (scene.name != "BosqueTurquesa") return;
+
+        Transform _player = FindObjectOfType<PlayerController>().transform;
+        _player.transform.position = new Vector3(DataSaving.LastPlayerPosX, DataSaving.LastPlayerPosY, 0);
+
+        SceneManager.sceneLoaded -= LoadSceneAssetsAndPlayer;
+    }
+
     public SerializedDictionary<Items, bool> GetItemsInfo()
     {
         return DataSaving.ItemsOwned;

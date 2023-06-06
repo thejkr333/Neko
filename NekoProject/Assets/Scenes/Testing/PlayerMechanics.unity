@@ -1424,7 +1424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2153924682056167697, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2153924682056167723, guid: 404e790324c0bcc44aebeeff0ae5ee7d, type: 3}
       propertyPath: m_RootOrder
@@ -1526,6 +1526,10 @@ PrefabInstance:
     - target: {fileID: 8767107735053118421, guid: 80c99bfa058d23c48809b9cf1f45328f, type: 3}
       propertyPath: m_Name
       value: FlyingEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767107735053118421, guid: 80c99bfa058d23c48809b9cf1f45328f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80c99bfa058d23c48809b9cf1f45328f, type: 3}

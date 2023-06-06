@@ -1086,6 +1086,7 @@ MonoBehaviour:
   target: {fileID: 6975279850009385060}
   rotationSpeed: 50
   distanceFromPlayer: 5
+  inputPos: {x: 0, y: 0, z: 0}
 --- !u!50 &1955881976512367657
 Rigidbody2D:
   serializedVersion: 4
@@ -4365,6 +4366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6c66bd752975d4eb11cfcac9017c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equippedBoostersPosition: []
+  nonEquippedBoostersPosition: []
+  highLightBorder: {fileID: 0}
 --- !u!1 &5690350736592408146
 GameObject:
   m_ObjectHideFlags: 0
@@ -4843,6 +4847,7 @@ GameObject:
   - component: {fileID: 1955881978323523523}
   - component: {fileID: 6502083635978950689}
   - component: {fileID: 6975279850679145441}
+  - component: {fileID: 5369304232896741797}
   - component: {fileID: 6975279850679145440}
   m_Layer: 8
   m_Name: Player
@@ -4928,12 +4933,16 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   pixie: {fileID: 0}
   antmanSpeed: 20
+  nekoCollider: {fileID: 6975279850679145441}
+  antmanCollider: {fileID: 5369304232896741797}
   antmanCD: 2
   antmanTimer: 0
   shield: {fileID: 1955881976512367668}
   shieldActiveTime: 5
   shieldCD: 2
   shieldCDTimer: 0
+  extraLifesAmount: 0
+  damageMultiplier: 0
   controllingPlayerMovement: 0
   controllingDir: 0
 --- !u!114 &1955881978323523524
@@ -4956,14 +4965,14 @@ MonoBehaviour:
   - {fileID: 1955881977810112989}
   moneyText: {fileID: 354788382}
   menu: {fileID: 1955881978403994170}
-  menuGameobjects:
-  - {fileID: 5654487102703836060}
-  - {fileID: 7862586306594666426}
+  inventory: {fileID: 0}
+  inventoryGameobjects: []
   map: {fileID: 7862586306594666426}
   shieldCDImg: {fileID: 1955881977795323602}
   antmanCDImg: {fileID: 1955881976673159045}
-  inventory: {fileID: 0}
-  moneyTextInventory: {fileID: 925563991}
+  items: {fileID: 0}
+  moneyTextItems: {fileID: 0}
+  boostersHandler: {fileID: 0}
 --- !u!114 &6279168229979338076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5005,6 +5014,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d88376a0b774940a720ae9094dcea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemsUnlockedInfo:
+    m_Keys: 
+    m_Values: 
+  BoostersUnlockInfo:
+    m_Keys: 
+    m_Values: 
 --- !u!70 &6975279850679145441
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5021,6 +5036,32 @@ CapsuleCollider2D:
   m_Offset: {x: -0.21, y: 3.36}
   m_Size: {x: 3.32, y: 8.73}
   m_Direction: 0
+--- !u!61 &5369304232896741797
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6975279850679145470}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: e01fcf748e66da04eb0d2de5d4b9241c, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.35547972, y: 0.5046078}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.831244, y: 3.288296}
+  m_EdgeRadius: 0
 --- !u!50 &6975279850679145440
 Rigidbody2D:
   serializedVersion: 4
