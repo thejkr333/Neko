@@ -398,6 +398,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void GetHit()
     {
+        anim.SetTrigger("GetHurt");
         Invincible = true;
         int _playerInvincibleLayer = LayerMask.NameToLayer("PlayerInvincible");
         gameObject.layer = _playerInvincibleLayer;

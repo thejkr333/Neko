@@ -1085,6 +1085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: Item 3
   Cost: 3
+  Booster: 0
 --- !u!1 &444691291
 GameObject:
   m_ObjectHideFlags: 3
@@ -1875,6 +1876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: Item 1
   Cost: 1
+  Booster: 0
 --- !u!4 &825376483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5158325738975921295, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
@@ -4706,7 +4708,6 @@ GameObject:
   - component: {fileID: 1558086609}
   - component: {fileID: 1558086611}
   - component: {fileID: 1558086610}
-  - component: {fileID: 1558086612}
   m_Layer: 0
   m_Name: ItemSelection
   m_TagString: Untagged
@@ -4775,22 +4776,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558086608}
   m_CullTransparentMesh: 1
---- !u!114 &1558086612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558086608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9afd73b67b5f5546885777127bf1800, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highLightBorder: {fileID: 0}
-  shopSlots: []
-  descriptionText: {fileID: 0}
-  costText: {fileID: 0}
 --- !u!1 &1616165737
 GameObject:
   m_ObjectHideFlags: 0
@@ -5039,8 +5024,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 387016080464923945, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9130882535614943561, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
+      propertyPath: menu
+      value: 
+      objectReference: {fileID: 1223570479}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
 --- !u!4 &1789823331 stripped
@@ -5268,6 +5257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: Item 2
   Cost: 2
+  Booster: 0
 --- !u!1 &1879362393
 GameObject:
   m_ObjectHideFlags: 0
