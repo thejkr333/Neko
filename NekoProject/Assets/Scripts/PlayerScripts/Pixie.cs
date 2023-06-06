@@ -100,7 +100,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
                     }
                     break;
                 case States.Checkpoint:
-                    if (playerStorage.ItemsUnlockedInfo[Items.PixieChangeMinds]) return;
+                    if (!playerStorage.ItemsUnlockedInfo[Items.PixieChangeMinds]) return;
                     break;
                 case States.ChangeMinds:
                     transitioning = true;

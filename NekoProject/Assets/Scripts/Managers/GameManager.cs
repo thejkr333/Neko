@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public enum Controllers { KbMouse, Controller}
@@ -12,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    static DataSaving DataSavingInstance;
+    public DataSaving DataSaving;
     public Action SaveGameAction;
 
     public bool Cheating;
@@ -22,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] BoosterData[] boosterData;
 
     [Header("BOOSTERS")]
-    public Dictionary<Boosters, bool> EquippedBoosters = new();
+    public SerializedDictionary<Boosters, bool> EquippedBoosters = new();
 
     public Controllers currentController;
     public Action EnablePlayerInput, DisablePlayerInput; 
@@ -42,15 +41,15 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        DataSavingInstance = new DataSaving();
+        DataSaving = new DataSaving();
 
         if (Cheating)
         {
-            DataSavingInstance.Cheat();
+            DataSaving.Cheat();
         }
         else
         {
-            if (DataSavingInstance.IsThereSaveFiles()) DataSavingInstance.LoadData();
+            if (DataSaving.IsThereSaveFiles()) DataSaving.LoadData();
         }
 
         foreach (Boosters booster in Enum.GetValues(typeof(Boosters)))
@@ -58,7 +57,7 @@ public class GameManager : MonoBehaviour
             if (booster == Boosters.None) continue;
 
             bool _value = false;
-            foreach (var boosterEquipped in DataSavingInstance.BoostersEquipped)
+            foreach (var boosterEquipped in DataSaving.BoostersEquipped)
             {
                 if (booster == boosterEquipped)
                 {
@@ -90,26 +89,26 @@ public class GameManager : MonoBehaviour
     public void EnableUIInputs() => EnableUIInput?.Invoke();
     public void DisableUIInputs() => DisableUIInput?.Invoke();
     
-    public void NewGame() => DataSavingInstance.EraseSaveFiles();
+    public void NewGame() => DataSaving.EraseSaveFiles();
 
     public void SaveGame()
     {
         SaveGameAction?.Invoke();
-        DataSavingInstance.SaveData();
+        DataSaving.SaveData();
     }
 
-    public Dictionary<Items, bool> GetItemsInfo()
+    public SerializedDictionary<Items, bool> GetItemsInfo()
     {
-        return DataSavingInstance.ItemsOwned;
+        return DataSaving.ItemsOwned;
     }
-    public void SetItemsInfo(ref Dictionary<Items, bool> itemsInfo)
+    public void SetItemsInfo(ref SerializedDictionary<Items, bool> itemsInfo)
     {
-        DataSavingInstance.ItemsOwned = itemsInfo;
+        DataSaving.ItemsOwned = itemsInfo;
     }
 
-    public Dictionary<Boosters, bool> GetUnlockedBoostersInfo()
+    public SerializedDictionary<Boosters, bool> GetUnlockedBoostersInfo()
     {
-        return DataSavingInstance.BoostersOwned;
+        return DataSaving.BoostersOwned;
     }
 
     public void EquipBooster(Boosters booster)
@@ -124,13 +123,13 @@ public class GameManager : MonoBehaviour
 
     public Boosters[] GetEquippedBoosters()
     {
-        return DataSavingInstance.BoostersEquipped;
+        return DataSaving.BoostersEquipped;
     }
 
-    public void SetBoostersInfo(ref Dictionary<Boosters, bool> boostersInfo, Boosters[] equippedBoosters)
+    public void SetBoostersInfo(ref SerializedDictionary<Boosters, bool> boostersInfo, Boosters[] equippedBoosters)
     {
-        DataSavingInstance.BoostersOwned = boostersInfo;
-        DataSavingInstance.BoostersEquipped = equippedBoosters;
+        DataSaving.BoostersOwned = boostersInfo;
+        DataSaving.BoostersEquipped = equippedBoosters;
     }
 
     public Sprite GetItemSprite(Items item)
@@ -174,13 +173,21 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    internal void PlayerDied()
+    {
+        DisablePlayerInputs();
+        DisablePixieInputs();
+        DisableUIInputs();
+    }
 }
 
+[System.Serializable]
 public class DataSaving
 {
     public int Money;
-    public Dictionary<Items, bool> ItemsOwned;
-    public Dictionary<Boosters, bool> BoostersOwned;
+    public SerializedDictionary<Items, bool> ItemsOwned;
+    public SerializedDictionary<Boosters, bool> BoostersOwned;
     public Boosters[] BoostersEquipped = new Boosters[3];
     public float LastPlayerPosX, LastPlayerPosY;
 
