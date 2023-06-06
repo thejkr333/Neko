@@ -137,7 +137,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a3fc3a75-4e84-4224-8720-67e9e1617c56"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -313,7 +313,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9e158d16-8b6f-43da-b97d-0f1fb11822f8"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -823,7 +823,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b9e7802b-c0b8-4a15-babb-5bb6f02d14b2"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -845,7 +845,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5e59bc8c-8342-4c15-997b-39d13c4a891b"",
-                    ""path"": ""<Gamepad>/select"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
