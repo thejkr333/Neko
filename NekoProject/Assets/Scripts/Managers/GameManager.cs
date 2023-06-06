@@ -97,6 +97,22 @@ public class GameManager : MonoBehaviour
         DataSaving.SaveData();
     }
 
+    public void LoadGame()
+    {
+        SceneManager.sceneLoaded += LoadSceneAssetsAndPlayer;
+        LoadScene("BosqueTurquesa");
+    }
+
+    void LoadSceneAssetsAndPlayer(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        if (scene.name != "BosqueTurquesa") return;
+
+        Transform _player = FindObjectOfType<PlayerController>().transform;
+        _player.transform.position = new Vector3(DataSaving.LastPlayerPosX, DataSaving.LastPlayerPosY, 0);
+
+        SceneManager.sceneLoaded -= LoadSceneAssetsAndPlayer;
+    }
+
     public SerializedDictionary<Items, bool> GetItemsInfo()
     {
         return DataSaving.ItemsOwned;
@@ -241,13 +257,13 @@ public class DataSaving
         foreach (var item in ItemsOwned.Keys)
         {
             int value = ItemsOwned[item] ? 1 : 0;
-            PlayerPrefs.SetInt(nameof(item), value);
+            PlayerPrefs.SetInt(item.ToString(), value);
         }
 
         foreach(var booster in BoostersOwned.Keys)
         {
             int value = BoostersOwned[booster] ? 1 : 0;
-            PlayerPrefs.SetInt(nameof(booster), value);
+            PlayerPrefs.SetInt(booster.ToString(), value);
         }
 
         for (int i = 0; i < BoostersEquipped.Length; i++)
@@ -266,12 +282,12 @@ public class DataSaving
 
         foreach (var item in ItemsOwned.Keys.ToList())
         {
-            ItemsOwned[item] = PlayerPrefs.GetInt(nameof(item)) == 1;
+            ItemsOwned[item] = PlayerPrefs.GetInt(item.ToString()) == 1;
         }
 
         foreach (var booster in BoostersOwned.Keys.ToList())
         {
-            BoostersOwned[booster] = PlayerPrefs.GetInt(nameof(booster)) == 1;
+            BoostersOwned[booster] = PlayerPrefs.GetInt(booster.ToString()) == 1;
         }
 
         for (int i = 0; i < BoostersEquipped.Length; i++)
