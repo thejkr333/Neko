@@ -50,13 +50,15 @@ public class HealthSystem : MonoBehaviour
     {
         if (TryGetComponent(out PlayerController playerController))
         {
-
+            playerController.Die();
+            return;
         }
 
         if (TryGetComponent(out Enemy enemy))
         {
             enemy.Die();
             SpawnCoins(enemy.coinsToSpawn);
+            return;
         }
     }
 

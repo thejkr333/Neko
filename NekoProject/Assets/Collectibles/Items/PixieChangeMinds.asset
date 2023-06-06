@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PixieChangeMinds
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   ID: 6
-  Sprite: {fileID: 1977492746, guid: f2874c1f070d44a46a79a233bf1b9809, type: 3}
+  Sprite: {fileID: 21300000, guid: 4db7754007ea1f949ba0c8e9c613beaa, type: 3}

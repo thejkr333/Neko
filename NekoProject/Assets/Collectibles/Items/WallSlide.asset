@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WallSlide
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   ID: 1
-  Sprite: {fileID: -614984619, guid: f2874c1f070d44a46a79a233bf1b9809, type: 3}
+  Sprite: {fileID: 21300000, guid: bb81e4552ec07524baeb7a9b8e13449a, type: 3}
