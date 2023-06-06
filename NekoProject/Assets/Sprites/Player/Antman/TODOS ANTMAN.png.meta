@@ -1,0 +1,609 @@
+fileFormatVersion: 2
+guid: 2137684b3976ca04ea7fcb5036f4082f
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 70
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TODOS ANTMAN_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 0
+        width: 445
+        height: 845
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc56e992f333969438faafc969af77b3
+      internalID: 826473634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_1
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82a1f0f786674ea41817fac9e6e66407
+      internalID: -1997749501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_2
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 0
+        width: 445
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da95130094fa36a45b1a294734052ec7
+      internalID: 1896129522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_3
+      rect:
+        serializedVersion: 2
+        x: 1337
+        y: 0
+        width: 445
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd1afce0f1440a44cbdc147f80691c9e
+      internalID: 296832807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_4
+      rect:
+        serializedVersion: 2
+        x: 1780
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fe55dfcfcf691f449b3efb26d9b6b94
+      internalID: -285763347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_5
+      rect:
+        serializedVersion: 2
+        x: 2225
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84b522f239b15ac44ba00fcae873fcf4
+      internalID: 1806917441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_6
+      rect:
+        serializedVersion: 2
+        x: 2670
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa80493486b88164aacba184d48a169f
+      internalID: 166053036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_7
+      rect:
+        serializedVersion: 2
+        x: 3115
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.54568267, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7defc25ad8f1df94b8066d7a0674fd08
+      internalID: -255214079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_8
+      rect:
+        serializedVersion: 2
+        x: 3560
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2962bc722ea02c40a737e88b5efce4c
+      internalID: -669409582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_9
+      rect:
+        serializedVersion: 2
+        x: 4005
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335432ce558ff2f4dae56f6afce9fb96
+      internalID: -1373703740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_10
+      rect:
+        serializedVersion: 2
+        x: 4450
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6268277f1b940b04e8c3591a0847bb68
+      internalID: 1589737017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_11
+      rect:
+        serializedVersion: 2
+        x: 4895
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d34d651f215a27a4d900045ce5eb7699
+      internalID: 1135811508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_12
+      rect:
+        serializedVersion: 2
+        x: 5343
+        y: 0
+        width: 445
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10d60e04ff273e84fb7585cca3b06789
+      internalID: -1348648117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_13
+      rect:
+        serializedVersion: 2
+        x: 5785
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a281e145ccf9f146ae6adf0d694ebc2
+      internalID: 492453656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_14
+      rect:
+        serializedVersion: 2
+        x: 6230
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ca65eef9239c6043be103e8e7272c5b
+      internalID: -33298992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_15
+      rect:
+        serializedVersion: 2
+        x: 6680
+        y: 0
+        width: 445
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 972a31ba905bc314e94e9425b1a5b3a4
+      internalID: 1941852321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_16
+      rect:
+        serializedVersion: 2
+        x: 7120
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e644d5df03a3f5c4381aaa35313d925d
+      internalID: 1487044762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_17
+      rect:
+        serializedVersion: 2
+        x: 7565
+        y: 0
+        width: 445.35
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a0bc609ece1d6d47aabe8bcc5d8ee4f
+      internalID: -2041200190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_18
+      rect:
+        serializedVersion: 2
+        x: 8015
+        y: 0
+        width: 445
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ff7b89a70478db498ebf7a7c75b6fe1
+      internalID: -738503616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_19
+      rect:
+        serializedVersion: 2
+        x: 8455
+        y: 0
+        width: 452
+        height: 845
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79a9c4e46839e9d4eb5dce2ce25f7838
+      internalID: 1465812005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TODOS ANTMAN_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 8907
+        height: 845
+      alignment: 9
+      pivot: {x: 0, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a47c63f996dd2d48a0ce2acdcda25a9
+      internalID: -485230838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      TODOS ANTMAN_3: 296832807
+      TODOS ANTMAN_10: 1589737017
+      TODOS ANTMAN_2: 1896129522
+      TODOS ANTMAN_16: 1487044762
+      TODOS ANTMAN_0: 826473634
+      TODOS ANTMAN_20: -485230838
+      TODOS ANTMAN_1: -1997749501
+      TODOS ANTMAN_5: 1806917441
+      TODOS ANTMAN_4: -285763347
+      TODOS ANTMAN_9: -1373703740
+      TODOS ANTMAN_19: 1465812005
+      TODOS ANTMAN_8: -669409582
+      TODOS ANTMAN_17: -2041200190
+      TODOS ANTMAN_6: 166053036
+      TODOS ANTMAN_21: -1324039019
+      TODOS ANTMAN_13: 492453656
+      TODOS ANTMAN_7: -255214079
+      TODOS ANTMAN_14: -33298992
+      TODOS ANTMAN_11: 1135811508
+      TODOS ANTMAN_15: 1941852321
+      TODOS ANTMAN_12: -1348648117
+      TODOS ANTMAN_18: -738503616
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

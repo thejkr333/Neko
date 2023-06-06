@@ -2565,7 +2565,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1955881976758851066, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1955881978323523524, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: menu
@@ -2753,24 +2753,28 @@ PrefabInstance:
       objectReference: {fileID: 372512621}
     - target: {fileID: 5369304232896741797, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_Size.x
-      value: 2.804429
+      value: 2.1326127
       objectReference: {fileID: 0}
     - target: {fileID: 5369304232896741797, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_Size.y
-      value: 1.4907675
+      value: 1.298818
       objectReference: {fileID: 0}
     - target: {fileID: 5369304232896741797, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_Offset.x
-      value: 0.052073658
+      value: 0.119258404
       objectReference: {fileID: 0}
     - target: {fileID: 5369304232896741797, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_Offset.y
-      value: 3.2468824
+      value: -0.7571195
       objectReference: {fileID: 0}
     - target: {fileID: 5654487102703836060, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6975279850009385061, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 234007284, guid: 47dd27efc1fbfc741a560752119fd630, type: 3}
     - target: {fileID: 6975279850679145442, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2827,6 +2831,10 @@ PrefabInstance:
       propertyPath: petals
       value: 
       objectReference: {fileID: 3962807743555226167}
+    - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: jumpAttackKnockbackForce
+      value: 1200
+      objectReference: {fileID: 0}
     - target: {fileID: 7862586306594666426, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_IsActive
       value: 1
