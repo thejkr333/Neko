@@ -1527,13 +1527,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 8767107735053118421, guid: 80c99bfa058d23c48809b9cf1f45328f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8767107735053118422, guid: 80c99bfa058d23c48809b9cf1f45328f, type: 3}
-      propertyPath: knockbackForce
-      value: 200
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80c99bfa058d23c48809b9cf1f45328f, type: 3}
