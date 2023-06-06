@@ -1,3 +1,4 @@
+using UnityEngine.Rendering;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +7,8 @@ using UnityEngine;
 public class PlayerStorage : MonoBehaviour
 {
     public int Coins { get; private set; }
-    public Dictionary<Items, bool> ItemsUnlockedInfo = new();
-    public Dictionary<Boosters, bool> BoostersUnlockInfo = new();
+    public SerializedDictionary<Items, bool> ItemsUnlockedInfo = new();
+    public SerializedDictionary<Boosters, bool> BoostersUnlockInfo = new();
     Boosters[] equippedBoosters = new Boosters[3];
 
     public Action<Items> ItemUnlocked;
@@ -61,6 +62,10 @@ public class PlayerStorage : MonoBehaviour
 
     void UpdateDataToGameManager()
     {
+        GameManager.Instance.DataSaving.Money = Coins;
+        GameManager.Instance.DataSaving.LastPlayerPosX = transform.position.x;
+        GameManager.Instance.DataSaving.LastPlayerPosY = transform.position.y;
+        GameManager.Instance.DataSaving.BoostersEquipped = equippedBoosters;
         GameManager.Instance.SetItemsInfo(ref ItemsUnlockedInfo);
         GameManager.Instance.SetBoostersInfo(ref BoostersUnlockInfo, equippedBoosters);
     }

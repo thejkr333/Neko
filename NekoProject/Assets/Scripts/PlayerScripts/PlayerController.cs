@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (playerStorage.ItemsUnlockedInfo[Items.Dash])
+        if (!playerStorage.ItemsUnlockedInfo[Items.Dash]) return;
 
         if (!canDash || attacking || antman || dashing) return;
 
@@ -278,7 +278,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void OnAntman(InputAction.CallbackContext context)
     {
-        if (playerStorage.ItemsUnlockedInfo[Items.Antman]) return;
+        if (!playerStorage.ItemsUnlockedInfo[Items.Antman]) return;
 
         if (wallSliding || dashing || attacking || shielding) return;
 
@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void OnShield(InputAction.CallbackContext context)
     {
-        if (playerStorage.ItemsUnlockedInfo[Items.Shield]) return;
+        if (!playerStorage.ItemsUnlockedInfo[Items.Shield]) return;
 
         if (!canShield || wallSliding || dashing || attacking) return;
 
@@ -767,6 +767,12 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
         {
             AudioManager.Instance.StopSound("GrassRun");
         }
+    }
+
+    public void Die()
+    {
+        anim.SetTrigger("Die");
+        GameManager.Instance.PlayerDied();
     }
 
     private void OnDrawGizmos()

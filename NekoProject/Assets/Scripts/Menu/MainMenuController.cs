@@ -13,6 +13,7 @@ public class  MainMenuController : MonoBehaviour
     public void NewGame()
     {
         GameManager.Instance.NewGame();
+        GameManager.Instance.LoadScene("BosqueTurquesa");
     }
 
     public void LoadGame()
