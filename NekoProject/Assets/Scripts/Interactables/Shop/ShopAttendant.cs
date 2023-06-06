@@ -13,5 +13,7 @@ public class ShopAttendant : Interactable
     public override void Interact(Transform player)
     {
         canvasTienda.SetActive(true);
+        GameManager.Instance.EnableUIInputs();
+        GameManager.Instance.DisablePlayerInputs();
     }
 }
