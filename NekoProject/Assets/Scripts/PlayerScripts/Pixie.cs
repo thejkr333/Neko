@@ -14,6 +14,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
     Transform player;
     [SerializeField] PlayerController playerController;
     PlayerStorage playerStorage;
+    Animator anim;
 
     bool transitioning;
 
@@ -50,6 +51,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
 
         player = playerController.transform;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         circleCollider = GetComponent<CircleCollider2D>();
         playerStorage = player.GetComponent<PlayerStorage>();
         circleCollider.enabled = false;
@@ -90,7 +92,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
                         RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, 5f, ground);
                         if (raycastHit2D)
                         {
-                            //anim de plantarse
+                            anim.SetTrigger("Transform");
                             tpTarget = raycastHit2D.point;
 
                             noise.enabled = false;
@@ -119,6 +121,7 @@ public class Pixie : MonoBehaviour, NekoInput.IPixieActions
         {
             if (states == States.Checkpoint)
             {
+                anim.SetTrigger("Transform");
                 ChangeStates(States.Following);
             }
         }
