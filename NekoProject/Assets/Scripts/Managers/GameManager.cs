@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviour
     public Action SaveGameAction;
 
     public bool Cheating;
+
     public bool InBossFight;
+    public Action OnStartBossFight;
 
     [Header("Data")]
     [SerializeField] ItemData[] itemData;
@@ -186,6 +188,13 @@ public class GameManager : MonoBehaviour
 
         Debug.LogError(boosterSprite + " not in list");
         return Boosters.x2Damage;
+    }
+
+    public void StartBossFight()
+    {
+        InBossFight = true;
+        AudioManager.Instance.PlayMusic("BossFight");
+        OnStartBossFight?.Invoke();
     }
     public void LoadScene(int sceneNumber)
     {

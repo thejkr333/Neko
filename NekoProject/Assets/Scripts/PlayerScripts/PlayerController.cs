@@ -263,6 +263,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
             canDash = false;
 
+            AudioManager.Instance.PlaySound("Dash");
             anim.SetTrigger("Dash");
 
             //Stop and disable movement and gravity

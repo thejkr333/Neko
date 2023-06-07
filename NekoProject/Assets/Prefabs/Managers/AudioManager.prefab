@@ -100,6 +100,26 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     Loop: 0
+  - Name: RockSmash
+    Clip: {fileID: 8300000, guid: 8abbd70eb410aa040b626d39bb81aa83, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Thump
+    Clip: {fileID: 8300000, guid: 618ffd517ff22834598187e87e052796, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Thud
+    Clip: {fileID: 8300000, guid: d56768c9f85aa4446b8473fddaa2480b, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Dash
+    Clip: {fileID: 8300000, guid: 3a9b7be5de4b00943bd264be684a1f30, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
   Music:
   - Name: BG_noises
     Clip: {fileID: 8300000, guid: dc3883ab075ee2744a328658c9e7ff46, type: 3}

@@ -15,6 +15,7 @@ public class Rock : MonoBehaviour
             playerController.GetComponent<HealthSystem>().GetHurt(1, new Vector2(dir, 1));
         }
 
+        AudioManager.Instance.PlaySound("RockSmash");
         Destroy(gameObject);
     }
 }

@@ -1632,6 +1632,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
+      propertyPath: Sounds.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
+      propertyPath: Sounds.Array.data[14].Clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a9b7be5de4b00943bd264be684a1f30, type: 3}
+    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
+      propertyPath: Sounds.Array.data[14].Name
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
+      propertyPath: Sounds.Array.data[14].Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
+      propertyPath: Sounds.Array.data[14].Volume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
 --- !u!114 &959475048 stripped
@@ -4904,7 +4924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2137341852
 MonoBehaviour:
   m_ObjectHideFlags: 0

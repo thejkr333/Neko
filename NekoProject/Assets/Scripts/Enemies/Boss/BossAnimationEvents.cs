@@ -44,4 +44,9 @@ public class BossAnimationEvents : MonoBehaviour
     {
         boss.WaveAttack();
     }
+
+    public void ThudSound()
+    {
+        AudioManager.Instance.PlaySound("Thud", Random.Range(.5f, 1.5f));
+    }
 }
