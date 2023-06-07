@@ -3727,10 +3727,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 387016081111373170, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
-      propertyPath: jumpAttackKnockbackForce
-      value: 1200
-      objectReference: {fileID: 0}
     - target: {fileID: 9130882534485253052, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
       propertyPath: virtualCamera
       value: 
