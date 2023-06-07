@@ -75,6 +75,7 @@ public class FlyingEnemy : Enemy
         {
             attackDirection = playerDirection.normalized;
             ChangeState(States.Attacking);
+            AudioManager.Instance.PlaySound("Attack_FlyingEnemy");
             anim.SetTrigger("Attack");
             return;
         }
@@ -117,5 +118,11 @@ public class FlyingEnemy : Enemy
     {
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        AudioManager.Instance.PlaySound("Die_FlyingEnemy");
     }
 }

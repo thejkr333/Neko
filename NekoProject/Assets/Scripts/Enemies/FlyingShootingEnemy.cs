@@ -50,6 +50,12 @@ public class FlyingShootingEnemy : FlyingEnemy
         }
     }
 
+    public override void Die()
+    {
+        base.Die();
+        AudioManager.Instance.PlaySound("Die_ShootingEnemy");
+    }
+
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         

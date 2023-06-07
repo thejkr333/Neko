@@ -103,6 +103,12 @@ public class SimpleEnemy : Enemy
         attacking = false;
     }
 
+    public override void Die()
+    {
+        base.Die();
+        AudioManager.Instance.PlaySound("Die_SimpleEnemy");
+    }
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();

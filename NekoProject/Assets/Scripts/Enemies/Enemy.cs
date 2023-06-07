@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
         canMove = true;
     }
 
-    public void Die()
+    public virtual void Die()
     {
         anim.SetTrigger("Die");
     }
