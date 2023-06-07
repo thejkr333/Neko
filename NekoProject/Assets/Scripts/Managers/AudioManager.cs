@@ -29,11 +29,12 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    public List<Sound> Sounds = new List<Sound>();
-    public List<MusicTrack> Music = new List<MusicTrack>();
+    public List<Sound> Sounds = new();
+    public List<MusicTrack> Music = new();
+    List<MusicTrack> GameMusicTrack = new();
 
-    private Dictionary<string, AudioSource> soundSources = new Dictionary<string, AudioSource>();
-    private Dictionary<string, AudioClip> musicClips = new Dictionary<string, AudioClip>();
+    private Dictionary<string, AudioSource> soundSources = new();
+    private Dictionary<string, AudioClip> musicClips = new();
     private AudioSource musicSource;
 
     [SerializeField] private float fadeDuration = 1f;
@@ -73,6 +74,7 @@ public class AudioManager : MonoBehaviour
 
         foreach (MusicTrack music in Music)
         {
+            if (music.Name.StartsWith("Game")) GameMusicTrack.Add(music);
             musicClips[music.Name] = music.Clip;
         }
 
@@ -190,11 +192,18 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(timeForNextSong);
 
         string _newSong;
-        do
-        {
-            _newSong = Music[UnityEngine.Random.Range(1, Music.Count)].Name;
+        if (GameManager.Instance.GetCurrentScene() != "BosqueTurquesa") 
+        { 
+            _newSong = currentSong;
         }
-        while (_newSong == currentSong);
+        else
+        {
+            do
+            {
+                _newSong = GameMusicTrack[UnityEngine.Random.Range(1, GameMusicTrack.Count)].Name;
+            }
+            while (_newSong == currentSong);
+        }
 
         PlayMusic(_newSong);
     }

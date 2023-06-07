@@ -95,7 +95,7 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     Loop: 0
-  - Name: Lando
+  - Name: Land
     Clip: {fileID: 8300000, guid: 39ecc63c4a33b394fa0897bf96dcbee2, type: 3}
     Volume: 1
     Pitch: 1
@@ -107,6 +107,12 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: a11112030d626014d83c665f3fab7720, type: 3}
   - Name: BossFight
     Clip: {fileID: 8300000, guid: 4cad259fa093b1f49b2ea3a5ff27aca3, type: 3}
+  - Name: Game_1
+    Clip: {fileID: 8300000, guid: 399882c2f808e55418e3ba9378f6f46f, type: 3}
+  - Name: Game_2
+    Clip: {fileID: 8300000, guid: 61884c3ba4ebed243884f6197d4868c3, type: 3}
+  - Name: Game_3
+    Clip: {fileID: 8300000, guid: 4affc5a6ff9a40b4dab9f788fee35ff7, type: 3}
   fadeDuration: 1
   MusicVolume: 1
   SfxVolume: 1
