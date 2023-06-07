@@ -32,6 +32,9 @@ public class ShopUIHandler : MonoBehaviour
         GameManager.Instance.ControllerConected += ControllerConected;
         if(GameManager.Instance.currentScheme == Controllers.Controller) EventSystem.current.SetSelectedGameObject(shopSlots[0].gameObject);
         lastSelectedSlot = shopSlots[0];
+        highLightBorder.transform.position = shopSlots[0].transform.position;
+        descriptionText.text = shopSlots[0].Description;
+        costText.text = shopSlots[0].Cost.ToString();
     }
 
     private void OnDisable()

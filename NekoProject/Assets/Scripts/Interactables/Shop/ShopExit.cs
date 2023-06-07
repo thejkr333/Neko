@@ -6,6 +6,8 @@ public class ShopExit : Interactable
 {
     [SerializeField] Transform tpPosition;
 
+    [SerializeField] CameraManager cameraManager;
+
     public override void Interact(Transform player)
     {
         GoToWorld(player);
@@ -13,7 +15,7 @@ public class ShopExit : Interactable
 
     void GoToWorld(Transform player)
     {
-        CameraManager.Instance.ChangeCamera(CameraManager.CameraStates.PlayerCam, true);
+        cameraManager.ChangeCamera(CameraManager.CameraStates.PlayerCam, true);
         StartCoroutine(TPPlayer(player, 1));
     }
 

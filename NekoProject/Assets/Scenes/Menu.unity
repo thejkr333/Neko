@@ -777,63 +777,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1001 &633759433
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5991989360237060195, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_Name
-      value: EventSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991989360237060196, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c7c4974461131a4459e6ca2d56a5531f, type: 3}
 --- !u!1 &1028541802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5706155022881950238, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5706155022881950238, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1414,6 +1357,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
+--- !u!114 &1542417046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5991989361758188662, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
+  m_PrefabInstance: {fileID: 2057040600}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1759097306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,17 +1749,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 959475049, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
+      propertyPath: m_UIInputModule
+      value: 
+      objectReference: {fileID: 1542417046}
     - target: {fileID: 5158325738975921292, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5158325738975921294, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
-      propertyPath: Cheating
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5158325738975921295, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5158325738975921295, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
       propertyPath: m_LocalPosition.x

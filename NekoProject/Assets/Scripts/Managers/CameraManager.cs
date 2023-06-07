@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    private static CameraManager instance;
-    public static CameraManager Instance => instance;
-
     Animator anim;
     public enum CameraStates { PlayerCam, ShopCam, BossCam}
     CameraStates currentCameraState;
@@ -15,15 +12,7 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         CinemachineStateDrivenCamera = GetComponent<Cinemachine.CinemachineStateDrivenCamera>();
-
-        instance = this;
         // Initialization logic
         DontDestroyOnLoad(gameObject);
         anim = GetComponent<Animator>();
