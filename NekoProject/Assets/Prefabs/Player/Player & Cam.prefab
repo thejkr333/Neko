@@ -2563,6 +2563,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 387016080464923944}
     m_Modifications:
+    - target: {fileID: 1955881976512367669, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955881976512367669, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955881976512367669, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955881976512367669, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955881976512367671, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b0c5e0ad6996ab4494173a43bc17230, type: 3}
     - target: {fileID: 1955881976758851066, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2838,6 +2858,22 @@ PrefabInstance:
     - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: jumpAttackKnockbackForce
       value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279851078286548, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_Size.x
+      value: 1.7767937
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279851078286548, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_Size.y
+      value: 2.8542962
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279851078286548, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.06264527
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279851078286548, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.025057793
       objectReference: {fileID: 0}
     - target: {fileID: 7862586306594666426, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: m_IsActive

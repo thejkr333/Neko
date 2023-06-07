@@ -289,7 +289,7 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
     #endregion
     public void OnClick(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.currentController != Controllers.Controller) return;
+        if (GameManager.Instance.currentScheme != Controllers.Controller) return;
 
         if (context.performed)
         {
@@ -313,7 +313,7 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
             ToggleMenu();
             if (menuOpen)
             {
-                if(GameManager.Instance.currentController == Controllers.Controller) EventSystem.current.SetSelectedGameObject(menu.transform.GetChild(0).gameObject);
+                if(GameManager.Instance.currentScheme == Controllers.Controller) EventSystem.current.SetSelectedGameObject(menu.transform.GetChild(0).gameObject);
                 GameManager.Instance.DisablePlayerInputs();
                 GameManager.Instance.DisablePixieInputs();
                 GameManager.Instance.EnableUIInputs();

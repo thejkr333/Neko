@@ -20,7 +20,7 @@ public class MainMenuController : MonoBehaviour, NekoInput.IPlayerUIActions
     {
         AudioManager.Instance.PlayMusic("Menu");
         settings.SetActive(false);
-        if (GameManager.Instance.currentController == Controllers.Controller) EventSystem.current.SetSelectedGameObject(newGameButton);
+        if (GameManager.Instance.currentScheme == Controllers.Controller) EventSystem.current.SetSelectedGameObject(newGameButton);
     }
     public void NewGame()
     {
@@ -112,7 +112,7 @@ public class MainMenuController : MonoBehaviour, NekoInput.IPlayerUIActions
 
     public void OnClick(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.currentController != Controllers.Controller) return;
+        if (GameManager.Instance.currentScheme != Controllers.Controller) return;
 
         if (context.performed)
         {

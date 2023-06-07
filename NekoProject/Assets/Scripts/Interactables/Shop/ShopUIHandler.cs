@@ -28,8 +28,21 @@ public class ShopUIHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        EventSystem.current.SetSelectedGameObject(shopSlots[0].gameObject);
+        GameManager.Instance.ControllerConected += ControllerConected;
+        if(GameManager.Instance.currentScheme == Controllers.Controller) EventSystem.current.SetSelectedGameObject(shopSlots[0].gameObject);
         lastSelectedSlot = shopSlots[0];
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.ControllerConected -= ControllerConected;
+    }
+
+    void ControllerConected()
+    {
+        if (EventSystem.current.alreadySelecting) return;
+
+        EventSystem.current.SetSelectedGameObject(shopSlots[0].gameObject);
     }
 
     public void Buy()

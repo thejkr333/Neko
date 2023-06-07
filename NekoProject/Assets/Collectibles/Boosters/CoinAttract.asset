@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CoinAttract
   m_EditorClassIdentifier: 
   ID: 2
-  Sprite: {fileID: 21300000, guid: 5e19e7e7d7d154644ae1bc96d75ebcf5, type: 3}
+  Sprite: {fileID: 21300000, guid: e83f9eaa8e4679349ac2dac50859298b, type: 3}

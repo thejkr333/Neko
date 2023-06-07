@@ -33,7 +33,7 @@ public class Shield : MonoBehaviour, NekoInput.IShieldActions
     void MoveToCursor()
     {       
         Vector3 _position;
-        if(GameManager.Instance.currentController == Controllers.KbMouse)
+        if(GameManager.Instance.currentScheme == Controllers.KbMouse)
         {
             inputPos = Mouse.current.position.ReadValue();
             inputPos = Camera.main.ScreenToWorldPoint(new Vector3(inputPos.x, inputPos.y, Mathf.Abs(Camera.main.transform.position.z)));

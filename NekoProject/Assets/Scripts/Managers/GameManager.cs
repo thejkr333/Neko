@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     [Header("BOOSTERS")]
     public SerializedDictionary<Boosters, bool> EquippedBoosters = new();
 
-    public Controllers currentController;
+    public Controllers currentScheme;
     public Action EnablePlayerInput, DisablePlayerInput; 
     public Action EnablePixieInput, DisablePixieInput; 
     public Action EnableUIInput, DisableUIInput;
@@ -76,12 +76,12 @@ public class GameManager : MonoBehaviour
     {
         if (input.currentControlScheme == "Controller")
         {
-            currentController = Controllers.Controller;
+            currentScheme = Controllers.Controller;
             ControllerConected?.Invoke();
         }
         else
         {
-            currentController = Controllers.KbMouse;
+            currentScheme = Controllers.KbMouse;
         }
     }
 
