@@ -24,17 +24,22 @@ public class MainMenuController : MonoBehaviour, NekoInput.IPlayerUIActions
     }
     public void NewGame()
     {
+        AudioManager.Instance.PlaySound("Button");
+        AudioManager.Instance.PlayMusic("Game_1");
         GameManager.Instance.NewGame();
         GameManager.Instance.LoadScene("BosqueTurquesa");
     }
 
     public void LoadGame()
     {
+        AudioManager.Instance.PlayMusic("Game_1");
+        AudioManager.Instance.PlaySound("Button");
         GameManager.Instance.LoadGame();
     }
 
     public void QuitGame()
     {
+        AudioManager.Instance.PlaySound("Button");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -44,12 +49,14 @@ public class MainMenuController : MonoBehaviour, NekoInput.IPlayerUIActions
 
     public void Settings()
     {
+        AudioManager.Instance.PlaySound("Button");
         mainMenu.SetActive(false);
         settings.SetActive(true);
     }
 
     public void MainMenu()
     {
+        AudioManager.Instance.PlaySound("Button");
         mainMenu.SetActive(true);
         settings.SetActive(false);
         EventSystem.current.SetSelectedGameObject(newGameButton);

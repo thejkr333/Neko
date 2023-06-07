@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] BoosterData[] boosterData;
 
     [Header("BOOSTERS")]
-    public SerializedDictionary<Boosters, bool> EquippedBoosters = new();
+    public Dictionary<Boosters, bool> EquippedBoosters = new();
     public Action ExtraHealthOn;
 
     public Controllers currentScheme;
@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public Action EnableUIInput, DisableUIInput;
 
     public Action ControllerConected;
+
+    public string FinalText;
 
     private void Awake()
     {
@@ -80,11 +82,13 @@ public class GameManager : MonoBehaviour
     {
         if (input.currentControlScheme == "Controller")
         {
+            Cursor.visible = false;
             currentScheme = Controllers.Controller;
             ControllerConected?.Invoke();
         }
         else
         {
+            Cursor.visible = true;
             currentScheme = Controllers.KbMouse;
         }
     }
@@ -107,8 +111,16 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.sceneLoaded += LoadSceneAssetsAndPlayer;
-        LoadScene("BosqueTurquesa");
+        if (PlayerPrefs.HasKey("Money"))
+        {
+            SceneManager.sceneLoaded += LoadSceneAssetsAndPlayer;
+            LoadScene("BosqueTurquesa");
+        }
+        else
+        {
+            NewGame();
+            LoadScene("BosqueTurquesa");
+        }
     }
 
     void LoadSceneAssetsAndPlayer(Scene scene, LoadSceneMode loadSceneMode)
@@ -121,16 +133,16 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= LoadSceneAssetsAndPlayer;
     }
 
-    public SerializedDictionary<Items, bool> GetItemsInfo()
+    public Dictionary<Items, bool> GetItemsInfo()
     {
         return DataSaving.ItemsOwned;
     }
-    public void SetItemsInfo(ref SerializedDictionary<Items, bool> itemsInfo)
+    public void SetItemsInfo(ref Dictionary<Items, bool> itemsInfo)
     {
         DataSaving.ItemsOwned = itemsInfo;
     }
 
-    public SerializedDictionary<Boosters, bool> GetUnlockedBoostersInfo()
+    public Dictionary<Boosters, bool> GetUnlockedBoostersInfo()
     {
         return DataSaving.BoostersOwned;
     }
@@ -151,7 +163,7 @@ public class GameManager : MonoBehaviour
         return DataSaving.BoostersEquipped;
     }
 
-    public void SetBoostersInfo(ref SerializedDictionary<Boosters, bool> boostersInfo, Boosters[] equippedBoosters)
+    public void SetBoostersInfo(ref Dictionary<Boosters, bool> boostersInfo, Boosters[] equippedBoosters)
     {
         DataSaving.BoostersOwned = boostersInfo;
         DataSaving.BoostersEquipped = equippedBoosters;
@@ -211,11 +223,16 @@ public class GameManager : MonoBehaviour
         return SceneManager.GetActiveScene().name;
     }
 
-    internal void PlayerDied()
+    public void PlayerDied()
     {
-        DisablePlayerInputs();
-        DisablePixieInputs();
-        DisableUIInputs();
+        LoadScene("End");
+        FinalText = "Seems like it was as little bit too difficult for you, wanna try again?";
+    }
+
+    public void BossDefeated()
+    {
+        LoadScene("End");
+        FinalText = "Wow you are complete pro, wanna try again?";
     }
 }
 
@@ -223,8 +240,8 @@ public class GameManager : MonoBehaviour
 public class DataSaving
 {
     public int Money;
-    public SerializedDictionary<Items, bool> ItemsOwned;
-    public SerializedDictionary<Boosters, bool> BoostersOwned;
+    public Dictionary<Items, bool> ItemsOwned;
+    public Dictionary<Boosters, bool> BoostersOwned;
     public Boosters[] BoostersEquipped = new Boosters[3];
     public float LastPlayerPosX, LastPlayerPosY;
 

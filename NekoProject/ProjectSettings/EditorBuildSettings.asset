@@ -11,8 +11,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 34e200842edb6e6438b630173a0848cf
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/NIVELES FINALES/BosqueTurquesa.unity
-    guid: 6bb7075ec37d6564a9f1f51cf1e33b10
+    guid: 51302b27d560bfe4fabbc363455fb87a
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 48920cd0682f9c64a896e8f0e2be35b6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 84a1b004976122e41a8b7be4a4db313b, type: 2}

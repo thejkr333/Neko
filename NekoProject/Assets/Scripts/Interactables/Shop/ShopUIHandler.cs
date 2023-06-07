@@ -20,6 +20,7 @@ public class ShopUIHandler : MonoBehaviour
 
     public void HighLight(ShopSlot shopSlot)
     {
+        AudioManager.Instance.PlaySound("Button");
         lastSelectedSlot = shopSlot;
         highLightBorder.transform.position = shopSlot.transform.position;
         descriptionText.text = shopSlot.Description;
@@ -47,6 +48,7 @@ public class ShopUIHandler : MonoBehaviour
 
     public void Buy()
     {
+        AudioManager.Instance.PlaySound("Button");
         PlayerStorage playerStorage = FindObjectOfType<PlayerStorage>();
         if (!playerStorage.BoostersUnlockInfo[lastSelectedSlot.Booster] && playerStorage.Coins >= lastSelectedSlot.Cost)
         {
@@ -56,6 +58,7 @@ public class ShopUIHandler : MonoBehaviour
 
     public void Back()
     {
+        AudioManager.Instance.PlaySound("Button");
         GameManager.Instance.EnablePlayerInputs();
         GameManager.Instance.DisableUIInputs();
         gameObject.SetActive(false);

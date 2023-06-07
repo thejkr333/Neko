@@ -33,10 +33,12 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
     bool mapOn;
 
     [Header("SHIELD")]
+    [SerializeField] GameObject shield;
     [SerializeField] Image shieldCDImg;
     float shieldTimeCD, shieldTimer;
 
     [Header("ANTMAN")]
+    [SerializeField] GameObject antman;
     [SerializeField] Image antmanCDImg;
     float antmanTimeCD, antmanTimer;
 
@@ -131,6 +133,13 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
 
     void UpdateShieldCD()
     {
+        if (!playerStorage.ItemsUnlockedInfo[Items.Shield])
+        {
+            shield.SetActive(false);
+            return;
+        }
+        else shield.SetActive(true);
+
         shieldTimer = playerController.shieldCDTimer;
 
         if (shieldTimer <= 0)
@@ -144,6 +153,13 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
 
     void UpdateAntmanCD()
     {
+        if (!playerStorage.ItemsUnlockedInfo[Items.Antman])
+        {
+            antman.SetActive(false);
+            return;
+        }
+        else antman.SetActive(true);
+
         antmanTimer = playerController.antmanTimer;
 
         if (antmanTimer <= 0)
@@ -197,10 +213,10 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
         Time.timeScale = inventoryOpen ? 0 : 1;
         inventory.SetActive(inventoryOpen);
 
-        if(!inventoryOpen)
+        if(inventoryOpen)
             for (int i = 0; i < inventoryGameobjects.Length; i++)
             {
-                if (i == 0) inventoryGameobjects[i].gameObject.SetActive(true);
+                if (i == 0) inventoryGameobjects[i].SetActive(true);
                 else inventoryGameobjects[i].SetActive(false);
             }
 

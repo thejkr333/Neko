@@ -7,8 +7,8 @@ using UnityEngine;
 public class PlayerStorage : MonoBehaviour
 {
     public int Coins { get; private set; }
-    public SerializedDictionary<Items, bool> ItemsUnlockedInfo = new();
-    public SerializedDictionary<Boosters, bool> BoostersUnlockInfo = new();
+    public Dictionary<Items, bool> ItemsUnlockedInfo = new();
+    public Dictionary<Boosters, bool> BoostersUnlockInfo = new();
     Boosters[] equippedBoosters = new Boosters[3];
 
     public Action<Items> ItemUnlocked;

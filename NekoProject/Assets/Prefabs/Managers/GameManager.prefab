@@ -47,16 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DataSaving:
     Money: 0
-    ItemsOwned:
-      m_Keys: 00000000010000000200000003000000040000000500000006000000
-      m_Values: 00000000000000
-    BoostersOwned:
-      m_Keys: 010000000200000003000000
-      m_Values: 000000
     BoostersEquipped: 000000000000000000000000
     LastPlayerPosX: 0
     LastPlayerPosY: 0
   Cheating: 0
+  InBossFight: 0
   itemData:
   - {fileID: 11400000, guid: 2963a4c54ea35c24ea720e41f5700da2, type: 2}
   - {fileID: 11400000, guid: 4b54962956e8a9840be9f08b1a867c85, type: 2}
@@ -69,10 +64,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b5b8d2b16bec3a949b00240a7bd355cf, type: 2}
   - {fileID: 11400000, guid: bb1ea9bdf4bf165428c13486bd90b815, type: 2}
   - {fileID: 11400000, guid: a73d6a33d5e77ea4481ae0713e193a79, type: 2}
-  EquippedBoosters:
-    m_Keys: 
-    m_Values: 
-  currentController: 0
+  currentScheme: 0
+  FinalText: 
 --- !u!114 &959475049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +192,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0a7908bb-5ba1-4456-a3cf-6648e8b05872
     m_ActionName: Menu/Map[/Keyboard/m,/DualShock4GamepadHID/touchpadButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 375059f8-e092-4527-997a-5392dda79be0
+    m_ActionName: PlayerUI/Close[/DualShock4GamepadHID/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

@@ -10,6 +10,7 @@ public class Item : Interactable
     {
         if(player.TryGetComponent(out PlayerStorage playerStorage))
         {
+            AudioManager.Instance.PlaySound("Save", 2);
             playerStorage.UnlockItem(ID);
             Destroy(gameObject);
         }

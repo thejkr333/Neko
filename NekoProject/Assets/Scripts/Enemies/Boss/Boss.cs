@@ -287,7 +287,7 @@ public class Boss : MonoBehaviour
                 clon.transform.position = leftEnemySpawnPoint.position;
             }
             rightSpawnPoint = !rightSpawnPoint;
-            yield return new WaitForSeconds(15);
+            yield return new WaitForSeconds(7);
         }
 
         for (int i = 0; i < 4; i++)
@@ -302,7 +302,7 @@ public class Boss : MonoBehaviour
                 clon.transform.position = leftEnemySpawnPoint.position;
             }
             rightSpawnPoint = !rightSpawnPoint;
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(5);
         }
 
         for (int i = 0; i < 10; i++)
@@ -318,7 +318,7 @@ public class Boss : MonoBehaviour
                 clon.transform.position = leftEnemySpawnPoint.position;
             }
             rightSpawnPoint = !rightSpawnPoint;
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2);
         }
 
         yield return new WaitUntil(() => FindObjectsOfType<Enemy>().Length == 0);
@@ -336,6 +336,7 @@ public class Boss : MonoBehaviour
         if (currentLife <= 0)
         {
             anim.SetTrigger("Die");
+            GameManager.Instance.BossDefeated();
             return;
         }
 

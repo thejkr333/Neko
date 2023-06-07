@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 464, y: -291}
+  m_AnchoredPosition: {x: 464, y: -336}
   m_SizeDelta: {x: 446, y: 53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &216180762
@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 363511797}
   - component: {fileID: 363511796}
   - component: {fileID: 363511795}
+  - component: {fileID: 832673357}
   m_Layer: 0
   m_Name: Attendant
   m_TagString: Untagged
@@ -179,7 +180,7 @@ MonoBehaviour:
   highLightGO: {fileID: 2009988073}
   KbText: Press E to buy
   ControllerText: Press O to buy
-  canvasTienda: {fileID: 1779998583}
+  canvasTienda: {fileID: 1451408329}
 --- !u!61 &363511795
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -193,6 +194,32 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
+  m_Offset: {x: -5.017845, y: -1.6441612}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 10, y: 10}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 15.03569, y: 5.2883224}
+  m_EdgeRadius: 0
+--- !u!61 &832673357
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363511794}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +231,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 2}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!1 &426457836
 GameObject:
@@ -296,8 +323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c4427d59e9e5f4ea51a5fc524e4d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Description: Item 3
-  Cost: 3
+  Description: I'm pretty handy. Don't loose me!
+  Cost: 30
   Booster: 3
 --- !u!114 &426457841
 MonoBehaviour:
@@ -312,18 +339,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 1200063035}
+    m_SelectOnLeft: {fileID: 1872528901}
+    m_SelectOnRight: {fileID: 1200063035}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.4009434, b: 0.979978, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -423,8 +450,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: E para comprar
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c41a7ba5d65f1b4ba9f716f806e3c53, type: 2}
+  m_sharedMaterial: {fileID: 4756676224779862806, guid: 1c41a7ba5d65f1b4ba9f716f806e3c53, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -448,7 +475,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3
+  m_fontSize: 2.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -657,8 +684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c4427d59e9e5f4ea51a5fc524e4d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Description: Item 1
-  Cost: 1
+  Description: Tired of picking up coins? I`ll do it for you!
+  Cost: 10
   Booster: 2
 --- !u!114 &791848900
 MonoBehaviour:
@@ -673,18 +700,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1200063035}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1872528901}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.4009434, b: 0.979978, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -962,7 +989,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 464, y: 400}
+  m_AnchoredPosition: {x: 464, y: 346}
   m_SizeDelta: {x: 446, y: 53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &981230305
@@ -1094,18 +1121,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1200063035}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.4009434, b: 0.979978, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1255,18 +1282,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 426457841}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 426457841}
+    m_SelectOnRight: {fileID: 1179626062}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.4009434, b: 0.979978, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1919,7 +1946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highLightGO: {fileID: 2097101063}
   KbText: Press E to leave shop
-  ControllerText: Press = to leave shop
+  ControllerText: Press O to leave shop
   tpPosition: {fileID: 0}
 --- !u!1 &1558086608
 GameObject:
@@ -2190,8 +2217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c4427d59e9e5f4ea51a5fc524e4d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Description: Item 2
-  Cost: 2
+  Description: Now we are talking! Where are those monsters?
+  Cost: 15
   Booster: 1
 --- !u!114 &1872528901
 MonoBehaviour:
@@ -2206,18 +2233,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 1200063035}
+    m_SelectOnLeft: {fileID: 791848900}
+    m_SelectOnRight: {fileID: 426457841}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.4009434, b: 0.979978, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2277,7 +2304,7 @@ RectTransform:
   m_GameObject: {fileID: 2009988073}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.3788, y: 2.3788, z: 2.3788}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 478595442}
@@ -2286,7 +2313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.02, y: 1.4299998}
+  m_AnchoredPosition: {x: 0.02, y: 4.62}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2009988076
@@ -2588,8 +2615,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299969309628167919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1059, y: -3.43, z: 0}
-  m_LocalScale: {x: 18.443108, y: 2.3194, z: 1}
+  m_LocalPosition: {x: 0.1059, y: -3.6493, z: 0}
+  m_LocalScale: {x: 18.443108, y: 2.4406192, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1299969310220747818}
@@ -3240,6 +3267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1299969310220747818}
+  - component: {fileID: 1375484409}
   m_Layer: 0
   m_Name: Tienda
   m_TagString: Untagged
@@ -3256,7 +3284,7 @@ Transform:
   m_GameObject: {fileID: 1299969310220747819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.841, y: 29.21, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5924788, y: 1.5924788, z: 1.5924788}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4459046785156716316}
@@ -3271,6 +3299,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1375484409
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299969310220747819}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.68211263, y: 5.058567}
+      - {x: -9.341034, y: 5.0155907}
+      - {x: -9.352923, y: -4.3901052}
+      - {x: 9.352923, y: -4.3218946}
+      - {x: 9.238719, y: 5.015591}
 --- !u!1 &1299969310303955560
 GameObject:
   m_ObjectHideFlags: 0

@@ -287,7 +287,7 @@ MonoBehaviour:
   attackDistance: 10
   damage: 1
   state: 0
-  coinsToSpawn: 3
+  coinsToSpawn: 5
   canMove: 0
   attackSpeed: 1
   patrolInterval: {x: 1, y: 3}
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6382152cd6a050541919469a41a020a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 4
   knockbackForce: 200
   currentHealth: 0
   coinPrefab: {fileID: 2744260340947091095, guid: 8255ce0106777e040860d5504dbafb57, type: 3}

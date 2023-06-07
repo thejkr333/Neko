@@ -41,10 +41,12 @@ public class HealthSystem : MonoBehaviour
 
         if (TryGetComponent(out PlayerController playerController))
         {
+            AudioManager.Instance.PlaySound("Hiss");
             playerController.GetHit();
         }
         else if(TryGetComponent(out Enemy enemy))
         {
+            AudioManager.Instance.PlaySound("EnemyHit");
             enemy.DisableMovement();
             enemy.EnableMovement(.3f);
         }

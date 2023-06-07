@@ -44,6 +44,10 @@ public class CameraManager : MonoBehaviour
     {
         currentCameraState = cameraState;
         if(fade) StartCoroutine(Co_Transition());
+        else
+        {
+            anim.Play(currentCameraState.ToString());
+        }
     }
 
     IEnumerator Co_Transition()

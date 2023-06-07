@@ -14,6 +14,7 @@ public class Settings : MonoBehaviour
         musicSlider.value = AudioManager.Instance.MusicVolume;
     }
 
+
     public void SFXVolume(float volume)
     {
         AudioManager.Instance.SetSFXVolume(volume);
@@ -26,8 +27,7 @@ public class Settings : MonoBehaviour
 
     public void ToggleMute()
     {
+        AudioManager.Instance.PlaySound("Button");
         AudioManager.Instance.ToggleMute();
     }
-
-    private void OnEnable() => EventSystem.current.SetSelectedGameObject(sfxSlider.gameObject);
 }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor.SceneManagement;
 
 [RequireComponent(typeof(Collider2D))]
 public abstract class Interactable : MonoBehaviour

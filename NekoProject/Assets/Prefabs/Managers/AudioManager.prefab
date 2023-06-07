@@ -120,6 +120,26 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     Loop: 0
+  - Name: Button
+    Clip: {fileID: 8300000, guid: 1e282e34b3ce2aa4e97ca192cac2a204, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Save
+    Clip: {fileID: 8300000, guid: 30086208c8731134184593ec53215e94, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Hiss
+    Clip: {fileID: 8300000, guid: dfd38c5d54fc2804f991b7e847a80160, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: EnemyHit
+    Clip: {fileID: 8300000, guid: 69c84817920d43a48b24d936406e8519, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
   Music:
   - Name: BG_noises
     Clip: {fileID: 8300000, guid: dc3883ab075ee2744a328658c9e7ff46, type: 3}
