@@ -60,6 +60,11 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     Loop: 0
+  - Name: Attack_ShootingEnemy
+    Clip: {fileID: 8300000, guid: bf5e9f7790cf37149bed846af7432f42, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
   Music:
   - Name: BG_noises
     Clip: {fileID: 8300000, guid: dc3883ab075ee2744a328658c9e7ff46, type: 3}

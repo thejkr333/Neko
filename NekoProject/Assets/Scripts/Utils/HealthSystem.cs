@@ -19,7 +19,13 @@ public class HealthSystem : MonoBehaviour
 
     public void GetHurt(int damage, Vector2 direction)
     {
-        currentHealth -= damage;
+        if(TryGetComponent(out PlayerUI playerUI)) 
+        {
+            if (playerUI.ExtraHealthOn) playerUI.LooseExtraHealth();
+            else currentHealth -= damage;
+        }
+        else currentHealth -= damage;
+
         Knockback(direction.normalized);
 
         if (currentHealth <= 0)

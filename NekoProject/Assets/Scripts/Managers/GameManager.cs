@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     [Header("BOOSTERS")]
     public SerializedDictionary<Boosters, bool> EquippedBoosters = new();
+    public Action ExtraHealthOn;
 
     public Controllers currentScheme;
     public Action EnablePlayerInput, DisablePlayerInput; 
@@ -134,6 +135,7 @@ public class GameManager : MonoBehaviour
     public void EquipBooster(Boosters booster)
     {
         EquippedBoosters[booster] = true;
+        if (booster == Boosters.ExtraHealth) ExtraHealthOn?.Invoke();
     }
 
     public void UnequipBooster(Boosters booster)

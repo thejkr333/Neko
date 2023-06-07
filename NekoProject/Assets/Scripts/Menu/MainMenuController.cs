@@ -108,6 +108,10 @@ public class MainMenuController : MonoBehaviour, NekoInput.IPlayerUIActions
     {
 
     }
+    public void OnClose(InputAction.CallbackContext context)
+    {
+        
+    }
     #endregion
 
     public void OnClick(InputAction.CallbackContext context)
@@ -125,6 +129,6 @@ public class MainMenuController : MonoBehaviour, NekoInput.IPlayerUIActions
                 }
             }
         }
-    } 
+    }
 }
 

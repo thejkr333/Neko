@@ -76,6 +76,82 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &79996793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79996794}
+  - component: {fileID: 79996796}
+  - component: {fileID: 79996795}
+  m_Layer: 0
+  m_Name: ExtraHealth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &79996794
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79996793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9130882535014488873}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.8542528, y: 0.37669864}
+  m_AnchorMax: {x: 0.8542528, y: 0.37669864}
+  m_AnchoredPosition: {x: 127, y: 4}
+  m_SizeDelta: {x: 94, y: 91}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &79996796
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79996793}
+  m_CullTransparentMesh: 1
+--- !u!114 &79996795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79996793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 07daf3f45a27b9c49af3f6c1b54b4290, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &252002575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2600,6 +2676,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9130882535947107511}
     - target: {fileID: 1955881978323523524, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: ExtraHealth
+      value: 
+      objectReference: {fileID: 79996795}
+    - target: {fileID: 1955881978323523524, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: moneyTextItems
       value: 
       objectReference: {fileID: 7319432423068973786}
@@ -3041,7 +3121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4849377051524224378}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1203607045}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &574178775282457397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7089859401467420088, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -3090,7 +3182,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1282326719608502714}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 898264053}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &898264053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3163,7 +3267,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 282947849095442034}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 548127245}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &548127245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3240,7 +3356,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 293965983320484867}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 372512621}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1005580119649773082 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7523070524772130967, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -3322,7 +3450,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2315489592219901801}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1459959646}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1459959646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3415,7 +3555,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1043387781575551567}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1472003216}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1899506011409432471 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9209790479651928346, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -3486,7 +3638,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1939900227188383152}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1972255765}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1972255765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3563,7 +3727,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8263440084634812727}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 27033897}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2310308211694694883 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5015888560307353454, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -3648,7 +3824,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2380807686200934092}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 852272681}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2380807686200934092 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4943134880804173889, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -3719,7 +3907,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2310308211694694883}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1972255768}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1972255768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3834,7 +4034,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7355508046108081217}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 356650001}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3631807440546834344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6338003532901277989, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -3897,7 +4109,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6043499080072435997}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1389219696}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3633004396299334380 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6339061932727792737, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -3968,7 +4192,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1005580119649773082}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1461490720}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1461490720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4042,7 +4278,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3019519342357497238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1280565212}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1280565212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4119,7 +4367,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8621787084597803507}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 53713793}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5610213412756379329 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2902748483995013196, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -4190,7 +4450,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3778065425076704029}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2136865155}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2136865155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4253,7 +4525,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5885464244971943401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1122508158}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1122508158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4346,7 +4630,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5610213412756379329}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1972255767}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6489272977670279281 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4583923788805986044, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -4395,7 +4691,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8455191483139552879}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1071364580}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1071364580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4458,7 +4766,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3054927388342218745}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1270265818}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1270265818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4532,7 +4852,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1899506011409432471}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1972255766}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1972255766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4653,7 +4985,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3633004396299334380}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 132522366}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8093755828762780709 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1567557274666099368, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -4702,7 +5046,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 179076302668013391}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1972255769}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1972255769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4765,7 +5121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6772353022925256154}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1176027182}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1176027182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4850,7 +5218,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7111243833409469806}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1921003983}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1921003983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4938,7 +5318,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1020133423862781944}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 159421563}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8709452186362308556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2111600658241397057, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
@@ -4987,7 +5379,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2886089571285320921}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 703263102}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &703263102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5064,7 +5468,24 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2568006727938399210}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6844196275386538830}
+        m_TargetAssemblyTypeName: BoostersUIHandler, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 692073425}
+          m_ObjectArgumentAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!224 &9130882535014488873 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1955881977725918628, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+  m_PrefabInstance: {fileID: 7319432422182504077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9130882535947107511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1955881978403994170, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}

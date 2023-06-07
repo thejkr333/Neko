@@ -18,7 +18,7 @@ public class ShopUIHandler : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void HighLight(ShopSlot shopSlot)
+    public void HighLight(ShopSlot shopSlot)
     {
         lastSelectedSlot = shopSlot;
         highLightBorder.transform.position = shopSlot.transform.position;

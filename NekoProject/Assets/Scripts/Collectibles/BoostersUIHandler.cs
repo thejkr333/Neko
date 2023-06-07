@@ -44,7 +44,7 @@ public class BoostersUIHandler : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(nonEquippedBoostersPosition[0].gameObject);
     }
 
-    void Click(ItemSlot itemClicked)
+    public void Click(ItemSlot itemClicked)
     {
         if(!firstClicked)
         {

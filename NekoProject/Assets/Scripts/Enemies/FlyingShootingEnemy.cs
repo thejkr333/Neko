@@ -40,6 +40,7 @@ public class FlyingShootingEnemy : FlyingEnemy
 
     public void CreateBullet()
     {
+        AudioManager.Instance.PlaySound("Attack_ShootingEnemy");
         GameObject clon = Instantiate(projectilePrefab);
         clon.transform.position = shootingPoint.position;
         if (clon.TryGetComponent(out Projectile projectile))

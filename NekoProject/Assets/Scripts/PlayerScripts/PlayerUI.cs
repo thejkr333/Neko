@@ -14,7 +14,9 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
     HealthSystem healthSystem;
 
     [SerializeField] Image[] healthOrbs;
+    [SerializeField] Image ExtraHealth;
     [SerializeField] TMP_Text moneyText;
+    public bool ExtraHealthOn;
 
     [Header("MENU")]
     [SerializeField] GameObject menu;
@@ -62,6 +64,7 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
         map.SetActive(false);
         inventory.SetActive(false);
         menu.SetActive(false);
+        ExtraHealth.enabled = false;
 
         //Set menu child objects
         for (int i = 1; i < inventoryGameobjects.Length; i++)
@@ -80,6 +83,8 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
         playerStorage.ItemUnlocked += AddItemToInventory;
         playerStorage.BoosterUnlocked += AddBoosterToPool;
         playerStorage.BoosterEquipped += EquipBooster;
+
+        GameManager.Instance.ExtraHealthOn += ActivateExtraHealth;
     }
 
     private void Start()
@@ -110,6 +115,18 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
 
         UpdateShieldCD();
         UpdateAntmanCD();
+    }
+
+    void ActivateExtraHealth()
+    {
+        ExtraHealthOn = true;
+        ExtraHealth.enabled = true;
+    }
+
+    public void LooseExtraHealth()
+    {
+        ExtraHealthOn = false;
+        ExtraHealth.enabled = false;
     }
 
     void UpdateShieldCD()
@@ -395,5 +412,25 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
             inventory.SetActive(false);
             map.SetActive(false);
         }
+    }
+
+    public void OnClose(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (menuOpen) CloseMenu();
+            else if (inventoryOpen) CloseInventory();
+        }
+    }
+
+    private void CloseInventory()
+    {
+        inventoryOpen = false;
+        Time.timeScale = 1;
+        inventory.SetActive(false);
+
+        GameManager.Instance.EnablePlayerInputs();
+        GameManager.Instance.EnablePixieInputs();
+        GameManager.Instance.DisableUIInputs();
     }
 }

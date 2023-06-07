@@ -540,6 +540,15 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""375059f8-e092-4527-997a-5392dda79be0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -773,6 +782,28 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                     ""action"": ""PreviousPage"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59938ce9-f34b-44b9-a76c-b27bbe8e78fa"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d8c0f0c-3289-4c9e-89d5-cae966d4b9c9"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -935,6 +966,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
         m_PlayerUI_Navigate = m_PlayerUI.FindAction("Navigate", throwIfNotFound: true);
         m_PlayerUI_NextPage = m_PlayerUI.FindAction("NextPage", throwIfNotFound: true);
         m_PlayerUI_PreviousPage = m_PlayerUI.FindAction("PreviousPage", throwIfNotFound: true);
+        m_PlayerUI_Close = m_PlayerUI.FindAction("Close", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_ToggleMenu = m_Menu.FindAction("ToggleMenu", throwIfNotFound: true);
@@ -1170,6 +1202,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerUI_Navigate;
     private readonly InputAction m_PlayerUI_NextPage;
     private readonly InputAction m_PlayerUI_PreviousPage;
+    private readonly InputAction m_PlayerUI_Close;
     public struct PlayerUIActions
     {
         private @NekoInput m_Wrapper;
@@ -1182,6 +1215,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
         public InputAction @Navigate => m_Wrapper.m_PlayerUI_Navigate;
         public InputAction @NextPage => m_Wrapper.m_PlayerUI_NextPage;
         public InputAction @PreviousPage => m_Wrapper.m_PlayerUI_PreviousPage;
+        public InputAction @Close => m_Wrapper.m_PlayerUI_Close;
         public InputActionMap Get() { return m_Wrapper.m_PlayerUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1215,6 +1249,9 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                 @PreviousPage.started -= m_Wrapper.m_PlayerUIActionsCallbackInterface.OnPreviousPage;
                 @PreviousPage.performed -= m_Wrapper.m_PlayerUIActionsCallbackInterface.OnPreviousPage;
                 @PreviousPage.canceled -= m_Wrapper.m_PlayerUIActionsCallbackInterface.OnPreviousPage;
+                @Close.started -= m_Wrapper.m_PlayerUIActionsCallbackInterface.OnClose;
+                @Close.performed -= m_Wrapper.m_PlayerUIActionsCallbackInterface.OnClose;
+                @Close.canceled -= m_Wrapper.m_PlayerUIActionsCallbackInterface.OnClose;
             }
             m_Wrapper.m_PlayerUIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1243,6 +1280,9 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                 @PreviousPage.started += instance.OnPreviousPage;
                 @PreviousPage.performed += instance.OnPreviousPage;
                 @PreviousPage.canceled += instance.OnPreviousPage;
+                @Close.started += instance.OnClose;
+                @Close.performed += instance.OnClose;
+                @Close.canceled += instance.OnClose;
             }
         }
     }
@@ -1344,6 +1384,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
         void OnNavigate(InputAction.CallbackContext context);
         void OnNextPage(InputAction.CallbackContext context);
         void OnPreviousPage(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
