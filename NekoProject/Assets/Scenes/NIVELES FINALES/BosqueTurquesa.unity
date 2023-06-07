@@ -43092,7 +43092,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1594730933}
         m_TargetAssemblyTypeName: PlayerUI, Assembly-CSharp
         m_MethodName: CloseMenu
         m_Mode: 1
@@ -43541,14 +43541,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player & Cam
       objectReference: {fileID: 0}
-    - target: {fileID: 387016080464923945, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9130882534033757047, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9130882535614943561, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
       propertyPath: menu
       value: 
@@ -43560,6 +43552,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 387016080710016745, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
   m_PrefabInstance: {fileID: 1594730931}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1594730933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9130882535614943561, guid: 4fb87a2869ec44c48af20bebeb8b5f18, type: 3}
+  m_PrefabInstance: {fileID: 1594730931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78d7cded79754d409b28cdbdb43a77d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1611533575
 GameObject:
   m_ObjectHideFlags: 0

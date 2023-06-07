@@ -373,6 +373,10 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
             //input_hor = Input.GetAxisRaw("Horizontal");
             input_hor = controlsInput.Player.Movement.ReadValue<Vector2>().x;
 
+        if (input_hor > .05f) input_hor = 1;
+        else if (input_hor < -.05f) input_hor = -1;
+        else input_hor = 0;
+
         float currentSpeed;
         if (Antman) currentSpeed = antmanSpeed;
         else currentSpeed = speed;
