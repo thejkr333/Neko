@@ -82,7 +82,8 @@ public class AudioManager : MonoBehaviour
         musicSource.volume = 1f;
         musicSource.pitch = 1f;
 
-        PlayMusic("BG_noises");
+        if (PlayerPrefs.HasKey("SFXVolume")) SfxVolume = PlayerPrefs.GetFloat("SFXVolume"); else SfxVolume = 1f;
+        if (PlayerPrefs.HasKey("MusicVolume")) MusicVolume = PlayerPrefs.GetFloat("MusicVolume"); else MusicVolume = 1f;
     }
 
     #region SFX

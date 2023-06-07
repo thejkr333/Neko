@@ -2832,6 +2832,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3962807743555226167}
     - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
+      propertyPath: attackFrecuency
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975279850679145471, guid: e7000de9c47322f4f985c18fbde78aa9, type: 3}
       propertyPath: jumpAttackKnockbackForce
       value: 1200
       objectReference: {fileID: 0}

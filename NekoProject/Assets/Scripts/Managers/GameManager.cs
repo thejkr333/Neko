@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -26,7 +27,9 @@ public class GameManager : MonoBehaviour
     public Controllers currentController;
     public Action EnablePlayerInput, DisablePlayerInput; 
     public Action EnablePixieInput, DisablePixieInput; 
-    public Action EnableUIInput, DisableUIInput; 
+    public Action EnableUIInput, DisableUIInput;
+
+    public Action ControllerConected;
 
     private void Awake()
     {
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
         if (input.currentControlScheme == "Controller")
         {
             currentController = Controllers.Controller;
+            ControllerConected?.Invoke();
         }
         else
         {

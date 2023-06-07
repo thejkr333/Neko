@@ -286,7 +286,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
     {
         if (!playerStorage.ItemsUnlockedInfo[Items.Antman]) return;
 
-        if (wallSliding || dashing || attacking || shielding) return;
+        if (wallSliding || dashing || attacking || shielding || !canAntman) return;
 
         if (context.started)
         {
