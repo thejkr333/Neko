@@ -1097,7 +1097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: Item 3
   Cost: 3
-  Booster: 0
+  Booster: 3
 --- !u!1 &444691291
 GameObject:
   m_ObjectHideFlags: 3
@@ -1900,7 +1900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: Item 1
   Cost: 1
-  Booster: 0
+  Booster: 2
 --- !u!4 &825376483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5158325738975921295, guid: 4dcff54279a46f5408fb3be81210f5db, type: 3}
@@ -5309,7 +5309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: Item 2
   Cost: 2
-  Booster: 0
+  Booster: 1
 --- !u!1 &1879362393
 GameObject:
   m_ObjectHideFlags: 0

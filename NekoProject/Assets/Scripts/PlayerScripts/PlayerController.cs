@@ -200,6 +200,8 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
             if (grounded) Jump();
             else if (wallSliding) WallSlideJump();
             else if (playerStorage.ItemsUnlockedInfo[Items.DoubleJump] && canDoubleJump) DoubleJump();
+
+            AudioManager.Instance.PlaySound("Jump");
         }
         else if (context.canceled)
         {

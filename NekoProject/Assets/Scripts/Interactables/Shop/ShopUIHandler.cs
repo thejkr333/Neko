@@ -48,7 +48,7 @@ public class ShopUIHandler : MonoBehaviour
     public void Buy()
     {
         PlayerStorage playerStorage = FindObjectOfType<PlayerStorage>();
-        if(playerStorage.Coins >= lastSelectedSlot.Cost)
+        if (!playerStorage.BoostersUnlockInfo[lastSelectedSlot.Booster] && playerStorage.Coins >= lastSelectedSlot.Cost)
         {
             playerStorage.UnlockBooster(lastSelectedSlot.Booster);
         }

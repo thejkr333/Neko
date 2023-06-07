@@ -29,4 +29,9 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         parent.JumpAttack();
     }
+
+    public void Land()
+    {
+        AudioManager.Instance.PlaySound("Land");
+    }
 }

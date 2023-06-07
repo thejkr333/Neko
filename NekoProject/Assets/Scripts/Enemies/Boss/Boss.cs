@@ -58,6 +58,7 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlayMusic("BossFight");
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         cachedTr = transform;
