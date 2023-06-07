@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
 
     void Rebound()
     {
+        AudioManager.Instance.PlaySound("ShieldREbound");
         direction *= -1;
         hasRebounded = true;
     }

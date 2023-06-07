@@ -51,7 +51,7 @@ MonoBehaviour:
     Pitch: 1
     Loop: 1
   - Name: TP
-    Clip: {fileID: 8300000, guid: 381f5addfb807724d97560007a30bacc, type: 3}
+    Clip: {fileID: 8300000, guid: 57a42ddfdd49a484fb81da4cf1125e19, type: 3}
     Volume: 1
     Pitch: 1
     Loop: 0
@@ -61,7 +61,32 @@ MonoBehaviour:
     Pitch: 1
     Loop: 0
   - Name: Attack_ShootingEnemy
-    Clip: {fileID: 8300000, guid: bf5e9f7790cf37149bed846af7432f42, type: 3}
+    Clip: {fileID: 8300000, guid: 1574b233838510247b02caf42d79a8a2, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Attack_FlyingEnemy
+    Clip: {fileID: 8300000, guid: a41baea1d005d5c47995e14b09a6172e, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Die_FlyingEnemy
+    Clip: {fileID: 8300000, guid: 7a1043bab44598946a41a79feee527de, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Die_ShootingEnemy
+    Clip: {fileID: 8300000, guid: d3aae510375793e48b29f5e028dc36b9, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: ShieldRebound
+    Clip: {fileID: 8300000, guid: 42402c88023d7b540a3ad0e00222a93b, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Die_SimpleEnemy
+    Clip: {fileID: 8300000, guid: 5f8fdef5e9e256742bffdf8d1841952b, type: 3}
     Volume: 1
     Pitch: 1
     Loop: 0
