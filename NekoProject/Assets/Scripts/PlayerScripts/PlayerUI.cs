@@ -230,6 +230,13 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
         }
     }
 
+    void ControllerConected()
+    {
+        if (EventSystem.current.alreadySelecting) return;
+
+        if(menuOpen) EventSystem.current.SetSelectedGameObject(menu.transform.GetChild(0).gameObject);
+    }
+
     void AddBoosterToPool(Boosters booster)
     {
         boostersHandler.AddBoosterUnequipped(booster);
@@ -240,14 +247,15 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
         boostersHandler.AddBoosterEquipped(booster);
     }
 
-
     private void OnEnable()
     {
         controlsInput.Menu.Enable();
+        GameManager.Instance.ControllerConected += ControllerConected;
     }
     private void OnDisable()
     {
         controlsInput.Menu.Disable();
+        GameManager.Instance.ControllerConected -= ControllerConected;
     }
 
     void OnEnableUIInputs() => controlsInput.PlayerUI.Enable();
@@ -281,6 +289,8 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
     #endregion
     public void OnClick(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.currentController != Controllers.Controller) return;
+
         if (context.performed)
         {
             GameObject _selected = EventSystem.current.currentSelectedGameObject;
@@ -303,7 +313,7 @@ public class PlayerUI : MonoBehaviour, NekoInput.IMenuActions, NekoInput.IPlayer
             ToggleMenu();
             if (menuOpen)
             {
-                EventSystem.current.SetSelectedGameObject(menu.transform.GetChild(0).gameObject);
+                if(GameManager.Instance.currentController == Controllers.Controller) EventSystem.current.SetSelectedGameObject(menu.transform.GetChild(0).gameObject);
                 GameManager.Instance.DisablePlayerInputs();
                 GameManager.Instance.DisablePixieInputs();
                 GameManager.Instance.EnableUIInputs();

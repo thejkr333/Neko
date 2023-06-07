@@ -34,6 +34,14 @@ public class BoostersUIHandler : MonoBehaviour
     private void OnEnable()
     {
         ResetClickHandler();
+        GameManager.Instance.ControllerConected += ControllerConected;
+    }
+    private void OnDisable() => GameManager.Instance.ControllerConected -= ControllerConected;
+    void ControllerConected()
+    {
+        if (EventSystem.current.alreadySelecting) return;
+
+        EventSystem.current.SetSelectedGameObject(nonEquippedBoostersPosition[0].gameObject);
     }
 
     void Click(ItemSlot itemClicked)
