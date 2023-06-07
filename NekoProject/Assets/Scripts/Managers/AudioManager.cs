@@ -192,7 +192,7 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(timeForNextSong);
 
         string _newSong;
-        if (GameManager.Instance.GetCurrentScene() != "BosqueTurquesa") 
+        if (GameManager.Instance.GetCurrentScene() != "BosqueTurquesa" || GameManager.Instance.InBossFight) 
         { 
             _newSong = currentSong;
         }

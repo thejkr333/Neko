@@ -2410,34 +2410,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
-      propertyPath: Music.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
-      propertyPath: Music.Array.data[3].Clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 399882c2f808e55418e3ba9378f6f46f, type: 3}
-    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
-      propertyPath: Music.Array.data[3].Name
-      value: Game_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
-      propertyPath: Music.Array.data[4].Clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 61884c3ba4ebed243884f6197d4868c3, type: 3}
-    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
-      propertyPath: Music.Array.data[4].Name
-      value: Game_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
-      propertyPath: Music.Array.data[5].Clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4affc5a6ff9a40b4dab9f788fee35ff7, type: 3}
-    - target: {fileID: 5706155022881950239, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
-      propertyPath: Music.Array.data[5].Name
-      value: Game_3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3347e88642bc65b4183c67e3abb1efdc, type: 3}
 --- !u!1 &971979346

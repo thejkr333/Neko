@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
     [SerializeField] Transform groundCheck_tr;
     [SerializeField] bool grounded;
     [SerializeField] float groundCheckRadius;
+    GroundTypes currentGroundType;
 
     [Header("PIXIE")]
     [SerializeField] Pixie pixie;
@@ -385,7 +386,10 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
         rb.velocity = new Vector2(input_hor * currentSpeed, rb.velocity.y);
 
-        if (grounded && Mathf.Abs(rb.velocity.x) > .1f) UpdatePetals();
+        if (grounded && Mathf.Abs(rb.velocity.x) > .1f)
+        {
+            if(currentGroundType == GroundTypes.Grass) UpdatePetals();
+        }
 
         FlipSr();
     }
@@ -709,6 +713,11 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
         {
             grounded = true;
             canDoubleJump = true;
+
+            if (colliders[0].TryGetComponent(out GroundType groundType))
+            {
+                currentGroundType = groundType.type;
+            }
         }
     }
 

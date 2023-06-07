@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public Action SaveGameAction;
 
     public bool Cheating;
+    public bool InBossFight;
 
     [Header("Data")]
     [SerializeField] ItemData[] itemData;
