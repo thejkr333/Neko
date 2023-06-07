@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLightGO: {fileID: 760588537176735225}
+  KbText: Press E to save
+  ControllerText: Press O to save
 --- !u!1 &760588537176735225
 GameObject:
   m_ObjectHideFlags: 0

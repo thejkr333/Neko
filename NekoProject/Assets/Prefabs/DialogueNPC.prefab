@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLightGO: {fileID: 760588537176735225}
+  KbText: Press E to interact
+  ControllerText: Press O to interact
   dialogueText: {fileID: 760588537972606556}
   phrases:
   - Hola

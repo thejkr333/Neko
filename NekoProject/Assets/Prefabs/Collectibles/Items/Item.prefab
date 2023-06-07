@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLightGO: {fileID: 3408064277892784931}
+  KbText: Press E to interact
+  ControllerText: Press O to interact
   ID: 0
 --- !u!1 &3408064277198439767
 GameObject:
