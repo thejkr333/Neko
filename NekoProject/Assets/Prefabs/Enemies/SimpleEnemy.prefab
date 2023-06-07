@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -560719997, guid: 039f89adfdf329d4c92e5cdfb4212072, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -243,6 +243,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d88376a0b774940a720ae9094dcea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemsUnlockedInfo:
+    m_Keys: 
+    m_Values: 
+  BoostersUnlockInfo:
+    m_Keys: 
+    m_Values: 
 --- !u!1 &2153924683268310113
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,6 +28,9 @@ public class Boss : MonoBehaviour
     bool inIdle;
     float idleTimer = 0, idleTime;
 
+
+    [SerializeField] GameObject bossCanvas;
+
     int direction;
 
     [Header("JUMP ATTACK")]
@@ -58,20 +61,22 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.Instance.PlayMusic("BossFight");
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         cachedTr = transform;
 
         player = FindObjectOfType<PlayerController>().transform;
 
-        ChangePhase(Phases.Initial);
+        currentPhase = Phases.None;
 
         SeparateAttacksIntoPhases();
 
         initialPosition = cachedTr.position;
-        Idle();
+
+        bossCanvas.SetActive(false);
         UpdateUI();
+
+        GameManager.Instance.OnStartBossFight += BeginFight;
     }
     void SeparateAttacksIntoPhases()
     {
@@ -128,6 +133,13 @@ public class Boss : MonoBehaviour
         if(currentAttack == null) return;
 
         if (currentAttack.isHitting) AttackHit();       
+    }
+
+    void BeginFight()
+    {
+        anim.SetTrigger("BeginFight");
+        bossCanvas.SetActive(true);
+        ChangePhase(Phases.Initial);
     }
         
     #region Phases
@@ -465,7 +477,7 @@ public class Boss : MonoBehaviour
 
     void UpdateUI()
     {
-        healthSlider.value = currentLife;
+        if(bossCanvas.activeInHierarchy) healthSlider.value = currentLife;
     }
 
     private void OnDrawGizmos()

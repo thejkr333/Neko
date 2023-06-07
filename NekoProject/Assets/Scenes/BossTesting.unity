@@ -4291,7 +4291,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34
+  field of view: 42.36
   orthographic: 0
   orthographic size: 9
   m_Depth: -1
@@ -4317,7 +4317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046847095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.8236456, y: 7.5344496, z: -25}
+  m_LocalPosition: {x: -93.5, y: -146.12515, z: -24.46523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4973,6 +4973,7 @@ MonoBehaviour:
     isHitting: 0
     hasHit: 0
   movSpeed: 5
+  bossCanvas: {fileID: 0}
   jumpSpeed: 5
   rockPrefab: {fileID: 4036108179719723337, guid: a788513f0083f7d40934b27f22f0d2ab, type: 3}
   minPoint: {fileID: 1650489434}

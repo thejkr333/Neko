@@ -8,8 +8,10 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance => instance;
 
     Animator anim;
-    public enum CameraStates { PlayerCam, ShopCam}
+    public enum CameraStates { PlayerCam, ShopCam, BossCam}
     CameraStates currentCameraState;
+
+    Cinemachine.CinemachineStateDrivenCamera CinemachineStateDrivenCamera;
 
     private void Awake()
     {
@@ -19,16 +21,29 @@ public class CameraManager : MonoBehaviour
             return;
         }
 
+        CinemachineStateDrivenCamera = GetComponent<Cinemachine.CinemachineStateDrivenCamera>();
+
         instance = this;
         // Initialization logic
         DontDestroyOnLoad(gameObject);
         anim = GetComponent<Animator>();
+        GameManager.Instance.OnStartBossFight += ChangeCameraToBoss;
     }
 
-    public void ChangeCamera(CameraStates cameraState)
+    private void Start()
+    {
+        anim.Play(CameraStates.PlayerCam.ToString());
+    }
+
+    void ChangeCameraToBoss()
+    {
+        ChangeCamera(CameraStates.BossCam);
+    }
+
+    public void ChangeCamera(CameraStates cameraState, bool fade = false)
     {
         currentCameraState = cameraState;
-        StartCoroutine(Co_Transition());
+        if(fade) StartCoroutine(Co_Transition());
     }
 
     IEnumerator Co_Transition()

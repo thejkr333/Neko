@@ -785,17 +785,6 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""59938ce9-f34b-44b9-a76c-b27bbe8e78fa"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Close"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0d8c0f0c-3289-4c9e-89d5-cae966d4b9c9"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",

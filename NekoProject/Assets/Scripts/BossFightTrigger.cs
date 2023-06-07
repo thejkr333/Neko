@@ -8,7 +8,8 @@ public class BossFightTrigger : MonoBehaviour
     {
         if(collision.TryGetComponent(out PlayerController playerController))
         {
-
+            GameManager.Instance.StartBossFight();
+            gameObject.SetActive(false);
         }
     }
 }

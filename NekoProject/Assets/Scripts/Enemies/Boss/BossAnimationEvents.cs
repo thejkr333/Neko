@@ -8,6 +8,7 @@ public class BossAnimationEvents : MonoBehaviour
     private void Awake()
     {
         boss = GetComponentInParent<Boss>();
+
     }
 
     public void EndAttack()

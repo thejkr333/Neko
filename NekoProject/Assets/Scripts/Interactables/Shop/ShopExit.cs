@@ -13,7 +13,7 @@ public class ShopExit : Interactable
 
     void GoToWorld(Transform player)
     {
-        CameraManager.Instance.ChangeCamera(CameraManager.CameraStates.PlayerCam);
+        CameraManager.Instance.ChangeCamera(CameraManager.CameraStates.PlayerCam, true);
         StartCoroutine(TPPlayer(player, 1));
     }
 

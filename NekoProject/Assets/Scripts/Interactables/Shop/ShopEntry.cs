@@ -13,7 +13,7 @@ public class ShopEntry : Interactable
 
     void GoToShop(Transform player)
     {
-        CameraManager.Instance.ChangeCamera(CameraManager.CameraStates.ShopCam);
+        CameraManager.Instance.ChangeCamera(CameraManager.CameraStates.ShopCam, true);
         StartCoroutine(TPPlayer(player, 1));
     }
 

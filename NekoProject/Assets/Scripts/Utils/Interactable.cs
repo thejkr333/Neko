@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEditor.SceneManagement;
 
 [RequireComponent(typeof(Collider2D))]
 public abstract class Interactable : MonoBehaviour
@@ -12,6 +13,7 @@ public abstract class Interactable : MonoBehaviour
     protected virtual void Start()
     {
         highlightText = highLightGO.GetComponent<TMP_Text>();
+        if(highlightText == null) highlightText = highLightGO.transform.GetChild(0).GetComponent<TMP_Text>();
         StopHighLight();
     }
     private void Update()
