@@ -498,7 +498,7 @@ public partial class @NekoInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Click"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""949031c0-97aa-44d2-acec-5df7a9e053e7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

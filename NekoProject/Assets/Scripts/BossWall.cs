@@ -21,4 +21,9 @@ public class BossWall : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("Thump");
     }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnStartBossFight -= Close;
+    }
 }

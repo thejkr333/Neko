@@ -27,7 +27,6 @@ public class MainMenuController : MonoBehaviour, NekoInput.IPlayerUIActions
         AudioManager.Instance.PlaySound("Button");
         AudioManager.Instance.PlayMusic("Game_1");
         GameManager.Instance.NewGame();
-        GameManager.Instance.LoadScene("BosqueTurquesa");
     }
 
     public void LoadGame()

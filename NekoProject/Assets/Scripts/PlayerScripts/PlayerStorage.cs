@@ -70,6 +70,11 @@ public class PlayerStorage : MonoBehaviour
         GameManager.Instance.SetBoostersInfo(ref BoostersUnlockInfo, equippedBoosters);
     }
 
+    private void OnDestroy()
+    {
+        GameManager.Instance.SaveGameAction -= UpdateDataToGameManager;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //if (collision.transform.TryGetComponent(out Item item))

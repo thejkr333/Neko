@@ -8,7 +8,11 @@ public class FlyingShootingEnemy : FlyingEnemy
     float attackTimer;
     [SerializeField] float projectileSpeed;
 
-
+    protected override void Start()
+    {
+        base.Start();
+        shootingEnemy = true;
+    }
     protected override void Attack()
     {
         if (!canMove) return;

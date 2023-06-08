@@ -417,6 +417,7 @@ public class PlayerController : MonoBehaviour, NekoInput.IPlayerActions
 
     public void GetHit()
     {
+        if(dashing) EndDash();
         anim.SetTrigger("GetHurt");
         Invincible = true;
         int _playerInvincibleLayer = LayerMask.NameToLayer("PlayerInvincible");

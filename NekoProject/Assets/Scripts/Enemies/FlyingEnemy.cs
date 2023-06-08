@@ -14,11 +14,13 @@ public class FlyingEnemy : Enemy
     float chasingTimer;
     float waitForChase = 3;
 
+    protected bool shootingEnemy;
     protected override void Start()
     {
         base.Start();
 
         GetComponentInChildren<CircleCollider2D>().radius = chaseDistance;
+        shootingEnemy = false;
     }
 
     protected override void Patrol()
@@ -75,8 +77,11 @@ public class FlyingEnemy : Enemy
         {
             attackDirection = playerDirection.normalized;
             ChangeState(States.Attacking);
-            AudioManager.Instance.PlaySound("Attack_FlyingEnemy");
-            anim.SetTrigger("Attack");
+            if(!shootingEnemy)
+            {
+                AudioManager.Instance.PlaySound("Attack_FlyingEnemy");
+                anim.SetTrigger("Attack");
+            }
             return;
         }
 

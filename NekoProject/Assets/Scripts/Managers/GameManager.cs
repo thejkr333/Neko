@@ -100,8 +100,13 @@ public class GameManager : MonoBehaviour
     public void DisablePixieInputs() => DisablePixieInput?.Invoke();   
     public void EnableUIInputs() => EnableUIInput?.Invoke();
     public void DisableUIInputs() => DisableUIInput?.Invoke();
-    
-    public void NewGame() => DataSaving.EraseSaveFiles();
+
+    public void NewGame() 
+    {
+        DataSaving.EraseSaveFiles();
+        DataSaving = new DataSaving();
+        GameManager.Instance.LoadScene("BosqueTurquesa");
+    }
 
     public void SaveGame()
     {

@@ -504,7 +504,13 @@ public class Boss : MonoBehaviour
         anim.SetTrigger("Hurt");
         currentLife -= damage;
     }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnStartBossFight -= BeginFight;
+    }
 }
+
 
 [System.Serializable]
 public class Attack

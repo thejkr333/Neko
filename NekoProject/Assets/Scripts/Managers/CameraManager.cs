@@ -14,7 +14,6 @@ public class CameraManager : MonoBehaviour
     {
         CinemachineStateDrivenCamera = GetComponent<Cinemachine.CinemachineStateDrivenCamera>();
         // Initialization logic
-        DontDestroyOnLoad(gameObject);
         anim = GetComponent<Animator>();
         GameManager.Instance.OnStartBossFight += ChangeCameraToBoss;
     }
@@ -52,5 +51,10 @@ public class CameraManager : MonoBehaviour
         yield return null;
 
         anim.Play("FadeOut");
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnStartBossFight -= ChangeCameraToBoss;
     }
 }
